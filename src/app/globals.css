@@ -9,29 +9,39 @@
   --font-serif: var(--font-serif), Georgia, Cambria, "Times New Roman", Times, serif;
   --font-script: var(--font-script), cursive;
 
-  --color-gold: #C9873A;
-  --color-gold-light: #DF9F4F;
-  --color-gold-dark: #A56924;
+  /* Official Brand Colors */
+  --color-brand-cream: #FAF6EF;
+  --color-brand-cream-dark: #F3ECE0;
+  --color-brand-sand: #DFD5BF;
+  --color-brand-sand-light: #F4EFE6;
+  
+  --color-brand-terracotta: #C06129;
+  --color-brand-terracotta-dark: #A44F1D;
+  --color-brand-umber: #66241C;
+  --color-brand-espresso: #241812;
+  --color-brand-charcoal: #3B2A22;
+  --color-brand-muted: #7A695F;
 
-  --color-vi-dark: #2C1810;
-  --color-vi-cream: #FAF5EC;
-  --color-vi-beige: #F5EEE3;
+  /* Secondary Brand Colors (from Brand Guideline) */
+  --color-brand-moss: #4B5031;
+  --color-brand-chili: #BF4227;
 
-  --color-maison-terracotta: #833422;
-  --color-maison-orange: #C2692C;
-  --color-maison-sand: #DED3B4;
-  --color-maison-crimson: #BF4227;
-  --color-maison-moss: #4B5031;
+  /* Semantic aliases */
+  --color-gold: #C06129;
+  --color-gold-light: #D47B3E;
+  --color-gold-dark: #A44F1D;
 }
 
 :root {
-  --background: oklch(0.12 0.02 45);
-  --foreground: oklch(0.96 0.01 75);
-  --primary: oklch(0.65 0.14 65);
-  --primary-foreground: oklch(0.12 0.02 45);
-  --card: oklch(0.16 0.02 45);
-  --card-foreground: oklch(0.96 0.01 75);
-  --border: oklch(0.28 0.03 50);
+  --background: #FAF6EF;
+  --foreground: #241812;
+  --primary: #BF4227;
+  --primary-foreground: #FFFFFF;
+  --secondary: #4B5031;
+  --secondary-foreground: #FFFFFF;
+  --card: #FFFFFF;
+  --card-foreground: #241812;
+  --border: #E8E0D2;
 }
 
 /* Custom scrollbars */
@@ -40,29 +50,29 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #140D0A;
+  background: #F4EFE6;
 }
 ::-webkit-scrollbar-thumb {
-  background: #3B2418;
+  background: #CBBDA4;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #C9873A;
+  background: #BF4227;
 }
 
-/* Pattern textures */
+/* Subtle architectural patterns on cream background */
 .pattern-indochine {
-  background-image: radial-gradient(rgba(201, 135, 58, 0.12) 1px, transparent 0);
+  background-image: radial-gradient(rgba(75, 80, 49, 0.08) 1.2px, transparent 0);
   background-size: 24px 24px;
 }
 
 .pattern-motif {
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 L35 25 L55 30 L35 35 L30 55 L25 35 L5 30 L25 25 Z' fill='%23C9873A' fill-opacity='0.035'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5 L35 25 L55 30 L35 35 L30 55 L25 35 L5 30 L25 25 Z' fill='%23C06129' fill-opacity='0.04'/%3E%3C/svg%3E");
   background-size: 60px 60px;
 }
 
 .pattern-maison-arch {
-  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 0 C62 0 80 18 80 40 L80 80 L0 80 L0 40 C0 18 18 0 40 0 Z' fill='none' stroke='%23C2692C' stroke-width='0.8' stroke-opacity='0.08'/%3E%3Ccircle cx='40' cy='40' r='8' fill='none' stroke='%23833422' stroke-width='0.8' stroke-opacity='0.08'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 0 C62 0 80 18 80 40 L80 80 L0 80 L0 40 C0 18 18 0 40 0 Z' fill='none' stroke='%23C06129' stroke-width='0.8' stroke-opacity='0.07'/%3E%3Ccircle cx='40' cy='40' r='8' fill='none' stroke='%234B5031' stroke-width='0.8' stroke-opacity='0.07'/%3E%3C/svg%3E");
   background-size: 80px 80px;
 }
 
@@ -70,7 +80,7 @@
 @keyframes fadeInSlideUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -79,5 +89,5 @@
 }
 
 .animate-fade-in-up {
-  animation: fadeInSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeInSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

@@ -19,20 +19,11 @@ export function RestaurantCard({
   const localized = getLocalizedRestaurant(restaurant, language);
 
   const isMaison = restaurant.id === "maison-de-vi";
-  const accentColor = isMaison ? "#C2692C" : "#C9873A";
-  const badgeBg = isMaison ? "rgba(194, 105, 44, 0.15)" : "rgba(201, 135, 58, 0.15)";
-  const borderColor = isMaison ? "rgba(194, 105, 44, 0.3)" : "rgba(201, 135, 58, 0.3)";
 
   return (
-    <div
-      className="group relative rounded-2xl overflow-hidden bg-[#1B120E] border transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl flex flex-col"
-      style={{
-        borderColor: borderColor,
-        boxShadow: "0 10px 30px -10px rgba(0,0,0,0.5)",
-      }}
-    >
+    <div className="group relative rounded-lg overflow-hidden bg-white border border-[#DFD5BF] transition-all duration-400 hover:-translate-y-1 hover:shadow-xl flex flex-col shadow-sm">
       {/* Image Banner */}
-      <div className="relative h-72 sm:h-80 w-full overflow-hidden">
+      <div className="relative h-72 sm:h-80 w-full overflow-hidden bg-[#FAF6EF]">
         <Image
           src={restaurant.heroImage}
           alt={restaurant.name}
@@ -41,30 +32,21 @@ export function RestaurantCard({
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, 50vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1B120E] via-[#1B120E]/40 to-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#241812]/90 via-[#241812]/30 to-black/20" />
 
-        {/* Top Badges */}
+        {/* Top Badges - Architectural subtle tags */}
         <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-          <span
-            className="text-[10px] sm:text-xs font-medium uppercase tracking-[0.2em] px-3 py-1 rounded-full backdrop-blur-md border text-white"
-            style={{
-              backgroundColor: badgeBg,
-              borderColor: `${accentColor}50`,
-            }}
-          >
+          <span className="text-[10px] sm:text-xs font-medium uppercase tracking-[0.2em] px-3 py-1 rounded-sm backdrop-blur-md border border-white/20 bg-black/40 text-white">
             {localized.badges[0]}
           </span>
-          <span className="text-[11px] text-[#FAF5EC]/80 font-mono backdrop-blur-md bg-black/40 px-2.5 py-1 rounded-full border border-white/10">
+          <span className="text-[11px] text-[#241812] font-mono backdrop-blur-md bg-[#FAF6EF]/90 px-2.5 py-1 rounded-sm border border-[#DFD5BF] shadow-xs">
             {restaurant.city}
           </span>
         </div>
 
         {/* Floating Brand Badge */}
-        <div className="absolute bottom-4 left-5 flex items-center gap-3">
-          <div
-            className="w-14 h-14 rounded-xl p-1 bg-[#140D0A]/90 backdrop-blur-md border flex items-center justify-center shadow-lg"
-            style={{ borderColor: `${accentColor}60` }}
-          >
+        <div className="absolute bottom-4 left-5 flex items-center gap-3.5">
+          <div className="w-14 h-14 rounded-md p-1.5 bg-[#FAF6EF] border border-[#DFD5BF] flex items-center justify-center shadow-md flex-shrink-0">
             <Image
               src={isMaison ? "/images/maison-de-vi/logo-badge.png" : "/images/vi-hanoi-logo.png"}
               alt={restaurant.name}
@@ -75,43 +57,43 @@ export function RestaurantCard({
           </div>
           <div>
             <span
-              className="text-[10px] uppercase tracking-[0.25em] font-semibold block drop-shadow-md"
-              style={{ color: accentColor }}
+              className="text-[10px] uppercase tracking-[0.25em] font-semibold block drop-shadow-sm"
+              style={{ color: "#F4D3B0" }}
             >
               {localized.subtitle}
             </span>
-            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white tracking-wide drop-shadow-lg">
+            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white tracking-wide drop-shadow-md">
               {restaurant.name}
             </h3>
           </div>
         </div>
       </div>
 
-      {/* Content */}
-      <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between space-y-6">
+      {/* Content Area - Warm cream and elegant typography */}
+      <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between space-y-6 bg-white">
         <div className="space-y-4">
           {/* Address & Metro */}
-          <div className="space-y-1.5 text-xs text-[#FAF5EC]/75">
+          <div className="space-y-1 text-xs text-[#6D5A50]">
             <div className="flex items-center gap-2">
-              <MapPin className="w-4 h-4 flex-shrink-0" style={{ color: accentColor }} />
-              <span className="font-medium text-white">{restaurant.address}, {restaurant.city}</span>
+              <MapPin className="w-4 h-4 flex-shrink-0 text-[#4B5031]" />
+              <span className="font-medium text-[#241812]">{restaurant.address}, {restaurant.city}</span>
             </div>
-            <div className="pl-6 text-[11px] text-[#FAF5EC]/50 font-light">
+            <div className="pl-6 text-[11px] text-[#7A695F] font-light">
               {t.portal.metroLabel}: {restaurant.metro}
             </div>
           </div>
 
           {/* Description */}
-          <p className="text-sm text-[#FAF5EC]/70 leading-relaxed font-light">
+          <p className="text-sm text-[#5C4B42] leading-relaxed font-light">
             {localized.description}
           </p>
 
-          {/* Highlights / Badges */}
+          {/* Highlights / Badges - Olive moss & Terracotta tints */}
           <div className="flex flex-wrap gap-1.5 pt-1">
             {localized.badges.map((badge, idx) => (
               <span
                 key={idx}
-                className="text-[10px] tracking-wider uppercase px-2.5 py-1 rounded bg-[#251914] text-[#FAF5EC]/60 border border-white/5"
+                className="text-[10px] tracking-wider uppercase px-2.5 py-1 rounded-sm bg-[#F4EFE6] text-[#4B5031] border border-[#DFD5BF] font-medium"
               >
                 {badge}
               </span>
@@ -119,13 +101,12 @@ export function RestaurantCard({
           </div>
         </div>
 
-        {/* Actions */}
-        <div className="pt-4 border-t border-[#2C1C15] flex flex-col sm:flex-row gap-3">
+        {/* Actions - Crisp refined buttons without bloated bubbles */}
+        <div className="pt-5 border-t border-[#EAE2D5] flex flex-col sm:flex-row gap-3">
           {/* Primary Action: Open Quick Drawer */}
           <button
             onClick={() => onSelectRestaurant(restaurant)}
-            className="flex-1 py-3.5 px-4 rounded-xl font-medium text-xs tracking-widest uppercase transition-all duration-300 shadow-md text-white flex items-center justify-center gap-2 group cursor-pointer hover:brightness-110 active:scale-[0.99]"
-            style={{ backgroundColor: accentColor }}
+            className="flex-1 py-3 px-4 rounded-md font-medium text-xs tracking-widest uppercase transition-all duration-300 shadow-sm text-white flex items-center justify-center gap-2 group cursor-pointer bg-[#BF4227] hover:bg-[#A4351D] active:scale-[0.99]"
           >
             <UtensilsCrossed className="w-3.5 h-3.5" />
             <span>{t.portal.bookTableBtn}</span>
@@ -134,10 +115,10 @@ export function RestaurantCard({
           {/* Secondary Action: More info directly or link */}
           <Link
             href={restaurant.route}
-            className="py-3.5 px-4 rounded-xl font-medium text-xs tracking-widest uppercase border border-[#3D291F] hover:border-white/30 text-[#FAF5EC]/80 hover:text-white transition-all duration-300 flex items-center justify-center gap-1.5 text-center bg-[#170E0B]"
+            className="py-3 px-4 rounded-md font-medium text-xs tracking-widest uppercase border border-[#DFD5BF] bg-[#F7F2E8] hover:bg-[#EFE6D6] text-[#241812] transition-all duration-300 flex items-center justify-center gap-1.5 text-center"
           >
             <span>{t.portal.detailsBtn}</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <ArrowRight className="w-3.5 h-3.5 text-[#C06129]" />
           </Link>
         </div>
       </div>

@@ -37,8 +37,6 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
   const [isSuccess, setIsSuccess] = useState(false);
 
   const isMaison = data.id === "maison-de-vi";
-  const accentColor = isMaison ? "#C2692C" : "#C9873A";
-  const themeBg = isMaison ? "#19100C" : "#140D0A";
   const Divider = isMaison ? TerracottaDivider : GoldDivider;
 
   const handleBooking = (e: React.FormEvent) => {
@@ -51,61 +49,61 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
   };
 
   return (
-    <div className="min-h-screen flex flex-col text-[#FAF5EC]" style={{ backgroundColor: themeBg }}>
+    <div className="min-h-screen flex flex-col text-[#241812] bg-[#FAF6EF]">
       {/* Top Header Navigation */}
-      <header className="sticky top-0 z-40 bg-[#160E0A]/95 backdrop-blur-md border-b border-[#2D1B13]">
+      <header className="sticky top-0 z-40 bg-[#FAF6EF]/95 backdrop-blur-md border-b border-[#DFD5BF]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
           {/* Back link & Brand */}
           <div className="flex items-center gap-4">
             <Link
               href="/"
-              className="inline-flex items-center gap-1.5 text-xs text-[#FAF5EC]/70 hover:text-white transition-colors bg-white/5 px-3 py-1.5 rounded-full border border-white/10"
+              className="inline-flex items-center gap-1.5 text-xs text-[#5C4B42] hover:text-[#241812] transition-colors bg-[#F3ECE0] px-3.5 py-1.5 rounded-md border border-[#DFD5BF] font-medium"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>{t.restaurant.backToAll}</span>
             </Link>
 
             <Link href={data.route} className="flex items-center gap-2">
-              <span className="font-serif text-xl sm:text-2xl font-bold text-white tracking-wide">
+              <span className="font-serif text-xl sm:text-2xl font-bold text-[#241812] tracking-wide">
                 {data.name}
               </span>
             </Link>
           </div>
 
           {/* Desktop Nav Items */}
-          <nav className="hidden md:flex items-center gap-7 text-xs font-medium uppercase tracking-wider text-[#FAF5EC]/70">
-            <a href="#histoire" className="hover:text-white transition-colors">{t.nav.story}</a>
-            <a href="#menu" className="hover:text-white transition-colors">{t.nav.menu}</a>
-            <a href="#presse" className="hover:text-white transition-colors">{t.nav.press}</a>
-            <a href="#espace" className="hover:text-white transition-colors">{t.nav.space}</a>
-            <a href="#reservation" className="hover:text-white transition-colors">{t.nav.bookTable}</a>
-            <a href="#contact" className="hover:text-white transition-colors">{t.nav.contact}</a>
+          <nav className="hidden md:flex items-center gap-7 text-xs font-medium uppercase tracking-wider text-[#6D5A50]">
+            <a href="#histoire" className="hover:text-[#BF4227] transition-colors">{t.nav.story}</a>
+            <a href="#menu" className="hover:text-[#BF4227] transition-colors">{t.nav.menu}</a>
+            <a href="#presse" className="hover:text-[#BF4227] transition-colors">{t.nav.press}</a>
+            <a href="#espace" className="hover:text-[#BF4227] transition-colors">{t.nav.space}</a>
+            <a href="#reservation" className="hover:text-[#BF4227] transition-colors">{t.nav.bookTable}</a>
+            <a href="#contact" className="hover:text-[#BF4227] transition-colors">{t.nav.contact}</a>
           </nav>
 
           {/* Right Action: Language Switcher + CTA Button */}
           <div className="hidden sm:flex items-center gap-3">
-            {/* Language Switcher */}
-            <div className="flex items-center bg-black/40 border border-white/10 rounded-full p-0.5 text-[11px] font-medium">
+            {/* Language Switcher - Crisp architectural tabs */}
+            <div className="flex items-center bg-[#F3ECE0] border border-[#DFD5BF] rounded-md p-0.5 text-[11px] font-medium">
               <button
                 onClick={() => setLanguage("en")}
-                className={`px-2.5 py-0.5 rounded-full transition-colors cursor-pointer ${
-                  language === "en" ? "bg-[#C9873A] text-white" : "text-[#FAF5EC]/60 hover:text-white"
+                className={`px-2.5 py-1 rounded-sm transition-all cursor-pointer font-sans tracking-wider ${
+                  language === "en" ? "bg-[#BF4227] text-white shadow-xs font-semibold" : "text-[#6D5A50] hover:text-[#241812]"
                 }`}
               >
                 EN
               </button>
               <button
                 onClick={() => setLanguage("fr")}
-                className={`px-2.5 py-0.5 rounded-full transition-colors cursor-pointer ${
-                  language === "fr" ? "bg-[#C9873A] text-white" : "text-[#FAF5EC]/60 hover:text-white"
+                className={`px-2.5 py-1 rounded-sm transition-all cursor-pointer font-sans tracking-wider ${
+                  language === "fr" ? "bg-[#BF4227] text-white shadow-xs font-semibold" : "text-[#6D5A50] hover:text-[#241812]"
                 }`}
               >
                 FR
               </button>
               <button
                 onClick={() => setLanguage("vi")}
-                className={`px-2.5 py-0.5 rounded-full transition-colors cursor-pointer ${
-                  language === "vi" ? "bg-[#C9873A] text-white" : "text-[#FAF5EC]/60 hover:text-white"
+                className={`px-2.5 py-1 rounded-sm transition-all cursor-pointer font-sans tracking-wider ${
+                  language === "vi" ? "bg-[#BF4227] text-white shadow-xs font-semibold" : "text-[#6D5A50] hover:text-[#241812]"
                 }`}
               >
                 VI
@@ -114,8 +112,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
 
             <a
               href="#reservation"
-              className="px-5 py-2.5 rounded-lg text-xs font-medium uppercase tracking-widest text-white shadow transition-all duration-300 hover:brightness-110"
-              style={{ backgroundColor: accentColor }}
+              className="px-5 py-2.5 rounded-md text-xs font-medium uppercase tracking-widest text-white shadow-xs transition-all duration-300 bg-[#BF4227] hover:bg-[#A4351D]"
             >
               {t.nav.bookTable}
             </a>
@@ -123,27 +120,27 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
 
           {/* Mobile Menu Button */}
           <div className="flex sm:hidden items-center gap-2">
-            <div className="flex items-center bg-black/40 border border-white/10 rounded-full p-0.5 text-[10px] font-medium">
+            <div className="flex items-center bg-[#F3ECE0] border border-[#DFD5BF] rounded-md p-0.5 text-[10px] font-medium">
               <button
                 onClick={() => setLanguage("en")}
-                className={`px-2 py-0.5 rounded-full ${
-                  language === "en" ? "bg-[#C9873A] text-white" : "text-[#FAF5EC]/60"
+                className={`px-2 py-0.5 rounded-sm ${
+                  language === "en" ? "bg-[#BF4227] text-white font-medium" : "text-[#6D5A50]"
                 }`}
               >
                 EN
               </button>
               <button
                 onClick={() => setLanguage("fr")}
-                className={`px-2 py-0.5 rounded-full ${
-                  language === "fr" ? "bg-[#C9873A] text-white" : "text-[#FAF5EC]/60"
+                className={`px-2 py-0.5 rounded-sm ${
+                  language === "fr" ? "bg-[#BF4227] text-white font-medium" : "text-[#6D5A50]"
                 }`}
               >
                 FR
               </button>
               <button
                 onClick={() => setLanguage("vi")}
-                className={`px-2 py-0.5 rounded-full ${
-                  language === "vi" ? "bg-[#C9873A] text-white" : "text-[#FAF5EC]/60"
+                className={`px-2 py-0.5 rounded-sm ${
+                  language === "vi" ? "bg-[#BF4227] text-white font-medium" : "text-[#6D5A50]"
                 }`}
               >
                 VI
@@ -152,7 +149,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-white/80 hover:text-white cursor-pointer"
+              className="p-2 text-[#241812] hover:bg-[#F3ECE0] rounded-md cursor-pointer"
               aria-label="Menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
@@ -162,40 +159,39 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
 
         {/* Mobile Dropdown */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-[#2D1B13] bg-[#160E0A] px-4 py-4 space-y-3 text-sm">
+          <div className="md:hidden border-t border-[#DFD5BF] bg-[#FAF6EF] px-4 py-4 space-y-3 text-sm">
             <a
               href="#histoire"
               onClick={() => setMobileMenuOpen(false)}
-              className="block py-1.5 text-white/80 hover:text-white"
+              className="block py-1.5 text-[#5C4B42] hover:text-[#241812] font-medium"
             >
               {t.nav.story}
             </a>
             <a
               href="#menu"
               onClick={() => setMobileMenuOpen(false)}
-              className="block py-1.5 text-white/80 hover:text-white"
+              className="block py-1.5 text-[#5C4B42] hover:text-[#241812] font-medium"
             >
               {t.nav.menu}
             </a>
             <a
               href="#presse"
               onClick={() => setMobileMenuOpen(false)}
-              className="block py-1.5 text-white/80 hover:text-white"
+              className="block py-1.5 text-[#5C4B42] hover:text-[#241812] font-medium"
             >
               {t.nav.press}
             </a>
             <a
               href="#espace"
               onClick={() => setMobileMenuOpen(false)}
-              className="block py-1.5 text-white/80 hover:text-white"
+              className="block py-1.5 text-[#5C4B42] hover:text-[#241812] font-medium"
             >
               {t.nav.space}
             </a>
             <a
               href="#reservation"
               onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 text-center rounded-lg text-white font-medium uppercase text-xs"
-              style={{ backgroundColor: accentColor }}
+              className="block py-2.5 text-center rounded-md text-white font-medium uppercase text-xs bg-[#BF4227]"
             >
               {t.restaurant.reserveTitle}
             </a>
@@ -214,43 +210,39 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
             className="object-cover"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/60 to-[#19100C]" />
-          <div className="absolute inset-0 pattern-indochine opacity-40 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#241812]/80 via-[#241812]/50 to-[#FAF6EF]" />
+          <div className="absolute inset-0 pattern-indochine opacity-30 pointer-events-none" />
         </div>
 
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto space-y-6 pt-12">
-          <div
-            className="inline-block text-[11px] sm:text-xs tracking-[0.35em] uppercase font-semibold px-4 py-1.5 rounded-full border bg-black/50 backdrop-blur-md"
-            style={{ color: accentColor, borderColor: `${accentColor}50` }}
-          >
+          <div className="inline-block text-[11px] sm:text-xs tracking-[0.35em] uppercase font-semibold px-4 py-1.5 rounded-md border border-[#DFD5BF] bg-[#FAF6EF]/95 text-[#4B5031] shadow-xs">
             {data.address} · {data.city}
           </div>
 
-          <h1 className="font-serif text-5xl sm:text-7xl md:text-8xl font-normal italic text-white tracking-tight leading-none drop-shadow-2xl">
+          <h1 className="font-serif text-5xl sm:text-7xl md:text-8xl font-normal italic text-white tracking-tight leading-none drop-shadow-lg">
             {data.name}
           </h1>
 
           <Divider className="my-2" />
 
-          <p className="font-script text-2xl sm:text-4xl leading-snug drop-shadow-md" style={{ color: accentColor }}>
+          <p className="font-script text-2xl sm:text-4xl leading-snug drop-shadow-md text-[#F4D3B0]">
             {localized.tagline}
           </p>
 
-          <p className="text-sm sm:text-base text-[#FAF5EC]/80 max-w-2xl mx-auto font-light leading-relaxed">
+          <p className="text-sm sm:text-base text-[#FAF6EF]/90 max-w-2xl mx-auto font-light leading-relaxed">
             {localized.description}
           </p>
 
           <div className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="#reservation"
-              className="w-full sm:w-auto px-10 py-4 rounded-xl font-medium text-xs tracking-widest uppercase transition-all duration-300 shadow-xl text-white hover:brightness-110"
-              style={{ backgroundColor: accentColor }}
+              className="w-full sm:w-auto px-8 py-3.5 rounded-md font-medium text-xs tracking-widest uppercase transition-all duration-300 shadow-md text-white bg-[#BF4227] hover:bg-[#A4351D]"
             >
               {t.restaurant.reserveTitle}
             </a>
             <a
               href="#menu"
-              className="w-full sm:w-auto px-10 py-4 rounded-xl border border-white/30 text-white hover:bg-white/10 font-medium text-xs tracking-widest uppercase transition-all duration-300"
+              className="w-full sm:w-auto px-8 py-3.5 rounded-md border border-[#DFD5BF] bg-white/90 text-[#241812] hover:bg-white font-medium text-xs tracking-widest uppercase transition-all duration-300 shadow-xs"
             >
               {t.restaurant.menuTitle}
             </a>
@@ -262,7 +254,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
       <section id="histoire" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Visual Showcase */}
-          <div className="relative rounded-2xl overflow-hidden border border-[#332117] aspect-[4/3] shadow-2xl group">
+          <div className="relative rounded-lg overflow-hidden border border-[#DFD5BF] aspect-[4/3] shadow-md group bg-white">
             <Image
               src={data.gallery[1]?.src || data.heroImage}
               alt={data.name}
@@ -271,7 +263,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute bottom-4 left-4 right-4">
-              <span className="text-xs text-[#FAF5EC]/80 italic">
+              <span className="text-xs text-white/90 italic font-serif">
                 {data.gallery[1]?.caption || data.name}
               </span>
             </div>
@@ -280,34 +272,34 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
           {/* Story Narrative */}
           <div className="space-y-6">
             <div>
-              <span className="text-xs uppercase tracking-[0.3em] font-semibold block mb-2" style={{ color: accentColor }}>
+              <span className="text-xs uppercase tracking-[0.3em] font-semibold block mb-2 text-[#4B5031]">
                 {t.restaurant.storyBadge}
               </span>
-              <h2 className="font-serif text-3xl sm:text-4xl font-normal italic text-white leading-tight">
+              <h2 className="font-serif text-3xl sm:text-4xl font-normal italic text-[#241812] leading-tight">
                 {isMaison ? t.restaurant.storyTitleMaisonDeVi : t.restaurant.storyTitleViHanoi}
               </h2>
             </div>
 
             <Divider className="my-1 justify-start" />
 
-            <p className="text-sm sm:text-base text-[#FAF5EC]/80 leading-relaxed font-light">
+            <p className="text-sm sm:text-base text-[#5C4B42] leading-relaxed font-light">
               {localized.storyContent}
             </p>
 
-            <blockquote className="border-l-2 pl-4 py-1 italic font-script text-2xl sm:text-3xl leading-snug" style={{ borderColor: accentColor, color: accentColor }}>
+            <blockquote className="border-l-2 pl-4 py-1 italic font-script text-2xl sm:text-3xl leading-snug border-[#BF4227] text-[#BF4227]">
               {localized.storyQuote}
-              <footer className="text-xs font-sans not-italic text-[#FAF5EC]/60 mt-2 font-normal">
+              <footer className="text-xs font-sans not-italic text-[#7A695F] mt-2 font-normal">
                 — {localized.storyAuthor}
               </footer>
             </blockquote>
 
-            <div className="pt-2 flex items-center gap-6 text-xs text-[#FAF5EC]/70">
+            <div className="pt-2 flex items-center gap-6 text-xs text-[#6D5A50]">
               <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4" style={{ color: accentColor }} />
-                <span>{data.address}, {data.city}</span>
+                <MapPin className="w-4 h-4 text-[#4B5031]" />
+                <span className="font-medium text-[#241812]">{data.address}, {data.city}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4" style={{ color: accentColor }} />
+                <Clock className="w-4 h-4 text-[#C06129]" />
                 <span>{localized.hours.split("&")[0]}</span>
               </div>
             </div>
@@ -316,13 +308,13 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
       </section>
 
       {/* SECTION: PRESSE / ILS EN PARLENT */}
-      <section id="presse" className="py-20 bg-[#160E0A] border-y border-[#291A13] px-4 sm:px-6 lg:px-8">
+      <section id="presse" className="py-20 bg-[#F3ECE0] border-y border-[#DFD5BF] px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto space-y-12">
           <div className="text-center space-y-3">
-            <span className="text-xs tracking-[0.3em] uppercase font-semibold" style={{ color: accentColor }}>
+            <span className="text-xs tracking-[0.3em] uppercase font-semibold text-[#4B5031]">
               {t.restaurant.pressBadge}
             </span>
-            <h2 className="font-serif text-3xl sm:text-4xl font-normal italic text-white">
+            <h2 className="font-serif text-3xl sm:text-4xl font-normal italic text-[#241812]">
               {t.restaurant.pressTitle}
             </h2>
             <Divider className="my-2" />
@@ -332,32 +324,28 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
             {data.reviews.map((rev, i) => (
               <div
                 key={i}
-                className="p-7 rounded-2xl bg-[#1F140F] border border-[#332117] flex flex-col justify-between space-y-4 hover:border-white/20 transition-colors"
+                className="p-7 rounded-md bg-white border border-[#DFD5BF] flex flex-col justify-between space-y-4 hover:border-[#BF4227]/50 shadow-xs transition-colors"
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="font-serif text-lg font-bold text-white">{rev.author}</span>
-                    <span
-                      className="text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded border"
-                      style={{ color: accentColor, borderColor: `${accentColor}50` }}
-                    >
+                    <span className="font-serif text-lg font-bold text-[#241812]">{rev.author}</span>
+                    <span className="text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-sm border border-[#4B5031]/30 bg-[#4B5031]/5 text-[#4B5031] font-medium">
                       {rev.role || "Critique"}
                     </span>
                   </div>
-                  <p className="font-serif text-lg italic text-[#FAF5EC]/90 leading-relaxed">
+                  <p className="font-serif text-lg italic text-[#4A3B33] leading-relaxed">
                     “{rev.quote}”
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between pt-3 border-t border-white/5 text-xs text-[#FAF5EC]/50">
+                <div className="flex items-center justify-between pt-3 border-t border-[#EAE2D5] text-xs text-[#7A695F]">
                   <span>{rev.date || "Revue Gastronomique"}</span>
                   {rev.url && (
                     <a
                       href={rev.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 hover:text-white transition-colors"
-                      style={{ color: accentColor }}
+                      className="inline-flex items-center gap-1 hover:text-[#241812] transition-colors text-[#BF4227] font-medium"
                     >
                       <span>{t.restaurant.viewArticle}</span>
                       <ExternalLink className="w-3 h-3" />
@@ -373,14 +361,14 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
       {/* SECTION: MENU / NOTRE CARTE */}
       <section id="menu" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-12">
         <div className="text-center space-y-3">
-          <span className="text-xs tracking-[0.3em] uppercase font-semibold" style={{ color: accentColor }}>
+          <span className="text-xs tracking-[0.3em] uppercase font-semibold text-[#4B5031]">
             {t.restaurant.menuBadge}
           </span>
-          <h2 className="font-serif text-3xl sm:text-5xl font-normal italic text-white">
+          <h2 className="font-serif text-3xl sm:text-5xl font-normal italic text-[#241812]">
             {t.restaurant.menuTitle}
           </h2>
           <Divider className="my-2" />
-          <p className="text-xs text-[#FAF5EC]/60 italic">
+          <p className="text-xs text-[#7A695F] italic">
             {t.restaurant.menuSubtitle}
           </p>
         </div>
@@ -391,14 +379,11 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
             <button
               key={idx}
               onClick={() => setActiveCategory(idx)}
-              className={`px-5 py-2.5 rounded-full text-xs font-medium tracking-wider uppercase transition-all duration-300 cursor-pointer ${
+              className={`px-5 py-2.5 rounded-md text-xs font-medium tracking-wider uppercase transition-all duration-300 cursor-pointer ${
                 activeCategory === idx
-                  ? "text-white shadow-lg font-semibold"
-                  : "bg-[#1E130E] text-[#FAF5EC]/70 hover:text-white border border-[#332117]"
+                  ? "bg-[#BF4227] text-white shadow-xs font-semibold"
+                  : "bg-white text-[#5C4B42] hover:text-[#241812] border border-[#DFD5BF]"
               }`}
-              style={{
-                backgroundColor: activeCategory === idx ? accentColor : undefined,
-              }}
             >
               {cat.category}
             </button>
@@ -410,31 +395,28 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
           {data.menu[activeCategory]?.items.map((dish, i) => (
             <div
               key={i}
-              className="p-6 rounded-2xl bg-[#1B110D] border border-[#2F1D15] flex flex-col justify-between hover:border-white/20 transition-all duration-300"
+              className="p-6 rounded-md bg-white border border-[#DFD5BF] flex flex-col justify-between hover:border-[#BF4227]/50 shadow-xs transition-all duration-300"
             >
               <div className="space-y-1.5">
                 <div className="flex items-start justify-between gap-4">
-                  <h3 className="font-serif text-lg font-medium text-white flex items-center gap-2">
+                  <h3 className="font-serif text-lg font-medium text-[#241812] flex items-center gap-2">
                     <span>{dish.name}</span>
                     {dish.tag && (
-                      <span
-                        className="text-[10px] uppercase font-sans tracking-wider px-2 py-0.5 rounded-full border font-normal"
-                        style={{ color: accentColor, borderColor: `${accentColor}50` }}
-                      >
+                      <span className="text-[10px] uppercase font-sans tracking-wider px-2 py-0.5 rounded-sm border border-[#4B5031]/30 bg-[#4B5031]/5 text-[#4B5031] font-normal">
                         {dish.tag}
                       </span>
                     )}
                   </h3>
-                  <span className="font-serif text-lg font-semibold whitespace-nowrap" style={{ color: accentColor }}>
+                  <span className="font-serif text-lg font-bold whitespace-nowrap text-[#BF4227]">
                     {dish.price}
                   </span>
                 </div>
                 {dish.vietnameseName && (
-                  <div className="text-xs text-[#DF9F4F]/80 font-light italic">
+                  <div className="text-xs text-[#C06129] font-light italic">
                     {dish.vietnameseName}
                   </div>
                 )}
-                <p className="text-xs sm:text-sm text-[#FAF5EC]/70 leading-relaxed font-light pt-1">
+                <p className="text-xs sm:text-sm text-[#5C4B42] leading-relaxed font-light pt-1">
                   {dish.description}
                 </p>
               </div>
@@ -444,13 +426,13 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
       </section>
 
       {/* SECTION: NOTRE ESPACE / GALLERY */}
-      <section id="espace" className="py-20 bg-[#160E0A] border-t border-[#291A13] px-4 sm:px-6 lg:px-8">
+      <section id="espace" className="py-20 bg-[#F3ECE0] border-t border-[#DFD5BF] px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto space-y-12">
           <div className="text-center space-y-3">
-            <span className="text-xs tracking-[0.3em] uppercase font-semibold" style={{ color: accentColor }}>
+            <span className="text-xs tracking-[0.3em] uppercase font-semibold text-[#4B5031]">
               {t.restaurant.spaceBadge}
             </span>
-            <h2 className="font-serif text-3xl sm:text-4xl font-normal italic text-white">
+            <h2 className="font-serif text-3xl sm:text-4xl font-normal italic text-[#241812]">
               {t.restaurant.spaceTitle}
             </h2>
             <Divider className="my-2" />
@@ -460,7 +442,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
             {data.gallery.map((img, i) => (
               <div
                 key={i}
-                className="group relative aspect-[4/3] rounded-xl overflow-hidden border border-[#2D1B13] bg-black/40"
+                className="group relative aspect-[4/3] rounded-md overflow-hidden border border-[#DFD5BF] bg-white shadow-xs"
               >
                 <Image
                   src={img.src}
@@ -482,28 +464,28 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
 
       {/* SECTION: RESERVATION ONLINE FORM */}
       <section id="reservation" className="py-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto w-full">
-        <div className="p-8 sm:p-12 rounded-3xl bg-[#1B110D] border border-[#332117] shadow-2xl space-y-8">
+        <div className="p-8 sm:p-12 rounded-lg bg-white border border-[#DFD5BF] shadow-md space-y-8">
           <div className="text-center space-y-3">
-            <span className="text-xs tracking-[0.3em] uppercase font-semibold" style={{ color: accentColor }}>
+            <span className="text-xs tracking-[0.3em] uppercase font-semibold text-[#4B5031]">
               {t.restaurant.reserveBadge}
             </span>
-            <h2 className="font-serif text-3xl sm:text-4xl font-normal italic text-white">
+            <h2 className="font-serif text-3xl sm:text-4xl font-normal italic text-[#241812]">
               {t.restaurant.reserveTitle}
             </h2>
             <Divider className="my-1" />
-            <p className="text-xs sm:text-sm text-[#FAF5EC]/70">
+            <p className="text-xs sm:text-sm text-[#6D5A50]">
               {t.restaurant.reserveSubtitle}{" "}
-              <a href={`tel:${data.phone.replace(/\s+/g, "")}`} className="font-mono underline text-white">
+              <a href={`tel:${data.phone.replace(/\s+/g, "")}`} className="font-mono underline text-[#BF4227] font-medium">
                 {data.phone}
               </a>
             </p>
           </div>
 
           {isSuccess ? (
-            <div className="p-8 rounded-2xl bg-green-950/20 border border-green-500/40 text-center space-y-4">
-              <CheckCircle className="w-14 h-14 text-green-400 mx-auto" />
-              <h3 className="font-serif text-2xl text-white">{t.restaurant.reservationSuccessTitle}</h3>
-              <p className="text-sm text-green-200">
+            <div className="p-8 rounded-md bg-[#4B5031]/10 border border-[#4B5031]/30 text-center space-y-4">
+              <CheckCircle className="w-14 h-14 text-[#4B5031] mx-auto" />
+              <h3 className="font-serif text-2xl text-[#241812] font-semibold">{t.restaurant.reservationSuccessTitle}</h3>
+              <p className="text-sm text-[#4B5031]">
                 {t.restaurant.reservationSuccessDesc
                   .replace("{name}", resName)
                   .replace("{phone}", resPhone)
@@ -511,8 +493,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
               </p>
               <button
                 onClick={() => setIsSuccess(false)}
-                className="text-xs uppercase tracking-wider underline hover:text-white cursor-pointer"
-                style={{ color: accentColor }}
+                className="text-xs uppercase tracking-wider underline hover:text-[#241812] cursor-pointer text-[#BF4227] font-medium"
               >
                 {t.restaurant.bookAnotherTable}
               </button>
@@ -521,7 +502,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
             <form onSubmit={handleBooking} className="space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-[#FAF5EC]/70 mb-1.5 uppercase tracking-wider">
+                  <label className="block text-xs font-medium text-[#5C4B42] mb-1.5 uppercase tracking-wider">
                     {t.restaurant.dateLabel}
                   </label>
                   <input
@@ -529,17 +510,17 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
                     required
                     value={resDate}
                     onChange={(e) => setResDate(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#221612] border border-[#332117] text-white text-xs focus:outline-none focus:border-gold"
+                    className="w-full px-3.5 py-2.5 rounded-md bg-[#FAF6EF] border border-[#DFD5BF] text-[#241812] text-xs focus:outline-none focus:border-[#BF4227]"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-[#FAF5EC]/70 mb-1.5 uppercase tracking-wider">
+                  <label className="block text-xs font-medium text-[#5C4B42] mb-1.5 uppercase tracking-wider">
                     {t.restaurant.timeLabel}
                   </label>
                   <select
                     value={resTime}
                     onChange={(e) => setResTime(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#221612] border border-[#332117] text-white text-xs focus:outline-none focus:border-gold"
+                    className="w-full px-3.5 py-2.5 rounded-md bg-[#FAF6EF] border border-[#DFD5BF] text-[#241812] text-xs focus:outline-none focus:border-[#BF4227]"
                   >
                     <optgroup label={t.restaurant.lunchGroup}>
                       <option value="11:30">11:30</option>
@@ -558,13 +539,13 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-[#FAF5EC]/70 mb-1.5 uppercase tracking-wider">
+                  <label className="block text-xs font-medium text-[#5C4B42] mb-1.5 uppercase tracking-wider">
                     {t.restaurant.guestsLabel}
                   </label>
                   <select
                     value={resGuests}
                     onChange={(e) => setResGuests(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#221612] border border-[#332117] text-white text-xs focus:outline-none focus:border-gold"
+                    className="w-full px-3.5 py-2.5 rounded-md bg-[#FAF6EF] border border-[#DFD5BF] text-[#241812] text-xs focus:outline-none focus:border-[#BF4227]"
                   >
                     {[1, 2, 3, 4, 5, 6, 7, 8, "9+"].map((n) => (
                       <option key={n} value={n}>
@@ -577,7 +558,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-[#FAF5EC]/70 mb-1.5 uppercase tracking-wider">
+                  <label className="block text-xs font-medium text-[#5C4B42] mb-1.5 uppercase tracking-wider">
                     {t.restaurant.nameLabel}
                   </label>
                   <input
@@ -586,11 +567,11 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
                     placeholder={t.drawer.namePlaceholder}
                     value={resName}
                     onChange={(e) => setResName(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#221612] border border-[#332117] text-white text-xs focus:outline-none focus:border-gold"
+                    className="w-full px-3.5 py-2.5 rounded-md bg-[#FAF6EF] border border-[#DFD5BF] text-[#241812] text-xs focus:outline-none focus:border-[#BF4227]"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-[#FAF5EC]/70 mb-1.5 uppercase tracking-wider">
+                  <label className="block text-xs font-medium text-[#5C4B42] mb-1.5 uppercase tracking-wider">
                     {t.restaurant.phoneLabel}
                   </label>
                   <input
@@ -599,13 +580,13 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
                     placeholder={t.drawer.phonePlaceholder}
                     value={resPhone}
                     onChange={(e) => setResPhone(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#221612] border border-[#332117] text-white text-xs focus:outline-none focus:border-gold"
+                    className="w-full px-3.5 py-2.5 rounded-md bg-[#FAF6EF] border border-[#DFD5BF] text-[#241812] text-xs focus:outline-none focus:border-[#BF4227]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-[#FAF5EC]/70 mb-1.5 uppercase tracking-wider">
+                <label className="block text-xs font-medium text-[#5C4B42] mb-1.5 uppercase tracking-wider">
                   {t.restaurant.notesLabel}
                 </label>
                 <textarea
@@ -613,14 +594,13 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
                   placeholder={t.restaurant.notesPlaceholder}
                   value={resNotes}
                   onChange={(e) => setResNotes(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#221612] border border-[#332117] text-white text-xs focus:outline-none focus:border-gold"
+                  className="w-full px-3.5 py-2.5 rounded-md bg-[#FAF6EF] border border-[#DFD5BF] text-[#241812] text-xs focus:outline-none focus:border-[#BF4227]"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-4 rounded-xl text-xs font-medium uppercase tracking-widest text-white shadow-xl transition-all duration-300 hover:brightness-110 cursor-pointer"
-                style={{ backgroundColor: accentColor }}
+                className="w-full py-3.5 rounded-md text-xs font-medium uppercase tracking-widest text-white shadow-sm transition-all duration-300 bg-[#BF4227] hover:bg-[#A4351D] cursor-pointer"
               >
                 {t.restaurant.submitReservation}
               </button>
@@ -630,33 +610,33 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
       </section>
 
       {/* SECTION: CONTACT & ACCÈS */}
-      <section id="contact" className="py-16 bg-[#120B08] border-t border-[#291A13] px-4 sm:px-6 lg:px-8">
+      <section id="contact" className="py-16 bg-[#F3ECE0] border-t border-[#DFD5BF] px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
           <div className="space-y-2">
-            <h4 className="font-serif text-lg font-bold text-white">{data.name}</h4>
-            <p className="text-xs text-[#FAF5EC]/70">{data.address}, {data.city}</p>
-            <p className="text-xs text-[#FAF5EC]/50">{t.portal.metroLabel}: {data.metro}</p>
+            <h4 className="font-serif text-lg font-bold text-[#241812]">{data.name}</h4>
+            <p className="text-xs text-[#5C4B42]">{data.address}, {data.city}</p>
+            <p className="text-xs text-[#7A695F]">{t.portal.metroLabel}: {data.metro}</p>
           </div>
           <div className="space-y-2">
-            <h4 className="font-serif text-lg font-bold text-white">{t.restaurant.openingHours}</h4>
-            <p className="text-xs text-[#FAF5EC]/70">{localized.hours}</p>
+            <h4 className="font-serif text-lg font-bold text-[#241812]">{t.restaurant.openingHours}</h4>
+            <p className="text-xs text-[#5C4B42]">{localized.hours}</p>
           </div>
           <div className="space-y-2">
-            <h4 className="font-serif text-lg font-bold text-white">{t.restaurant.contactHotline}</h4>
-            <p className="text-xs text-[#FAF5EC]/70">
-              <a href={`tel:${data.phone.replace(/\s+/g, "")}`} className="font-mono hover:text-white underline">
+            <h4 className="font-serif text-lg font-bold text-[#241812]">{t.restaurant.contactHotline}</h4>
+            <p className="text-xs text-[#5C4B42]">
+              <a href={`tel:${data.phone.replace(/\s+/g, "")}`} className="font-mono hover:text-[#BF4227] underline">
                 {data.phone}
               </a>
             </p>
-            <p className="text-xs text-[#FAF5EC]/50">{data.email}</p>
+            <p className="text-xs text-[#7A695F]">{data.email}</p>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-[#22150F] bg-[#0C0705] py-8 text-center text-xs text-[#FAF5EC]/40 space-y-2">
+      <footer className="border-t border-[#DFD5BF] bg-[#EFE6D6] py-8 text-center text-xs text-[#7A695F] space-y-2">
         <p>© 2026 {data.name} Paris — {data.address}, 75015 Paris.</p>
-        <Link href="/" className="inline-block text-[#FAF5EC]/70 hover:text-white underline">
+        <Link href="/" className="inline-block text-[#5C4B42] hover:text-[#BF4227] underline">
           {t.restaurant.backHome}
         </Link>
       </footer>
