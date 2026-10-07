@@ -1,20 +1,33 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Playfair_Display, Be_Vietnam_Pro, Pinyon_Script } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const beVietnam = Be_Vietnam_Pro({
+  variable: "--font-sans",
+  subsets: ["latin", "vietnamese"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const playfair = Playfair_Display({
+  variable: "--font-serif",
+  subsets: ["latin", "vietnamese"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const pinyonScript = Pinyon_Script({
+  variable: "--font-script",
   subsets: ["latin"],
+  weight: ["400"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Website Clone",
-  description: "Pixel-perfect website clone",
+  title: "Les Restaurants Vị Paris — Vị Hanoi & Maison de Vị",
+  description: "Trải nghiệm ẩm thực Việt Nam tinh hoa tại Paris 15e. Đặt bàn nhanh tại Vị Hanoi (282 Rue Lecourbe) và Maison de Vị (142 Rue de Vaugirard).",
+  keywords: ["Restaurant vietnamien Paris", "Vị Hanoi", "Maison de Vị", "Pho Paris 15", "Bun cha Paris", "Rue Lecourbe", "Rue de Vaugirard"],
 };
 
 export default function RootLayout({
@@ -24,10 +37,17 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      lang="fr"
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+      className={`${beVietnam.variable} ${playfair.variable} ${pinyonScript.variable} h-full antialiased scroll-smooth`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body
+        suppressHydrationWarning
+        className="min-h-full flex flex-col font-sans bg-[#140D0A] text-[#FAF5EC] selection:bg-[#C9873A] selection:text-white"
+      >
+        {children}
+      </body>
     </html>
   );
 }
