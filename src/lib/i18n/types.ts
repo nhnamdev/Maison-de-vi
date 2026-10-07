@@ -25,6 +25,7 @@ export interface TranslationSchema {
     selectLabel: string;
     badgeAuthentic: string;
     badgeContemporary: string;
+    scrollDown: string;
   };
 
   // Portal Section
@@ -111,5 +112,7 @@ export interface TranslationSchema {
     backHome: string;
     lunchGroup: string;
     dinnerGroup: string;
+    defaultReviewRole: string;
+    defaultReviewDate: string;
   };
 }

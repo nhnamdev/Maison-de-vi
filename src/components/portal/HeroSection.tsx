@@ -121,7 +121,7 @@ export function HeroSection({ onScrollToRestaurants }: { onScrollToRestaurants: 
         className="absolute bottom-5 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-[#241812]/60 hover:text-[#241812] transition-colors cursor-pointer"
         aria-label="Scroll down"
       >
-        <span className="text-[10px] tracking-[0.25em] uppercase font-medium">Scroll</span>
+        <span className="text-[10px] tracking-[0.25em] uppercase font-medium">{t.hero.scrollDown}</span>
         <ChevronDown className="w-4 h-4 animate-bounce text-[#BF4227]" />
       </button>
     </section>

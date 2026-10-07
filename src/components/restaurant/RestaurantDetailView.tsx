@@ -256,7 +256,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
           {/* Visual Showcase */}
           <div className="relative rounded-lg overflow-hidden border border-[#DFD5BF] aspect-[4/3] shadow-md group bg-white">
             <Image
-              src={data.gallery[1]?.src || data.heroImage}
+              src={localized.gallery[1]?.src || data.heroImage}
               alt={data.name}
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -264,7 +264,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute bottom-4 left-4 right-4">
               <span className="text-xs text-white/90 italic font-serif">
-                {data.gallery[1]?.caption || data.name}
+                {localized.gallery[1]?.caption || data.name}
               </span>
             </div>
           </div>
@@ -321,7 +321,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {data.reviews.map((rev, i) => (
+            {localized.reviews.map((rev, i) => (
               <div
                 key={i}
                 className="p-7 rounded-md bg-white border border-[#DFD5BF] flex flex-col justify-between space-y-4 hover:border-[#BF4227]/50 shadow-xs transition-colors"
@@ -330,7 +330,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
                   <div className="flex items-center justify-between">
                     <span className="font-serif text-lg font-bold text-[#241812]">{rev.author}</span>
                     <span className="text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-sm border border-[#4B5031]/30 bg-[#4B5031]/5 text-[#4B5031] font-medium">
-                      {rev.role || "Critique"}
+                      {rev.role || t.restaurant.defaultReviewRole}
                     </span>
                   </div>
                   <p className="font-serif text-lg italic text-[#4A3B33] leading-relaxed">
@@ -339,7 +339,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
                 </div>
 
                 <div className="flex items-center justify-between pt-3 border-t border-[#EAE2D5] text-xs text-[#7A695F]">
-                  <span>{rev.date || "Revue Gastronomique"}</span>
+                  <span>{rev.date || t.restaurant.defaultReviewDate}</span>
                   {rev.url && (
                     <a
                       href={rev.url}
@@ -375,7 +375,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
 
         {/* Categories Tab */}
         <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-          {data.menu.map((cat, idx) => (
+          {localized.menu.map((cat, idx) => (
             <button
               key={idx}
               onClick={() => setActiveCategory(idx)}
@@ -392,7 +392,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
 
         {/* Dish Items Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-          {data.menu[activeCategory]?.items.map((dish, i) => (
+          {localized.menu[activeCategory]?.items.map((dish, i) => (
             <div
               key={i}
               className="p-6 rounded-md bg-white border border-[#DFD5BF] flex flex-col justify-between hover:border-[#BF4227]/50 shadow-xs transition-all duration-300"
@@ -439,7 +439,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
-            {data.gallery.map((img, i) => (
+            {localized.gallery.map((img, i) => (
               <div
                 key={i}
                 className="group relative aspect-[4/3] rounded-md overflow-hidden border border-[#DFD5BF] bg-white shadow-xs"
