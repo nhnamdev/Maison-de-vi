@@ -4,9 +4,11 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { ChevronDown, Utensils, Sparkles } from "lucide-react";
 import { GoldDivider } from "@/components/common/BrandLogos";
+import { useI18n } from "@/lib/i18n/context";
 
 export function HeroSection({ onScrollToRestaurants }: { onScrollToRestaurants: () => void }) {
   const [activeSlide, setActiveSlide] = useState(0);
+  const { t } = useI18n();
 
   const heroImages = [
     "/images/hero-3.webp",
@@ -14,7 +16,7 @@ export function HeroSection({ onScrollToRestaurants }: { onScrollToRestaurants: 
     "/images/maison-de-vi/entrance.png",
   ];
 
-  // Auto rotate hero slides every 5s
+  // Auto rotate hero slides every 6s
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % heroImages.length);
@@ -69,7 +71,7 @@ export function HeroSection({ onScrollToRestaurants }: { onScrollToRestaurants: 
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#C9873A]/40 bg-black/40 backdrop-blur-md">
           <Sparkles className="w-3.5 h-3.5 text-[#DF9F4F]" />
           <span className="text-[11px] sm:text-xs tracking-[0.3em] uppercase text-[#FAF5EC]/90 font-medium">
-            Paris 15<sup>e</sup> · Hai Cơ Sở Ẩm Thực Việt
+            {t.hero.subtitle}
           </span>
         </div>
 
@@ -80,11 +82,11 @@ export function HeroSection({ onScrollToRestaurants }: { onScrollToRestaurants: 
         <GoldDivider className="my-3 opacity-80" />
 
         <p className="font-script text-2xl sm:text-3xl md:text-4xl text-[#DF9F4F] leading-snug drop-shadow-md">
-          L’Âme Culinaire du Vietnam au Cœur de Paris
+          {t.hero.titleLine1}
         </p>
 
         <p className="max-w-2xl mx-auto text-sm sm:text-base text-[#FAF5EC]/80 font-light leading-relaxed">
-          Chào mừng quý khách đến với hệ thống nhà hàng của chúng tôi. Lựa chọn cơ sở bên dưới để đặt bàn nhanh nhất hoặc khám phá câu chuyện và thực đơn trọn vẹn.
+          {t.hero.description}
         </p>
 
         {/* Call to action */}
@@ -94,7 +96,7 @@ export function HeroSection({ onScrollToRestaurants }: { onScrollToRestaurants: 
             className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-[#C2692C] to-[#C9873A] hover:brightness-110 text-white font-medium text-xs tracking-widest uppercase transition-all duration-300 shadow-xl flex items-center justify-center gap-2 cursor-pointer"
           >
             <Utensils className="w-4 h-4" />
-            <span>Chọn Nhà Hàng Để Đặt Bàn</span>
+            <span>{t.hero.exploreBtn}</span>
           </button>
         </div>
 
@@ -104,7 +106,7 @@ export function HeroSection({ onScrollToRestaurants }: { onScrollToRestaurants: 
             <button
               key={i}
               onClick={() => setActiveSlide(i)}
-              className={`h-1 transition-all duration-300 rounded-full ${
+              className={`h-1 transition-all duration-300 rounded-full cursor-pointer ${
                 i === activeSlide ? "w-8 bg-[#DF9F4F]" : "w-2 bg-white/30"
               }`}
               aria-label={`Slide ${i + 1}`}
@@ -117,9 +119,9 @@ export function HeroSection({ onScrollToRestaurants }: { onScrollToRestaurants: 
       <button
         onClick={onScrollToRestaurants}
         className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50 hover:text-white transition-colors cursor-pointer"
-        aria-label="Kéo xuống xem nhà hàng"
+        aria-label="Scroll down"
       >
-        <span className="text-[10px] tracking-[0.25em] uppercase">Kéo xuống</span>
+        <span className="text-[10px] tracking-[0.25em] uppercase">Scroll</span>
         <ChevronDown className="w-4 h-4 animate-bounce" />
       </button>
     </section>

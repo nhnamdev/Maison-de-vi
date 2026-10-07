@@ -1,10 +1,10 @@
 "use client";
 
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, Phone, ArrowRight, UtensilsCrossed, Sparkles } from "lucide-react";
-import { RestaurantData } from "@/lib/restaurant-data";
+import { MapPin, ArrowRight, UtensilsCrossed } from "lucide-react";
+import { RestaurantData, getLocalizedRestaurant } from "@/lib/restaurant-data";
+import { useI18n } from "@/lib/i18n/context";
 
 interface RestaurantCardProps {
   restaurant: RestaurantData;
@@ -15,6 +15,9 @@ export function RestaurantCard({
   restaurant,
   onSelectRestaurant,
 }: RestaurantCardProps) {
+  const { language, t } = useI18n();
+  const localized = getLocalizedRestaurant(restaurant, language);
+
   const isMaison = restaurant.id === "maison-de-vi";
   const accentColor = isMaison ? "#C2692C" : "#C9873A";
   const badgeBg = isMaison ? "rgba(194, 105, 44, 0.15)" : "rgba(201, 135, 58, 0.15)";
@@ -49,7 +52,7 @@ export function RestaurantCard({
               borderColor: `${accentColor}50`,
             }}
           >
-            {restaurant.badges[0]}
+            {localized.badges[0]}
           </span>
           <span className="text-[11px] text-[#FAF5EC]/80 font-mono backdrop-blur-md bg-black/40 px-2.5 py-1 rounded-full border border-white/10">
             {restaurant.city}
@@ -75,7 +78,7 @@ export function RestaurantCard({
               className="text-[10px] uppercase tracking-[0.25em] font-semibold block drop-shadow-md"
               style={{ color: accentColor }}
             >
-              {restaurant.subtitle}
+              {localized.subtitle}
             </span>
             <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white tracking-wide drop-shadow-lg">
               {restaurant.name}
@@ -94,18 +97,18 @@ export function RestaurantCard({
               <span className="font-medium text-white">{restaurant.address}, {restaurant.city}</span>
             </div>
             <div className="pl-6 text-[11px] text-[#FAF5EC]/50 font-light">
-              Métro: {restaurant.metro}
+              {t.portal.metroLabel}: {restaurant.metro}
             </div>
           </div>
 
           {/* Description */}
           <p className="text-sm text-[#FAF5EC]/70 leading-relaxed font-light">
-            {restaurant.descriptionVi}
+            {localized.description}
           </p>
 
           {/* Highlights / Badges */}
           <div className="flex flex-wrap gap-1.5 pt-1">
-            {restaurant.badges.map((badge, idx) => (
+            {localized.badges.map((badge, idx) => (
               <span
                 key={idx}
                 className="text-[10px] tracking-wider uppercase px-2.5 py-1 rounded bg-[#251914] text-[#FAF5EC]/60 border border-white/5"
@@ -125,7 +128,7 @@ export function RestaurantCard({
             style={{ backgroundColor: accentColor }}
           >
             <UtensilsCrossed className="w-3.5 h-3.5" />
-            <span>Đặt bàn ngay</span>
+            <span>{t.portal.bookTableBtn}</span>
           </button>
 
           {/* Secondary Action: More info directly or link */}
@@ -133,7 +136,7 @@ export function RestaurantCard({
             href={restaurant.route}
             className="py-3.5 px-4 rounded-xl font-medium text-xs tracking-widest uppercase border border-[#3D291F] hover:border-white/30 text-[#FAF5EC]/80 hover:text-white transition-all duration-300 flex items-center justify-center gap-1.5 text-center bg-[#170E0B]"
           >
-            <span>Chi tiết</span>
+            <span>{t.portal.detailsBtn}</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>

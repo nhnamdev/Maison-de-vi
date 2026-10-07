@@ -5,26 +5,25 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   MapPin,
-  Phone,
   Clock,
   ArrowLeft,
-  Calendar,
-  Users,
   CheckCircle,
   ExternalLink,
-  ChevronRight,
   Menu as MenuIcon,
   X,
-  Star,
 } from "lucide-react";
-import { RestaurantData } from "@/lib/restaurant-data";
+import { RestaurantData, getLocalizedRestaurant } from "@/lib/restaurant-data";
 import { GoldDivider, TerracottaDivider } from "@/components/common/BrandLogos";
+import { useI18n } from "@/lib/i18n/context";
 
 interface RestaurantDetailViewProps {
   data: RestaurantData;
 }
 
 export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
+  const { language, setLanguage, t } = useI18n();
+  const localized = getLocalizedRestaurant(data, language);
+
   const [activeCategory, setActiveCategory] = useState<number>(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -45,7 +44,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
   const handleBooking = (e: React.FormEvent) => {
     e.preventDefault();
     if (!resName || !resPhone) {
-      alert("Vui lòng điền họ tên và số điện thoại!");
+      alert(t.drawer.alertNamePhone);
       return;
     }
     setIsSuccess(true);
@@ -63,7 +62,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
               className="inline-flex items-center gap-1.5 text-xs text-[#FAF5EC]/70 hover:text-white transition-colors bg-white/5 px-3 py-1.5 rounded-full border border-white/10"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Cả 2 nhà hàng</span>
+              <span>{t.restaurant.backToAll}</span>
             </Link>
 
             <Link href={data.route} className="flex items-center gap-2">
@@ -75,33 +74,90 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
 
           {/* Desktop Nav Items */}
           <nav className="hidden md:flex items-center gap-7 text-xs font-medium uppercase tracking-wider text-[#FAF5EC]/70">
-            <a href="#histoire" className="hover:text-white transition-colors">Câu chuyện</a>
-            <a href="#menu" className="hover:text-white transition-colors">Thực đơn</a>
-            <a href="#presse" className="hover:text-white transition-colors">Báo chí</a>
-            <a href="#espace" className="hover:text-white transition-colors">Không gian</a>
-            <a href="#reservation" className="hover:text-white transition-colors">Đặt bàn</a>
-            <a href="#contact" className="hover:text-white transition-colors">Liên hệ</a>
+            <a href="#histoire" className="hover:text-white transition-colors">{t.nav.story}</a>
+            <a href="#menu" className="hover:text-white transition-colors">{t.nav.menu}</a>
+            <a href="#presse" className="hover:text-white transition-colors">{t.nav.press}</a>
+            <a href="#espace" className="hover:text-white transition-colors">{t.nav.space}</a>
+            <a href="#reservation" className="hover:text-white transition-colors">{t.nav.bookTable}</a>
+            <a href="#contact" className="hover:text-white transition-colors">{t.nav.contact}</a>
           </nav>
 
-          {/* CTA Reservation Button */}
+          {/* Right Action: Language Switcher + CTA Button */}
           <div className="hidden sm:flex items-center gap-3">
+            {/* Language Switcher */}
+            <div className="flex items-center bg-black/40 border border-white/10 rounded-full p-0.5 text-[11px] font-medium">
+              <button
+                onClick={() => setLanguage("en")}
+                className={`px-2.5 py-0.5 rounded-full transition-colors cursor-pointer ${
+                  language === "en" ? "bg-[#C9873A] text-white" : "text-[#FAF5EC]/60 hover:text-white"
+                }`}
+              >
+                EN
+              </button>
+              <button
+                onClick={() => setLanguage("fr")}
+                className={`px-2.5 py-0.5 rounded-full transition-colors cursor-pointer ${
+                  language === "fr" ? "bg-[#C9873A] text-white" : "text-[#FAF5EC]/60 hover:text-white"
+                }`}
+              >
+                FR
+              </button>
+              <button
+                onClick={() => setLanguage("vi")}
+                className={`px-2.5 py-0.5 rounded-full transition-colors cursor-pointer ${
+                  language === "vi" ? "bg-[#C9873A] text-white" : "text-[#FAF5EC]/60 hover:text-white"
+                }`}
+              >
+                VI
+              </button>
+            </div>
+
             <a
               href="#reservation"
               className="px-5 py-2.5 rounded-lg text-xs font-medium uppercase tracking-widest text-white shadow transition-all duration-300 hover:brightness-110"
               style={{ backgroundColor: accentColor }}
             >
-              Đặt bàn ngay
+              {t.nav.bookTable}
             </a>
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-white/80 hover:text-white"
-            aria-label="Menu"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
-          </button>
+          <div className="flex sm:hidden items-center gap-2">
+            <div className="flex items-center bg-black/40 border border-white/10 rounded-full p-0.5 text-[10px] font-medium">
+              <button
+                onClick={() => setLanguage("en")}
+                className={`px-2 py-0.5 rounded-full ${
+                  language === "en" ? "bg-[#C9873A] text-white" : "text-[#FAF5EC]/60"
+                }`}
+              >
+                EN
+              </button>
+              <button
+                onClick={() => setLanguage("fr")}
+                className={`px-2 py-0.5 rounded-full ${
+                  language === "fr" ? "bg-[#C9873A] text-white" : "text-[#FAF5EC]/60"
+                }`}
+              >
+                FR
+              </button>
+              <button
+                onClick={() => setLanguage("vi")}
+                className={`px-2 py-0.5 rounded-full ${
+                  language === "vi" ? "bg-[#C9873A] text-white" : "text-[#FAF5EC]/60"
+                }`}
+              >
+                VI
+              </button>
+            </div>
+
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 text-white/80 hover:text-white cursor-pointer"
+              aria-label="Menu"
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Dropdown */}
@@ -112,28 +168,28 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
               onClick={() => setMobileMenuOpen(false)}
               className="block py-1.5 text-white/80 hover:text-white"
             >
-              Câu chuyện & Triết lý
+              {t.nav.story}
             </a>
             <a
               href="#menu"
               onClick={() => setMobileMenuOpen(false)}
               className="block py-1.5 text-white/80 hover:text-white"
             >
-              Thực đơn (Menu)
+              {t.nav.menu}
             </a>
             <a
               href="#presse"
               onClick={() => setMobileMenuOpen(false)}
               className="block py-1.5 text-white/80 hover:text-white"
             >
-              Đánh giá báo chí
+              {t.nav.press}
             </a>
             <a
               href="#espace"
               onClick={() => setMobileMenuOpen(false)}
               className="block py-1.5 text-white/80 hover:text-white"
             >
-              Không gian nhà hàng
+              {t.nav.space}
             </a>
             <a
               href="#reservation"
@@ -141,7 +197,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
               className="block py-2 text-center rounded-lg text-white font-medium uppercase text-xs"
               style={{ backgroundColor: accentColor }}
             >
-              Đặt bàn trực tuyến
+              {t.restaurant.reserveTitle}
             </a>
           </div>
         )}
@@ -177,11 +233,11 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
           <Divider className="my-2" />
 
           <p className="font-script text-2xl sm:text-4xl leading-snug drop-shadow-md" style={{ color: accentColor }}>
-            {data.tagline}
+            {localized.tagline}
           </p>
 
           <p className="text-sm sm:text-base text-[#FAF5EC]/80 max-w-2xl mx-auto font-light leading-relaxed">
-            {data.descriptionVi}
+            {localized.description}
           </p>
 
           <div className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -190,13 +246,13 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
               className="w-full sm:w-auto px-10 py-4 rounded-xl font-medium text-xs tracking-widest uppercase transition-all duration-300 shadow-xl text-white hover:brightness-110"
               style={{ backgroundColor: accentColor }}
             >
-              Đặt Bàn Ngay
+              {t.restaurant.reserveTitle}
             </a>
             <a
               href="#menu"
               className="w-full sm:w-auto px-10 py-4 rounded-xl border border-white/30 text-white hover:bg-white/10 font-medium text-xs tracking-widest uppercase transition-all duration-300"
             >
-              Xem Thực Đơn
+              {t.restaurant.menuTitle}
             </a>
           </div>
         </div>
@@ -225,23 +281,23 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
           <div className="space-y-6">
             <div>
               <span className="text-xs uppercase tracking-[0.3em] font-semibold block mb-2" style={{ color: accentColor }}>
-                Notre Histoire & Âme
+                {t.restaurant.storyBadge}
               </span>
               <h2 className="font-serif text-3xl sm:text-4xl font-normal italic text-white leading-tight">
-                {isMaison ? "Hành Trình Kiến Tạo Maison de Vị" : "Vị Hanoi — L'Âme de Hanoï à Paris"}
+                {isMaison ? t.restaurant.storyTitleMaisonDeVi : t.restaurant.storyTitleViHanoi}
               </h2>
             </div>
 
             <Divider className="my-1 justify-start" />
 
             <p className="text-sm sm:text-base text-[#FAF5EC]/80 leading-relaxed font-light">
-              {data.storyContent}
+              {localized.storyContent}
             </p>
 
             <blockquote className="border-l-2 pl-4 py-1 italic font-script text-2xl sm:text-3xl leading-snug" style={{ borderColor: accentColor, color: accentColor }}>
-              {data.storyQuote}
+              {localized.storyQuote}
               <footer className="text-xs font-sans not-italic text-[#FAF5EC]/60 mt-2 font-normal">
-                — {data.storyAuthor}
+                — {localized.storyAuthor}
               </footer>
             </blockquote>
 
@@ -252,7 +308,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" style={{ color: accentColor }} />
-                <span>{data.hours.split("&")[0]}</span>
+                <span>{localized.hours.split("&")[0]}</span>
               </div>
             </div>
           </div>
@@ -264,10 +320,10 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
         <div className="max-w-5xl mx-auto space-y-12">
           <div className="text-center space-y-3">
             <span className="text-xs tracking-[0.3em] uppercase font-semibold" style={{ color: accentColor }}>
-              Họ Nói Về Chúng Tôi
+              {t.restaurant.pressBadge}
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl font-normal italic text-white">
-              Ils en parlent
+              {t.restaurant.pressTitle}
             </h2>
             <Divider className="my-2" />
           </div>
@@ -303,7 +359,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
                       className="inline-flex items-center gap-1 hover:text-white transition-colors"
                       style={{ color: accentColor }}
                     >
-                      <span>Xem bài báo</span>
+                      <span>{t.restaurant.viewArticle}</span>
                       <ExternalLink className="w-3 h-3" />
                     </a>
                   )}
@@ -318,14 +374,14 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
       <section id="menu" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-12">
         <div className="text-center space-y-3">
           <span className="text-xs tracking-[0.3em] uppercase font-semibold" style={{ color: accentColor }}>
-            Tươi Ngon & Tinh Tế
+            {t.restaurant.menuBadge}
           </span>
           <h2 className="font-serif text-3xl sm:text-5xl font-normal italic text-white">
-            Notre Carte · Thực Đơn
+            {t.restaurant.menuTitle}
           </h2>
           <Divider className="my-2" />
           <p className="text-xs text-[#FAF5EC]/60 italic">
-            Prix TTC · Service compris · Nguyên liệu tươi mới nhập hàng ngày
+            {t.restaurant.menuSubtitle}
           </p>
         </div>
 
@@ -335,7 +391,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
             <button
               key={idx}
               onClick={() => setActiveCategory(idx)}
-              className={`px-5 py-2.5 rounded-full text-xs font-medium tracking-wider uppercase transition-all duration-300 ${
+              className={`px-5 py-2.5 rounded-full text-xs font-medium tracking-wider uppercase transition-all duration-300 cursor-pointer ${
                 activeCategory === idx
                   ? "text-white shadow-lg font-semibold"
                   : "bg-[#1E130E] text-[#FAF5EC]/70 hover:text-white border border-[#332117]"
@@ -392,10 +448,10 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
         <div className="max-w-7xl mx-auto space-y-12">
           <div className="text-center space-y-3">
             <span className="text-xs tracking-[0.3em] uppercase font-semibold" style={{ color: accentColor }}>
-              Ấm Cúng & Trang Nhã
+              {t.restaurant.spaceBadge}
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl font-normal italic text-white">
-              Notre Espace · Không Gian
+              {t.restaurant.spaceTitle}
             </h2>
             <Divider className="my-2" />
           </div>
@@ -429,15 +485,15 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
         <div className="p-8 sm:p-12 rounded-3xl bg-[#1B110D] border border-[#332117] shadow-2xl space-y-8">
           <div className="text-center space-y-3">
             <span className="text-xs tracking-[0.3em] uppercase font-semibold" style={{ color: accentColor }}>
-              Đặt Bàn Trực Tuyến
+              {t.restaurant.reserveBadge}
             </span>
             <h2 className="font-serif text-3xl sm:text-4xl font-normal italic text-white">
-              Réserver Une Table
+              {t.restaurant.reserveTitle}
             </h2>
             <Divider className="my-1" />
             <p className="text-xs sm:text-sm text-[#FAF5EC]/70">
-              Đặt bàn trực tuyến 24/7 hoặc liên hệ hotline:{" "}
-              <a href={`tel:${data.phone}`} className="font-mono underline text-white">
+              {t.restaurant.reserveSubtitle}{" "}
+              <a href={`tel:${data.phone.replace(/\s+/g, "")}`} className="font-mono underline text-white">
                 {data.phone}
               </a>
             </p>
@@ -446,17 +502,19 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
           {isSuccess ? (
             <div className="p-8 rounded-2xl bg-green-950/20 border border-green-500/40 text-center space-y-4">
               <CheckCircle className="w-14 h-14 text-green-400 mx-auto" />
-              <h3 className="font-serif text-2xl text-white">Yêu Cầu Đã Được Ghi Nhận!</h3>
+              <h3 className="font-serif text-2xl text-white">{t.restaurant.reservationSuccessTitle}</h3>
               <p className="text-sm text-green-200">
-                Cảm ơn quý khách <strong>{resName}</strong>. Chúng tôi sẽ liên hệ tới số{" "}
-                <span className="font-mono text-white">{resPhone}</span> để xác nhận lịch đặt bàn {resGuests} khách.
+                {t.restaurant.reservationSuccessDesc
+                  .replace("{name}", resName)
+                  .replace("{phone}", resPhone)
+                  .replace("{guests}", String(resGuests))}
               </p>
               <button
                 onClick={() => setIsSuccess(false)}
-                className="text-xs uppercase tracking-wider underline hover:text-white"
+                className="text-xs uppercase tracking-wider underline hover:text-white cursor-pointer"
                 style={{ color: accentColor }}
               >
-                Đặt thêm bàn khác
+                {t.restaurant.bookAnotherTable}
               </button>
             </div>
           ) : (
@@ -464,7 +522,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
                   <label className="block text-xs font-medium text-[#FAF5EC]/70 mb-1.5 uppercase tracking-wider">
-                    Ngày (Date) *
+                    {t.restaurant.dateLabel}
                   </label>
                   <input
                     type="date"
@@ -476,21 +534,21 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
                 </div>
                 <div>
                   <label className="block text-xs font-medium text-[#FAF5EC]/70 mb-1.5 uppercase tracking-wider">
-                    Giờ (Heure) *
+                    {t.restaurant.timeLabel}
                   </label>
                   <select
                     value={resTime}
                     onChange={(e) => setResTime(e.target.value)}
                     className="w-full px-3.5 py-2.5 rounded-xl bg-[#221612] border border-[#332117] text-white text-xs focus:outline-none focus:border-gold"
                   >
-                    <optgroup label="Bữa trưa (Midi)">
+                    <optgroup label={t.restaurant.lunchGroup}>
                       <option value="11:30">11:30</option>
                       <option value="12:00">12:00</option>
                       <option value="12:30">12:30</option>
                       <option value="13:00">13:00</option>
                       <option value="13:30">13:30</option>
                     </optgroup>
-                    <optgroup label="Bữa tối (Soir)">
+                    <optgroup label={t.restaurant.dinnerGroup}>
                       <option value="19:00">19:00</option>
                       <option value="19:30">19:30</option>
                       <option value="20:00">20:00</option>
@@ -501,7 +559,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
                 </div>
                 <div>
                   <label className="block text-xs font-medium text-[#FAF5EC]/70 mb-1.5 uppercase tracking-wider">
-                    Số Khách (Personnes) *
+                    {t.restaurant.guestsLabel}
                   </label>
                   <select
                     value={resGuests}
@@ -510,7 +568,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
                   >
                     {[1, 2, 3, 4, 5, 6, 7, 8, "9+"].map((n) => (
                       <option key={n} value={n}>
-                        {n} người
+                        {n} {t.drawer.guestUnit}
                       </option>
                     ))}
                   </select>
@@ -520,12 +578,12 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-medium text-[#FAF5EC]/70 mb-1.5 uppercase tracking-wider">
-                    Họ và tên (Nom) *
+                    {t.restaurant.nameLabel}
                   </label>
                   <input
                     type="text"
                     required
-                    placeholder="VD: Nguyễn Văn A"
+                    placeholder={t.drawer.namePlaceholder}
                     value={resName}
                     onChange={(e) => setResName(e.target.value)}
                     className="w-full px-3.5 py-2.5 rounded-xl bg-[#221612] border border-[#332117] text-white text-xs focus:outline-none focus:border-gold"
@@ -533,12 +591,12 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
                 </div>
                 <div>
                   <label className="block text-xs font-medium text-[#FAF5EC]/70 mb-1.5 uppercase tracking-wider">
-                    Số điện thoại (Téléphone) *
+                    {t.restaurant.phoneLabel}
                   </label>
                   <input
                     type="tel"
                     required
-                    placeholder="+33 6 12 34 56 78"
+                    placeholder={t.drawer.phonePlaceholder}
                     value={resPhone}
                     onChange={(e) => setResPhone(e.target.value)}
                     className="w-full px-3.5 py-2.5 rounded-xl bg-[#221612] border border-[#332117] text-white text-xs focus:outline-none focus:border-gold"
@@ -548,11 +606,11 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
 
               <div>
                 <label className="block text-xs font-medium text-[#FAF5EC]/70 mb-1.5 uppercase tracking-wider">
-                  Ghi chú yêu cầu đặc biệt
+                  {t.restaurant.notesLabel}
                 </label>
                 <textarea
                   rows={2}
-                  placeholder="Bàn ngoài trời, ghế trẻ em, dị ứng hải sản..."
+                  placeholder={t.restaurant.notesPlaceholder}
                   value={resNotes}
                   onChange={(e) => setResNotes(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-xl bg-[#221612] border border-[#332117] text-white text-xs focus:outline-none focus:border-gold"
@@ -564,7 +622,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
                 className="w-full py-4 rounded-xl text-xs font-medium uppercase tracking-widest text-white shadow-xl transition-all duration-300 hover:brightness-110 cursor-pointer"
                 style={{ backgroundColor: accentColor }}
               >
-                Gửi Xác Nhận Đặt Bàn
+                {t.restaurant.submitReservation}
               </button>
             </form>
           )}
@@ -577,16 +635,16 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
           <div className="space-y-2">
             <h4 className="font-serif text-lg font-bold text-white">{data.name}</h4>
             <p className="text-xs text-[#FAF5EC]/70">{data.address}, {data.city}</p>
-            <p className="text-xs text-[#FAF5EC]/50">Métro: {data.metro}</p>
+            <p className="text-xs text-[#FAF5EC]/50">{t.portal.metroLabel}: {data.metro}</p>
           </div>
           <div className="space-y-2">
-            <h4 className="font-serif text-lg font-bold text-white">Giờ Mở Cửa (Horaires)</h4>
-            <p className="text-xs text-[#FAF5EC]/70">{data.hours}</p>
+            <h4 className="font-serif text-lg font-bold text-white">{t.restaurant.openingHours}</h4>
+            <p className="text-xs text-[#FAF5EC]/70">{localized.hours}</p>
           </div>
           <div className="space-y-2">
-            <h4 className="font-serif text-lg font-bold text-white">Liên Hệ & Hotline</h4>
+            <h4 className="font-serif text-lg font-bold text-white">{t.restaurant.contactHotline}</h4>
             <p className="text-xs text-[#FAF5EC]/70">
-              <a href={`tel:${data.phone}`} className="font-mono hover:text-white underline">
+              <a href={`tel:${data.phone.replace(/\s+/g, "")}`} className="font-mono hover:text-white underline">
                 {data.phone}
               </a>
             </p>
@@ -599,7 +657,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
       <footer className="border-t border-[#22150F] bg-[#0C0705] py-8 text-center text-xs text-[#FAF5EC]/40 space-y-2">
         <p>© 2026 {data.name} Paris — {data.address}, 75015 Paris.</p>
         <Link href="/" className="inline-block text-[#FAF5EC]/70 hover:text-white underline">
-          ← Quay lại trang chủ chọn nhà hàng
+          {t.restaurant.backHome}
         </Link>
       </footer>
     </div>

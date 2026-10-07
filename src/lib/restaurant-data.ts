@@ -1,3 +1,5 @@
+import { Language } from "./i18n/types";
+
 export interface MenuItem {
   name: string;
   vietnameseName?: string;
@@ -8,6 +10,7 @@ export interface MenuItem {
 
 export interface MenuCategory {
   category: string;
+  categoryI18n?: Record<Language, string>;
   items: MenuItem[];
 }
 
@@ -23,53 +26,115 @@ export interface RestaurantData {
   id: "vi-hanoi" | "maison-de-vi";
   name: string;
   subtitle: string;
+  subtitleI18n?: Record<Language, string>;
   tagline: string;
   taglineVi: string;
+  taglineI18n?: Record<Language, string>;
   address: string;
   city: string;
   metro: string;
   phone: string;
   email: string;
   hours: string;
+  hoursI18n?: Record<Language, string>;
   heroImage: string;
   accentColor: string;
   secondaryColor: string;
   badges: string[];
+  badgesI18n?: Record<Language, string[]>;
   description: string;
   descriptionVi: string;
+  descriptionI18n?: Record<Language, string>;
   storyQuote: string;
+  storyQuoteI18n?: Record<Language, string>;
   storyAuthor: string;
+  storyAuthorI18n?: Record<Language, string>;
   storyContent: string;
+  storyContentI18n?: Record<Language, string>;
   reviews: ReviewItem[];
   menu: MenuCategory[];
   gallery: { src: string; caption: string }[];
   route: string;
 }
 
+export function getLocalizedRestaurant(data: RestaurantData, lang: Language) {
+  return {
+    ...data,
+    subtitle: data.subtitleI18n?.[lang] || data.subtitle,
+    tagline: data.taglineI18n?.[lang] || (lang === "vi" ? data.taglineVi : data.tagline),
+    description: data.descriptionI18n?.[lang] || (lang === "vi" ? data.descriptionVi : data.description),
+    badges: data.badgesI18n?.[lang] || data.badges,
+    storyQuote: data.storyQuoteI18n?.[lang] || data.storyQuote,
+    storyAuthor: data.storyAuthorI18n?.[lang] || data.storyAuthor,
+    storyContent: data.storyContentI18n?.[lang] || data.storyContent,
+    hours: data.hoursI18n?.[lang] || data.hours,
+  };
+}
+
 export const VI_HANOI_DATA: RestaurantData = {
   id: "vi-hanoi",
   name: "Vị Hanoi",
   subtitle: "Cuisine Traditionnelle de Hanoï",
+  subtitleI18n: {
+    en: "Traditional Hanoi Cuisine",
+    fr: "Cuisine Traditionnelle de Hanoï",
+    vi: "Ẩm Thực Truyền Thống Hà Nội",
+  },
   tagline: "Les saveurs authentiques de Hanoï au cœur de Paris",
   taglineVi: "Hương vị truyền thống Hà Nội giữa lòng Paris",
+  taglineI18n: {
+    en: "Authentic flavors of Hanoi in the heart of Paris",
+    fr: "Les saveurs authentiques de Hanoï au cœur de Paris",
+    vi: "Hương vị truyền thống Hà Nội giữa lòng Paris",
+  },
   address: "282 Rue Lecourbe",
   city: "75015 Paris",
   metro: "Lourmel (M8) · Boucicaut (M8)",
   phone: "+33 1 89 32 49 07",
   email: "contact@vi-hanoi.com",
   hours: "Mar - Dim: 11:30 - 14:30 & 19:00 - 22:30 (Fermé le Lundi)",
+  hoursI18n: {
+    en: "Tue - Sun: 11:30 - 14:30 & 19:00 - 22:30 (Closed Mon)",
+    fr: "Mar - Dim: 11:30 - 14:30 & 19:00 - 22:30 (Fermé le Lundi)",
+    vi: "Thứ 3 - CN: 11:30 - 14:30 & 19:00 - 22:30 (Đóng cửa thứ 2)",
+  },
   heroImage: "/images/hero-3.webp",
   accentColor: "#C9873A",
   secondaryColor: "#2C1810",
   badges: ["Paris 15e", "Phở & Bún Chả", "4.7★ (500+ avis)"],
+  badgesI18n: {
+    en: ["Paris 15th", "Phở & Bún Chả", "4.7★ (500+ reviews)"],
+    fr: ["Paris 15e", "Phở & Bún Chả", "4.7★ (500+ avis)"],
+    vi: ["Paris 15", "Phở & Bún Chả", "4.7★ (500+ đánh giá)"],
+  },
   description:
     "Saveurs authentiques de Hanoï au cœur de Paris. Meilleur phở, bún chả, chả giò du 15e arrondissement.",
   descriptionVi:
     "Nhà hàng mang đến những món ăn chuẩn vị Hà Nội trong không gian gỗ ấm cúng, đậm đà ký ức thủ đô.",
+  descriptionI18n: {
+    en: "Authentic Hanoi dishes in a warm wooden interior, echoing the soul and culinary heritage of Vietnam's capital.",
+    fr: "Saveurs authentiques de Hanoï au cœur de Paris. Meilleur phở, bún chả, chả giò du 15e arrondissement.",
+    vi: "Nhà hàng mang đến những món ăn chuẩn vị Hà Nội trong không gian gỗ ấm cúng, đậm đà ký ức thủ đô.",
+  },
   storyQuote: "“Phở là thứ quà riêng của Hà Nội, không phải chỉ riêng Hà Nội mới có, nhưng chính là vì chỉ ở Hà Nội mới ngon”",
+  storyQuoteI18n: {
+    en: "“Pho is Hanoi's unique gift; not because other places don't have it, but because only in Hanoi is it truly exceptional.”",
+    fr: "« Le Phở est un présent exclusif de Hanoï — non pas que d'autres ne le fassent point, mais c'est à Hanoï qu'il révèle toute sa quintessence. »",
+    vi: "“Phở là thứ quà riêng của Hà Nội, không phải chỉ riêng Hà Nội mới có, nhưng chính là vì chỉ ở Hà Nội mới ngon”",
+  },
   storyAuthor: "Thạch Lam (Hà Nội 36 Phố Phường)",
+  storyAuthorI18n: {
+    en: "Thạch Lam (Hanoi 36 Streets and Guilds)",
+    fr: "Thạch Lam (Hanoï aux 36 Rues et Corporations)",
+    vi: "Thạch Lam (Hà Nội 36 Phố Phường)",
+  },
   storyContent:
     "Nous vous apportons les saveurs authentiques et uniques de la cuisine hanoïenne. Notre espace, orné de peintures murales et de mobilier en bois traditionnel, est idéal pour dîner en famille, entre amis ou entre collègues. Mỗi nồi nước dùng được ninh hầm chậm rãi trên 48 tiếng, giữ trọn vị ngọt thanh thuần khiết từ xương tủy và hồi, quế thơm lừng.",
+  storyContentI18n: {
+    en: "We bring you the authentic and unique flavors of traditional Hanoi gastronomy. Our space, adorned with warm wooden craftsmanship and cultural murals, is the ideal destination for dining with family, friends, and colleagues. Every pot of broth is gently slow-simmered for over 48 hours with marrow bones, star anise, and cinnamon to preserve the purest natural sweetness.",
+    fr: "Nous vous apportons les saveurs authentiques et uniques de la cuisine hanoïenne. Notre espace, orné de peintures murales et de mobilier en bois traditionnel, est idéal pour dîner en famille, entre amis ou entre collègues. Chaque bouillon est mijoté lentement plus de 48 heures, révélant toute la richesse aromatique de l'anis étoilé et de la cannelle.",
+    vi: "Chúng tôi mang đến cho quý khách những hương vị nguyên bản và độc đáo nhất của ẩm thực Hà Nội. Không gian trang nhã với nội thất gỗ truyền thống và tranh tường văn hóa là điểm hẹn lý tưởng cho những bữa ăn sum họp gia đình, bạn bè và đồng nghiệp. Mỗi nồi nước dùng được ninh hầm chậm rãi trên 48 tiếng, giữ trọn vị ngọt thanh thuần khiết từ xương tủy, hồi và quế thơm lừng.",
+  },
   reviews: [
     {
       author: "Télérama",
@@ -226,26 +291,66 @@ export const MAISON_DE_VI_DATA: RestaurantData = {
   id: "maison-de-vi",
   name: "Maison de Vị",
   subtitle: "Restaurant Vietnamien Contemporain",
+  subtitleI18n: {
+    en: "Contemporary Vietnamese Restaurant",
+    fr: "Restaurant Vietnamien Contemporain",
+    vi: "Nhà Hàng Việt Nam Đương Đại",
+  },
   tagline: "L'art de vivre et la haute gastronomie vietnamienne à Paris",
   taglineVi: "Tinh hoa ẩm thực Việt & Nghệ thuật sống Indochine đương đại",
+  taglineI18n: {
+    en: "The art of living and haute gastronomy of Vietnam in Paris",
+    fr: "L'art de vivre et la haute gastronomie vietnamienne à Paris",
+    vi: "Tinh hoa ẩm thực Việt & Nghệ thuật sống Indochine đương đại",
+  },
   address: "142 Rue de Vaugirard",
   city: "75015 Paris",
   metro: "Pasteur (M6, M12) · Falguière (M12)",
   phone: "+33 1 89 32 49 07",
   email: "contact@maison-de-vi.com",
   hours: "Mar - Dim: 12:00 - 15:00 & 19:00 - 23:00 (Fermé le Lundi)",
+  hoursI18n: {
+    en: "Tue - Sun: 12:00 - 15:00 & 19:00 - 23:00 (Closed Mon)",
+    fr: "Mar - Dim: 12:00 - 15:00 & 19:00 - 23:00 (Fermé le Lundi)",
+    vi: "Thứ 3 - CN: 12:00 - 15:00 & 19:00 - 23:00 (Đóng cửa thứ 2)",
+  },
   heroImage: "/images/maison-de-vi/entrance.png",
   accentColor: "#833422",
   secondaryColor: "#C2692C",
   badges: ["Nouvelle Adresse", "Rue de Vaugirard", "Indochine Chic"],
+  badgesI18n: {
+    en: ["New Address", "Rue de Vaugirard", "Indochine Chic"],
+    fr: ["Nouvelle Adresse", "Rue de Vaugirard", "Indochine Chic"],
+    vi: ["Địa Điểm Mới", "Rue de Vaugirard", "Indochine Chic"],
+  },
   description:
     "Nouvelle table d'exception du groupe Vị au 142 Rue de Vaugirard. Une rencontre intime entre l'élégance parisienne et les saveurs raffinées du Vietnam.",
   descriptionVi:
     "Cơ sở mới tại 142 Rue de Vaugirard mang ngôn ngữ kiến trúc vòm nón quai thao, gạch nung ấm áp và hương vị Việt được trau chuốt tỉ mỉ.",
+  descriptionI18n: {
+    en: "A new exceptional address at 142 Rue de Vaugirard, presenting warm terracotta architecture, artisanal archways, and carefully curated contemporary Vietnamese dishes.",
+    fr: "Nouvelle table d'exception du groupe Vị au 142 Rue de Vaugirard. Une rencontre intime entre l'élégance parisienne et les saveurs raffinées du Vietnam.",
+    vi: "Cơ sở mới tại 142 Rue de Vaugirard mang ngôn ngữ kiến trúc vòm nón quai thao, gạch nung ấm áp và hương vị Việt được trau chuốt tỉ mỉ.",
+  },
   storyQuote: "“Nón quai thao, trái ớt và hoa hồi — Ba biểu tượng hội tụ chiều sâu di sản và hương sắc Việt Nam.”",
+  storyQuoteI18n: {
+    en: "“The Quai Thao hat, the chili, and the star anise — three symbols uniting Vietnam's heritage and culinary depth.”",
+    fr: "« Le chapeau Quai Thao, le piment et l'anis étoilé — Trois symboles réunissant héritage et profondeur aromatique vietnamienne. »",
+    vi: "“Nón quai thao, trái ớt và hoa hồi — Ba biểu tượng hội tụ chiều sâu di sản và hương sắc Việt Nam.”",
+  },
   storyAuthor: "Triết lý thương hiệu Maison de Vị",
+  storyAuthorI18n: {
+    en: "Maison de Vị Brand Philosophy",
+    fr: "Philosophie de marque Maison de Vị",
+    vi: "Triết lý thương hiệu Maison de Vị",
+  },
   storyContent:
     "Biểu tượng logo được xây dựng từ ba chất liệu văn hoá và ẩm thực đặc trưng của Việt Nam: nón quai thao mang giá trị di sản và nét duyên dáng truyền thống, trái ớt và hoa hồi đại diện cho chiều sâu gia vị và cảm xúc ẩm thực. Chữ “Vị” được sáng tạo với nhịp điệu thư pháp mềm mại, bay bổng, hòa cùng kiến trúc vòm Indochine sang trọng tại trung tâm quận 15 Paris.",
+  storyContentI18n: {
+    en: "Our brand identity is inspired by three distinctive cultural and culinary elements of Vietnam: the traditional Quai Thao hat representing graceful heritage, alongside fresh chili and star anise evoking culinary passion and rich aromatic depth. The word “Vị” flows in delicate calligraphy, harmonizing with warm arched Indochine architecture in Paris 15th.",
+    fr: "L'identité de notre maison puise son inspiration dans trois éléments culturels et culinaires emblématiques du Vietnam : le chapeau traditionnel Quai Thao incarnant la grâce du patrimoine, le piment et l'anis étoilé symbolisant la passion des épices. La calligraphie du mot « Vị » s'associe à des arcades élégantes au cœur du 15e arrondissement.",
+    vi: "Biểu tượng thương hiệu được xây dựng từ ba chất liệu văn hoá và ẩm thực đặc trưng của Việt Nam: nón quai thao mang giá trị di sản và nét duyên dáng truyền thống, trái ớt và hoa hồi đại diện cho chiều sâu gia vị và cảm xúc ẩm thực. Chữ “Vị” được sáng tạo với nhịp điệu thư pháp mềm mại, bay bổng, hòa cùng kiến trúc vòm Indochine sang trọng tại trung tâm quận 15 Paris.",
+  },
   reviews: [
     {
       author: "Guide Gourmand Paris",

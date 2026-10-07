@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Be_Vietnam_Pro, Pinyon_Script } from "next/font/google";
 import "./globals.css";
+import { LanguageProvider } from "@/lib/i18n/context";
 
 const beVietnam = Be_Vietnam_Pro({
   variable: "--font-sans",
@@ -46,7 +47,7 @@ export default function RootLayout({
         suppressHydrationWarning
         className="min-h-full flex flex-col font-sans bg-[#140D0A] text-[#FAF5EC] selection:bg-[#C9873A] selection:text-white"
       >
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );

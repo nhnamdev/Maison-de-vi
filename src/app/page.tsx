@@ -8,11 +8,13 @@ import { QuickReservationDrawer } from "@/components/portal/QuickReservationDraw
 import { VI_HANOI_DATA, MAISON_DE_VI_DATA, RestaurantData } from "@/lib/restaurant-data";
 import { GoldDivider } from "@/components/common/BrandLogos";
 import { Utensils, Award, Clock, Heart } from "lucide-react";
+import { useI18n } from "@/lib/i18n/context";
 
 export default function Home() {
   const [selectedRestaurant, setSelectedRestaurant] = useState<RestaurantData | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const restaurantsSectionRef = useRef<HTMLDivElement>(null);
+  const { t } = useI18n();
 
   const handleOpenDrawer = (restaurant: RestaurantData) => {
     setSelectedRestaurant(restaurant);
@@ -44,14 +46,14 @@ export default function Home() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <span className="text-xs tracking-[0.3em] uppercase text-[#DF9F4F] font-medium block">
-            Paris 15<sup>e</sup> · Destination Gastronomique
+            {t.portal.tagline}
           </span>
           <h2 className="font-serif text-3xl sm:text-5xl font-normal italic text-white tracking-wide">
-            Hai Cơ Sở Của Chúng Tôi
+            {t.portal.title}
           </h2>
           <GoldDivider className="my-2" />
           <p className="text-sm sm:text-base text-[#FAF5EC]/70 font-light leading-relaxed">
-            Chọn một trong hai nhà hàng bên dưới để mở mục đặt chỗ nhanh dành cho khách quen hoặc khám phá đầy đủ thực đơn và không gian kiến trúc.
+            {t.portal.description}
           </p>
         </div>
 
@@ -71,23 +73,23 @@ export default function Home() {
         <div className="mt-20 pt-16 border-t border-[#291A13] grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div className="p-4 rounded-xl bg-[#1C120D]/60 border border-[#2D1C15] space-y-2">
             <Utensils className="w-5 h-5 mx-auto text-[#DF9F4F]" />
-            <h4 className="font-serif text-sm font-medium text-white">Vị Nguyên Bản</h4>
-            <p className="text-xs text-[#FAF5EC]/60">Nước dùng hầm 48h & gia vị tươi từ Việt Nam</p>
+            <h4 className="font-serif text-sm font-medium text-white">{t.portal.featureAuthenticTitle}</h4>
+            <p className="text-xs text-[#FAF5EC]/60">{t.portal.featureAuthenticDesc}</p>
           </div>
           <div className="p-4 rounded-xl bg-[#1C120D]/60 border border-[#2D1C15] space-y-2">
             <Clock className="w-5 h-5 mx-auto text-[#DF9F4F]" />
-            <h4 className="font-serif text-sm font-medium text-white">Đặt Bàn Tiện Lợi</h4>
-            <p className="text-xs text-[#FAF5EC]/60">Hỗ trợ khách quen đặt bàn nhanh chỉ 1 chạm</p>
+            <h4 className="font-serif text-sm font-medium text-white">{t.portal.featureBookingTitle}</h4>
+            <p className="text-xs text-[#FAF5EC]/60">{t.portal.featureBookingDesc}</p>
           </div>
           <div className="p-4 rounded-xl bg-[#1C120D]/60 border border-[#2D1C15] space-y-2">
             <Award className="w-5 h-5 mx-auto text-[#DF9F4F]" />
-            <h4 className="font-serif text-sm font-medium text-white">Báo Chí Vinh Danh</h4>
-            <p className="text-xs text-[#FAF5EC]/60">Télérama, Gilles Pudlowski đánh giá xuất sắc</p>
+            <h4 className="font-serif text-sm font-medium text-white">{t.portal.featurePressTitle}</h4>
+            <p className="text-xs text-[#FAF5EC]/60">{t.portal.featurePressDesc}</p>
           </div>
           <div className="p-4 rounded-xl bg-[#1C120D]/60 border border-[#2D1C15] space-y-2">
             <Heart className="w-5 h-5 mx-auto text-[#DF9F4F]" />
-            <h4 className="font-serif text-sm font-medium text-white">Không Gian Sang Trọng</h4>
-            <p className="text-xs text-[#FAF5EC]/60">Kiến trúc Indochine ấm cúng và đầy chất thơ</p>
+            <h4 className="font-serif text-sm font-medium text-white">{t.portal.featureAmbianceTitle}</h4>
+            <p className="text-xs text-[#FAF5EC]/60">{t.portal.featureAmbianceDesc}</p>
           </div>
         </div>
       </section>
@@ -99,19 +101,19 @@ export default function Home() {
             onClick={() => handleOpenDrawer(VI_HANOI_DATA)}
             className="hover:text-[#DF9F4F] transition-colors cursor-pointer"
           >
-            Đặt bàn Vị Hanoi
+            {t.nav.bookTable} {VI_HANOI_DATA.name}
           </button>
           <span>·</span>
           <button
             onClick={() => handleOpenDrawer(MAISON_DE_VI_DATA)}
             className="hover:text-[#C2692C] transition-colors cursor-pointer"
           >
-            Đặt bàn Maison de Vị
+            {t.nav.bookTable} {MAISON_DE_VI_DATA.name}
           </button>
         </div>
-        <p>© 2026 Groupe Vị Paris — Vị Hanoi (282 Rue Lecourbe) & Maison de Vị (142 Rue de Vaugirard), 75015 Paris.</p>
+        <p>© 2026 {t.portal.footerCopyright}</p>
         <p className="text-[11px] text-[#FAF5EC]/30">
-          Meilleur Restaurant Vietnamien Paris 15e · Phở & Bún Chả Traditionnels
+          {t.portal.footerTagline}
         </p>
       </footer>
 

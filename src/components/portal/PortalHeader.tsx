@@ -2,11 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Phone, Globe } from "lucide-react";
+import { Phone } from "lucide-react";
+import { useI18n } from "@/lib/i18n/context";
 
 export function PortalHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [lang, setLang] = useState<"FR" | "EN" | "VI">("VI");
+  const { language, setLanguage, t } = useI18n();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,39 +44,39 @@ export function PortalHeader() {
               href="/vi-hanoi"
               className="text-[#FAF5EC]/70 hover:text-[#DF9F4F] transition-colors"
             >
-              Vị Hanoi
+              {t.nav.viHanoi}
             </Link>
             <span className="text-white/20">·</span>
             <Link
               href="/maison-de-vi"
               className="text-[#FAF5EC]/70 hover:text-[#C2692C] transition-colors"
             >
-              Maison de Vị
+              {t.nav.maisonDeVi}
             </Link>
           </div>
 
           {/* Language Switcher */}
           <div className="flex items-center bg-black/40 border border-white/10 rounded-full p-0.5 text-[11px] font-medium">
             <button
-              onClick={() => setLang("FR")}
-              className={`px-2.5 py-0.5 rounded-full transition-colors ${
-                lang === "FR" ? "bg-[#C9873A] text-white" : "text-[#FAF5EC]/60 hover:text-white"
-              }`}
-            >
-              FR
-            </button>
-            <button
-              onClick={() => setLang("EN")}
-              className={`px-2.5 py-0.5 rounded-full transition-colors ${
-                lang === "EN" ? "bg-[#C9873A] text-white" : "text-[#FAF5EC]/60 hover:text-white"
+              onClick={() => setLanguage("en")}
+              className={`px-2.5 py-0.5 rounded-full transition-colors cursor-pointer ${
+                language === "en" ? "bg-[#C9873A] text-white" : "text-[#FAF5EC]/60 hover:text-white"
               }`}
             >
               EN
             </button>
             <button
-              onClick={() => setLang("VI")}
-              className={`px-2.5 py-0.5 rounded-full transition-colors ${
-                lang === "VI" ? "bg-[#C9873A] text-white" : "text-[#FAF5EC]/60 hover:text-white"
+              onClick={() => setLanguage("fr")}
+              className={`px-2.5 py-0.5 rounded-full transition-colors cursor-pointer ${
+                language === "fr" ? "bg-[#C9873A] text-white" : "text-[#FAF5EC]/60 hover:text-white"
+              }`}
+            >
+              FR
+            </button>
+            <button
+              onClick={() => setLanguage("vi")}
+              className={`px-2.5 py-0.5 rounded-full transition-colors cursor-pointer ${
+                language === "vi" ? "bg-[#C9873A] text-white" : "text-[#FAF5EC]/60 hover:text-white"
               }`}
             >
               VI
