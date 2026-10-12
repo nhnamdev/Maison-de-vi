@@ -11,6 +11,7 @@ import {
   ExternalLink,
   Menu as MenuIcon,
   X,
+  Phone,
 } from "lucide-react";
 import { RestaurantData, getLocalizedRestaurant } from "@/lib/restaurant-data";
 import { GoldDivider, TerracottaDivider } from "@/components/common/BrandLogos";
@@ -528,6 +529,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
                       <option value="12:30">12:30</option>
                       <option value="13:00">13:00</option>
                       <option value="13:30">13:30</option>
+                      <option value="14:00">14:00</option>
                     </optgroup>
                     <optgroup label={t.restaurant.dinnerGroup}>
                       <option value="19:00">19:00</option>
@@ -535,6 +537,8 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
                       <option value="20:00">20:00</option>
                       <option value="20:30">20:30</option>
                       <option value="21:00">21:00</option>
+                      <option value="21:30">21:30</option>
+                      <option value="22:00">22:00</option>
                     </optgroup>
                   </select>
                 </div>
@@ -596,6 +600,20 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
                   onChange={(e) => setResNotes(e.target.value)}
                   className="w-full px-3.5 py-2.5 rounded-md bg-[#FAF6EF] border border-[#DFD5BF] text-[#241812] text-xs focus:outline-none focus:border-[#BF4227]"
                 />
+              </div>
+
+              {/* Policy Notice Box */}
+              <div className="p-4 rounded-md bg-[#FAF2E6] border border-[#DFD5BF] text-xs text-[#5C4B42] leading-relaxed flex items-start gap-3">
+                <Phone className="w-4 h-4 text-[#BF4227] flex-shrink-0 mt-0.5" />
+                <div>
+                  <p>{t.restaurant.policyNotice}</p>
+                  <a
+                    href={`tel:${data.phone.replace(/\s+/g, "")}`}
+                    className="inline-block mt-1 font-mono text-xs font-semibold text-[#BF4227] hover:underline"
+                  >
+                    {data.phone}
+                  </a>
+                </div>
               </div>
 
               <button

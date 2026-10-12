@@ -29,17 +29,17 @@ export function PortalHeader() {
         {/* Brand */}
         <Link href="/" className="flex items-center gap-2.5 group">
           <span
-            className={`font-serif text-2xl sm:text-3xl font-bold tracking-wider transition-colors duration-300 ${
+            className={`font-serif text-xl sm:text-2xl font-bold tracking-wider transition-colors duration-300 ${
               isScrolled ? "text-[#241812]" : "text-white drop-shadow-sm"
             }`}
           >
-            VỊ{" "}
+            Group{" "}
             <span
               className={`font-script text-2xl sm:text-3xl italic font-normal transition-colors duration-300 ${
                 isScrolled ? "text-[#BF4227]" : "text-[#E88656] drop-shadow-sm"
               }`}
             >
-              Paris
+              Maison de Vi
             </span>
           </span>
           <span
@@ -47,7 +47,7 @@ export function PortalHeader() {
               isScrolled ? "text-[#7A695F] border-[#DFD5BF]" : "text-white/80 border-white/30"
             }`}
           >
-            Paris 15<sup>e</sup>
+            Paris
           </span>
         </Link>
 

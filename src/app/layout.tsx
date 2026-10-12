@@ -26,9 +26,9 @@ const pinyonScript = Pinyon_Script({
 });
 
 export const metadata: Metadata = {
-  title: "Les Restaurants Vị Paris — Vị Hanoi & Maison de Vị",
-  description: "Trải nghiệm ẩm thực Việt Nam tinh hoa tại Paris 15e. Đặt bàn nhanh tại Vị Hanoi (282 Rue Lecourbe) và Maison de Vị (142 Rue de Vaugirard).",
-  keywords: ["Restaurant vietnamien Paris", "Vị Hanoi", "Maison de Vị", "Pho Paris 15", "Bun cha Paris", "Rue Lecourbe", "Rue de Vaugirard"],
+  title: "Group Maison de Vi — Vị Hanoi & Maison de Vị | Paris",
+  description: "Trải nghiệm ẩm thực Việt Nam tinh hoa tại Paris. Vị Hanoi (282 Rue Lecourbe) và Maison de Vị (142 Rue de Vaugirard) thuộc Group Maison de Vi.",
+  keywords: ["Group Maison de Vi", "Restaurant vietnamien Paris", "Vị Hanoi", "Maison de Vị", "Pho Paris", "Bun cha Paris", "Rue Lecourbe", "Rue de Vaugirard"],
 };
 
 export default function RootLayout({

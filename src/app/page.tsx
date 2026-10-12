@@ -94,27 +94,60 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer - Elegant warm cream finish */}
-      <footer className="mt-auto border-t border-[#DFD5BF] bg-[#F3ECE0] py-12 px-4 sm:px-6 lg:px-8 text-center text-xs text-[#7A695F] space-y-4">
-        <div className="flex flex-wrap items-center justify-center gap-6 text-[#241812] font-medium uppercase tracking-wider text-xs">
-          <button
-            onClick={() => handleOpenDrawer(VI_HANOI_DATA)}
-            className="hover:text-[#BF4227] transition-colors cursor-pointer"
-          >
-            {t.nav.bookTable} {VI_HANOI_DATA.name}
-          </button>
-          <span className="text-[#DFD5BF]">·</span>
-          <button
-            onClick={() => handleOpenDrawer(MAISON_DE_VI_DATA)}
-            className="hover:text-[#BF4227] transition-colors cursor-pointer"
-          >
-            {t.nav.bookTable} {MAISON_DE_VI_DATA.name}
-          </button>
+      {/* Footer - Elegant warm cream finish with full separate addresses */}
+      <footer className="mt-auto border-t border-[#DFD5BF] bg-[#F3ECE0] py-14 px-4 sm:px-6 lg:px-8 text-xs text-[#7A695F]">
+        <div className="max-w-5xl mx-auto space-y-8">
+          {/* 2 Restaurants Addresses Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-8 border-b border-[#DFD5BF]/80 text-center md:text-left">
+            {/* Vị Hanoi */}
+            <div className="p-5 rounded-lg bg-white/70 border border-[#DFD5BF] space-y-2 shadow-xs">
+              <div className="flex items-center justify-between flex-wrap gap-2">
+                <h4 className="font-serif text-base font-bold text-[#241812]">{VI_HANOI_DATA.name}</h4>
+                <button
+                  onClick={() => handleOpenDrawer(VI_HANOI_DATA)}
+                  className="text-[11px] uppercase tracking-wider text-[#BF4227] hover:underline font-semibold cursor-pointer"
+                >
+                  {t.nav.bookTable} →
+                </button>
+              </div>
+              <p className="text-xs text-[#5C4B42] font-medium">{VI_HANOI_DATA.address}, {VI_HANOI_DATA.city}</p>
+              <p className="text-[11px] text-[#7A695F]">{t.portal.metroLabel}: {VI_HANOI_DATA.metro}</p>
+              <p className="text-[11px] text-[#7A695F]">
+                Tél :{" "}
+                <a href={`tel:${VI_HANOI_DATA.phone.replace(/\s+/g, "")}`} className="font-mono text-[#BF4227] hover:underline">
+                  {VI_HANOI_DATA.phone}
+                </a>
+              </p>
+            </div>
+
+            {/* Maison de Vị */}
+            <div className="p-5 rounded-lg bg-white/70 border border-[#DFD5BF] space-y-2 shadow-xs">
+              <div className="flex items-center justify-between flex-wrap gap-2">
+                <h4 className="font-serif text-base font-bold text-[#241812]">{MAISON_DE_VI_DATA.name}</h4>
+                <span className="text-[10px] uppercase tracking-widest text-[#833422] font-semibold px-2 py-0.5 rounded-sm bg-[#833422]/10 border border-[#833422]/20">
+                  {t.portal.comingSoon || "Coming soon"}
+                </span>
+              </div>
+              <p className="text-xs text-[#5C4B42] font-medium">{MAISON_DE_VI_DATA.address}, {MAISON_DE_VI_DATA.city}</p>
+              <p className="text-[11px] text-[#7A695F]">{t.portal.metroLabel}: {MAISON_DE_VI_DATA.metro}</p>
+              <p className="text-[11px] text-[#7A695F]">
+                Tél :{" "}
+                <a href={`tel:${MAISON_DE_VI_DATA.phone.replace(/\s+/g, "")}`} className="font-mono text-[#BF4227] hover:underline">
+                  {MAISON_DE_VI_DATA.phone}
+                </a>
+              </p>
+            </div>
+          </div>
+
+          {/* Group Copyright & Tagline */}
+          <div className="text-center space-y-2">
+            <p className="font-serif text-sm font-semibold text-[#241812] tracking-wider uppercase">
+              Group Maison de Vi
+            </p>
+            <p className="text-[#5C4B42]">© 2026 {t.portal.footerCopyright}</p>
+            <p className="text-[11px] text-[#8F7D73]">{t.portal.footerTagline}</p>
+          </div>
         </div>
-        <p className="text-[#5C4B42]">© 2026 {t.portal.footerCopyright}</p>
-        <p className="text-[11px] text-[#8F7D73]">
-          {t.portal.footerTagline}
-        </p>
       </footer>
 
       {/* Slide-over Right Drawer */}

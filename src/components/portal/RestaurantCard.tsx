@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, ArrowRight, UtensilsCrossed } from "lucide-react";
+import { MapPin, ArrowRight, UtensilsCrossed, Sparkles } from "lucide-react";
 import { RestaurantData, getLocalizedRestaurant } from "@/lib/restaurant-data";
 import { useI18n } from "@/lib/i18n/context";
 
@@ -102,24 +102,35 @@ export function RestaurantCard({
         </div>
 
         {/* Actions - Crisp refined buttons without bloated bubbles */}
-        <div className="pt-5 border-t border-[#EAE2D5] flex flex-col sm:flex-row gap-3">
-          {/* Primary Action: Open Quick Drawer */}
-          <button
-            onClick={() => onSelectRestaurant(restaurant)}
-            className="flex-1 py-3 px-4 rounded-md font-medium text-xs tracking-widest uppercase transition-all duration-300 shadow-sm text-white flex items-center justify-center gap-2 group cursor-pointer bg-[#BF4227] hover:bg-[#A4351D] active:scale-[0.99]"
-          >
-            <UtensilsCrossed className="w-3.5 h-3.5" />
-            <span>{t.portal.bookTableBtn}</span>
-          </button>
+        <div className="pt-5 border-t border-[#EAE2D5]">
+          {isMaison ? (
+            <div className="w-full py-3.5 px-4 rounded-md font-serif text-sm tracking-widest uppercase border border-[#833422]/30 bg-[#833422]/10 text-[#833422] flex items-center justify-center gap-2 shadow-xs select-none">
+              <Sparkles className="w-4 h-4 text-[#833422]" />
+              <span className="font-sans text-xs font-semibold tracking-[0.2em]">
+                {t.portal.comingSoon || "Coming soon"}
+              </span>
+            </div>
+          ) : (
+            <div className="flex flex-col sm:flex-row gap-3">
+              {/* Primary Action: Open Quick Drawer */}
+              <button
+                onClick={() => onSelectRestaurant(restaurant)}
+                className="flex-1 py-3 px-4 rounded-md font-medium text-xs tracking-widest uppercase transition-all duration-300 shadow-sm text-white flex items-center justify-center gap-2 group cursor-pointer bg-[#BF4227] hover:bg-[#A4351D] active:scale-[0.99]"
+              >
+                <UtensilsCrossed className="w-3.5 h-3.5" />
+                <span>{t.portal.bookTableBtn}</span>
+              </button>
 
-          {/* Secondary Action: More info directly or link */}
-          <Link
-            href={restaurant.route}
-            className="py-3 px-4 rounded-md font-medium text-xs tracking-widest uppercase border border-[#DFD5BF] bg-[#F7F2E8] hover:bg-[#EFE6D6] text-[#241812] transition-all duration-300 flex items-center justify-center gap-1.5 text-center"
-          >
-            <span>{t.portal.detailsBtn}</span>
-            <ArrowRight className="w-3.5 h-3.5 text-[#C06129]" />
-          </Link>
+              {/* Secondary Action: More info directly or link */}
+              <Link
+                href={restaurant.route}
+                className="py-3 px-4 rounded-md font-medium text-xs tracking-widest uppercase border border-[#DFD5BF] bg-[#F7F2E8] hover:bg-[#EFE6D6] text-[#241812] transition-all duration-300 flex items-center justify-center gap-1.5 text-center"
+              >
+                <span>{t.portal.detailsBtn}</span>
+                <ArrowRight className="w-3.5 h-3.5 text-[#C06129]" />
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>

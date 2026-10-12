@@ -15,11 +15,11 @@ export const translations: Record<Language, TranslationSchema> = {
       phone: "+33 1 89 32 49 07",
     },
     hero: {
-      subtitle: "Two Distinct Ambiances · One Authentic Vietnamese Soul · Paris 15e",
+      subtitle: "Two Distinct Ambiances · One Authentic Vietnamese Soul · Paris",
       titleLine1: "The Art of Vietnamese Gastronomy",
       titleLine2: "In the Heart of Paris",
       description:
-        "From authentic street flavors of old Hanoi to refined contemporary Indochine gastronomy, immerse yourself in the culinary universe of Groupe Vị Paris in the 15th arrondissement.",
+        "From authentic street flavors of old Hanoi to refined contemporary Indochine gastronomy, immerse yourself in the culinary universe of Group Maison de Vi in Paris.",
       exploreBtn: "Explore Our Restaurants",
       selectLabel: "Select a restaurant to reserve",
       badgeAuthentic: "Authentic Hanoi Tradition",
@@ -27,12 +27,13 @@ export const translations: Record<Language, TranslationSchema> = {
       scrollDown: "Scroll",
     },
     portal: {
-      tagline: "Paris 15e · Culinary Destination",
-      title: "Our Two Culinary Destinations",
+      tagline: "Paris · Culinary Destination",
+      title: "Nos Deux Maisons",
       description:
         "Select one of our two restaurants below to open instant booking or explore their full story, menu, and architectural ambiance.",
       bookTableBtn: "Book a Table",
       detailsBtn: "Details",
+      comingSoon: "Coming Soon",
       metroLabel: "Metro",
       featureAuthenticTitle: "Authentic Flavors",
       featureAuthenticDesc: "48-hour slow-simmered broth & fresh spices imported directly from Vietnam",
@@ -42,8 +43,8 @@ export const translations: Record<Language, TranslationSchema> = {
       featurePressDesc: "Celebrated by Télérama, Gilles Pudlowski, and top Parisian food guides",
       featureAmbianceTitle: "Refined Atmosphere",
       featureAmbianceDesc: "Warm, poetic Indochine-inspired architecture with crafted woodwork",
-      footerCopyright: "Groupe Vị Paris — Vị Hanoi (282 Rue Lecourbe) & Maison de Vị (142 Rue de Vaugirard), 75015 Paris.",
-      footerTagline: "Best Vietnamese Restaurants in Paris 15e · Traditional Phở & Bún Chả",
+      footerCopyright: "Group Maison de Vi — Vị Hanoi & Maison de Vị, Paris.",
+      footerTagline: "Excellence of Vietnamese Gastronomy in Paris · Vị Hanoi & Maison de Vị",
     },
     drawer: {
       title: "Book a Table",
@@ -73,6 +74,8 @@ export const translations: Record<Language, TranslationSchema> = {
       successMessage: "Thank you, {name}. Your booking request for {guests} guests at {restaurant} on {date} at {time} has been received. We will contact you at {phone} shortly.",
       bookAnother: "Book another table",
       alertNamePhone: "Please provide your Full Name and Phone Number!",
+      policyNotice:
+        "Online reservations are available up to 1 month in advance and at least 1 hour prior to arrival. For any last-minute requests, bookings over 1 month in advance, or parties of more than 10 guests, please contact us directly by phone.",
     },
     restaurant: {
       backToAll: "Both Restaurants",
@@ -108,6 +111,8 @@ export const translations: Record<Language, TranslationSchema> = {
       dinnerGroup: "Dinner",
       defaultReviewRole: "Press Review",
       defaultReviewDate: "Gastronomic Review",
+      policyNotice:
+        "Online reservations are available up to 1 month in advance and at least 1 hour prior to arrival. For any last-minute requests, bookings over 1 month in advance, or parties of more than 10 guests, please contact us directly by phone.",
     },
   },
   fr: {
@@ -124,11 +129,11 @@ export const translations: Record<Language, TranslationSchema> = {
       phone: "+33 1 89 32 49 07",
     },
     hero: {
-      subtitle: "Deux Adresses · Une Même Âme Vietnamienne · Paris 15e",
+      subtitle: "Deux Adresses · Une Même Âme Vietnamienne · Paris",
       titleLine1: "L'Art Culinaire Vietnamien",
       titleLine2: "Au Cœur de Paris",
       description:
-        "De la cuisine de rue authentique d'Hanoï à la gastronomie indochinoise contemporaine et raffinée, découvrez l'univers du Groupe Vị dans le 15e arrondissement de Paris.",
+        "De la cuisine de rue authentique d'Hanoï à la gastronomie indochinoise contemporaine et raffinée, découvrez l'univers du Groupe Maison de Vi à Paris.",
       exploreBtn: "Découvrir nos restaurants",
       selectLabel: "Sélectionnez votre table pour réserver",
       badgeAuthentic: "Tradition Authentique de Hanoï",
@@ -136,12 +141,13 @@ export const translations: Record<Language, TranslationSchema> = {
       scrollDown: "Défiler",
     },
     portal: {
-      tagline: "Paris 15e · Destination Gastronomique",
-      title: "Nos Deux Tables d'Exception",
+      tagline: "Paris · Destination Gastronomique",
+      title: "Nos Deux Maisons",
       description:
         "Choisissez l'un de nos deux restaurants ci-dessous pour ouvrir une réservation rapide ou découvrir leur histoire, leur carte et leur atmosphère.",
       bookTableBtn: "Réserver une table",
       detailsBtn: "Découvrir",
+      comingSoon: "Coming Soon",
       metroLabel: "Métro",
       featureAuthenticTitle: "Saveurs Authentiques",
       featureAuthenticDesc: "Bouillon mijoté 48h & épices fraîches importées directement du Vietnam",
@@ -151,8 +157,8 @@ export const translations: Record<Language, TranslationSchema> = {
       featurePressDesc: "Critiques élogieuses dans Télérama, Gilles Pudlowski et guides réputés",
       featureAmbianceTitle: "Cadre Élégant",
       featureAmbianceDesc: "Architecture chaleureuse inspirée de l'Indochine avec boiseries artisanales",
-      footerCopyright: "Groupe Vị Paris — Vị Hanoi (282 Rue Lecourbe) & Maison de Vị (142 Rue de Vaugirard), 75015 Paris.",
-      footerTagline: "Meilleurs Restaurants Vietnamiens Paris 15e · Phở & Bún Chả Traditionnels",
+      footerCopyright: "Groupe Maison de Vi — Vị Hanoi & Maison de Vị, Paris.",
+      footerTagline: "L'Excellence Culinaire Vietnamienne à Paris · Vị Hanoi & Maison de Vị",
     },
     drawer: {
       title: "Réserver une table",
@@ -182,6 +188,8 @@ export const translations: Record<Language, TranslationSchema> = {
       successMessage: "Merci {name}. Votre demande de réservation pour {guests} personnes chez {restaurant} le {date} à {time} a bien été enregistrée. Nous vous contacterons au {phone}.",
       bookAnother: "Réserver une autre table",
       alertNamePhone: "Veuillez renseigner votre Nom et Numéro de téléphone !",
+      policyNotice:
+        "Les réservations en ligne sont possibles jusqu’à 1 mois à l’avance et au minimum 1 heure avant votre arrivée. Pour toute demande de dernière minute, réservation à plus d’un mois ou pour les groupes de plus de 10 personnes, merci de nous contacter directement par téléphone.",
     },
     restaurant: {
       backToAll: "Les deux adresses",
@@ -217,6 +225,8 @@ export const translations: Record<Language, TranslationSchema> = {
       dinnerGroup: "Soir",
       defaultReviewRole: "Critique Presse",
       defaultReviewDate: "Revue Gastronomique",
+      policyNotice:
+        "Les réservations en ligne sont possibles jusqu’à 1 mois à l’avance et au minimum 1 heure avant votre arrivée. Pour toute demande de dernière minute, réservation à plus d’un mois ou pour les groupes de plus de 10 personnes, merci de nous contacter directement par téléphone.",
     },
   },
   vi: {
@@ -233,11 +243,11 @@ export const translations: Record<Language, TranslationSchema> = {
       phone: "+33 1 89 32 49 07",
     },
     hero: {
-      subtitle: "Hai Điểm Hẹn · Một Hồn Vị Việt · Paris 15e",
+      subtitle: "Hai Điểm Hẹn · Một Hồn Vị Việt · Paris",
       titleLine1: "Tinh Hoa Ẩm Thực Việt",
       titleLine2: "Giữa Lòng Paris",
       description:
-        "Từ những món ăn truyền thống chuẩn vị Hà Nội cổ kính đến trải nghiệm ẩm thực Indochine đương đại tinh tế, khám phá thế giới phong vị của Groupe Vị tại quận 15 Paris.",
+        "Từ những món ăn truyền thống chuẩn vị Hà Nội cổ kính đến trải nghiệm ẩm thực Indochine đương đại tinh tế, khám phá thế giới phong vị của Group Maison de Vi tại Paris.",
       exploreBtn: "Khám phá 2 nhà hàng",
       selectLabel: "Chọn nhà hàng để đặt bàn ngay",
       badgeAuthentic: "Chuẩn Vị Hà Nội Xưa",
@@ -245,12 +255,13 @@ export const translations: Record<Language, TranslationSchema> = {
       scrollDown: "Cuộn xuống",
     },
     portal: {
-      tagline: "Paris 15e · Điểm Hẹn Ẩm Thực",
-      title: "Hai Cơ Sở Của Chúng Tôi",
+      tagline: "Paris · Điểm Hẹn Ẩm Thực",
+      title: "Nos Deux Maisons",
       description:
         "Chọn một trong hai nhà hàng bên dưới để mở mục đặt chỗ nhanh dành cho khách quen hoặc khám phá đầy đủ thực đơn và không gian kiến trúc.",
       bookTableBtn: "Đặt bàn ngay",
       detailsBtn: "Chi tiết",
+      comingSoon: "Coming Soon",
       metroLabel: "Tuyến Métro",
       featureAuthenticTitle: "Vị Nguyên Bản",
       featureAuthenticDesc: "Nước dùng hầm 48h & gia vị tươi nhập trực tiếp từ Việt Nam",
@@ -260,8 +271,8 @@ export const translations: Record<Language, TranslationSchema> = {
       featurePressDesc: "Télérama, Gilles Pudlowski đánh giá xuất sắc về chất lượng",
       featureAmbianceTitle: "Không Gian Sang Trọng",
       featureAmbianceDesc: "Kiến trúc Indochine ấm cúng, đậm chất thơ với chất liệu gỗ tự nhiên",
-      footerCopyright: "Groupe Vị Paris — Vị Hanoi (282 Rue Lecourbe) & Maison de Vị (142 Rue de Vaugirard), 75015 Paris.",
-      footerTagline: "Nhà hàng Việt Nam xuất sắc tại Paris 15e · Phở & Bún Chả Truyền Thống",
+      footerCopyright: "Group Maison de Vi — Vị Hanoi & Maison de Vị, Paris.",
+      footerTagline: "Tinh hoa ẩm thực Việt Nam giữa lòng Paris · Vị Hanoi & Maison de Vị",
     },
     drawer: {
       title: "Đặt bàn trực tuyến",
@@ -291,6 +302,8 @@ export const translations: Record<Language, TranslationSchema> = {
       successMessage: "Cảm ơn quý khách {name}. Yêu cầu đặt bàn {guests} khách tại {restaurant} vào ngày {date} lúc {time} đã được ghi nhận. Nhà hàng sẽ liên hệ lại qua số {phone}.",
       bookAnother: "Đặt thêm bàn khác",
       alertNamePhone: "Vui lòng điền Họ tên và Số điện thoại!",
+      policyNotice:
+        "Les réservations en ligne sont possibles jusqu’à 1 mois à l’avance et au minimum 1 heure avant votre arrivée. Pour toute demande de dernière minute, réservation à plus d’un mois ou pour les groupes de plus de 10 personnes, merci de nous contacter directement par téléphone.",
     },
     restaurant: {
       backToAll: "Cả 2 nhà hàng",
@@ -326,6 +339,8 @@ export const translations: Record<Language, TranslationSchema> = {
       dinnerGroup: "Bữa tối",
       defaultReviewRole: "Báo Chí & Chuyên Gia",
       defaultReviewDate: "Chuyên Mục Ẩm Thực",
+      policyNotice:
+        "Les réservations en ligne sont possibles jusqu’à 1 mois à l’avance et au minimum 1 heure avant votre arrivée. Pour toute demande de dernière minute, réservation à plus d’un mois ou pour les groupes de plus de 10 personnes, merci de nous contacter directement par téléphone.",
     },
   },
 };

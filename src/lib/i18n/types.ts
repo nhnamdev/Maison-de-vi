@@ -35,6 +35,7 @@ export interface TranslationSchema {
     description: string;
     bookTableBtn: string;
     detailsBtn: string;
+    comingSoon: string;
     metroLabel: string;
     featureAuthenticTitle: string;
     featureAuthenticDesc: string;
@@ -77,6 +78,7 @@ export interface TranslationSchema {
     successMessage: string;
     bookAnother: string;
     alertNamePhone: string;
+    policyNotice: string;
   };
 
   // Restaurant Detail View
@@ -114,5 +116,6 @@ export interface TranslationSchema {
     dinnerGroup: string;
     defaultReviewRole: string;
     defaultReviewDate: string;
+    policyNotice: string;
   };
 }

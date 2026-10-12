@@ -75,8 +75,8 @@ export function HeroSection({ onScrollToRestaurants }: { onScrollToRestaurants: 
           </span>
         </div>
 
-        <h1 className="font-serif text-5xl sm:text-7xl md:text-8xl font-normal italic text-white tracking-tight leading-none drop-shadow-lg">
-          Vị Paris
+        <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-normal italic text-white tracking-tight leading-none drop-shadow-lg">
+          Group Maison de Vi
         </h1>
 
         <GoldDivider className="my-3 opacity-90" />

@@ -78,8 +78,8 @@ export function QuickReservationDrawer({
     }, 600);
   };
 
-  const lunchSlots = ["11:30", "12:00", "12:30", "13:00", "13:30"];
-  const dinnerSlots = ["19:00", "19:30", "20:00", "20:30", "21:00"];
+  const lunchSlots = ["11:30", "12:00", "12:30", "13:00", "13:30", "14:00"];
+  const dinnerSlots = ["19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00"];
 
   const dateDisplay =
     selectedDate === "today"
@@ -362,6 +362,20 @@ export function QuickReservationDrawer({
                     onChange={(e) => setNotes(e.target.value)}
                     className="w-full px-3 py-2 text-xs rounded-md bg-white border border-[#DFD5BF] text-[#241812] focus:outline-none focus:border-[#BF4227]"
                   />
+                </div>
+
+                {/* Policy Notice Box */}
+                <div className="p-3.5 rounded-md bg-[#FAF2E6] border border-[#DFD5BF] text-[11px] text-[#5C4B42] leading-relaxed flex items-start gap-2.5">
+                  <Phone className="w-4 h-4 text-[#BF4227] flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p>{t.drawer.policyNotice}</p>
+                    <a
+                      href={`tel:${restaurant.phone.replace(/\s+/g, "")}`}
+                      className="inline-block mt-1 font-mono text-xs font-semibold text-[#BF4227] hover:underline"
+                    >
+                      {restaurant.phone}
+                    </a>
+                  </div>
                 </div>
 
                 {/* Submit button */}
