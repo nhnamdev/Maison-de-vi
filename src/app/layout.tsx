@@ -57,7 +57,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="fr"
+      lang="vi"
       data-scroll-behavior="smooth"
       suppressHydrationWarning
       className={`${beVietnam.variable} ${playfair.variable} ${pinyonScript.variable} ${corinthia.variable} ${appleChancery.variable} ${minion.variable} h-full antialiased scroll-smooth`}
