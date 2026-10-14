@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Be_Vietnam_Pro, Pinyon_Script } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { LanguageProvider } from "@/lib/i18n/context";
 
@@ -25,6 +26,24 @@ const pinyonScript = Pinyon_Script({
   display: "swap",
 });
 
+const corinthia = localFont({
+  src: "../../public/fonts/Corinthia-Regular.ttf",
+  variable: "--font-corinthia",
+  display: "swap",
+});
+
+const appleChancery = localFont({
+  src: "../../public/fonts/Apple Chancery.ttf",
+  variable: "--font-chancery",
+  display: "swap",
+});
+
+const minion = localFont({
+  src: "../../public/fonts/MinionVariableConcept-Roman.otf",
+  variable: "--font-minion",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Group Maison de Vi — Vị Hanoi & Maison de Vị | Paris",
   description: "Trải nghiệm ẩm thực Việt Nam tinh hoa tại Paris. Vị Hanoi (282 Rue Lecourbe) và Maison de Vị (142 Rue de Vaugirard) thuộc Group Maison de Vi.",
@@ -41,7 +60,7 @@ export default function RootLayout({
       lang="fr"
       data-scroll-behavior="smooth"
       suppressHydrationWarning
-      className={`${beVietnam.variable} ${playfair.variable} ${pinyonScript.variable} h-full antialiased scroll-smooth`}
+      className={`${beVietnam.variable} ${playfair.variable} ${pinyonScript.variable} ${corinthia.variable} ${appleChancery.variable} ${minion.variable} h-full antialiased scroll-smooth`}
     >
       <body
         suppressHydrationWarning

@@ -45,6 +45,8 @@ export interface TranslationSchema {
     featurePressDesc: string;
     featureAmbianceTitle: string;
     featureAmbianceDesc: string;
+    phoneLabel: string;
+    footerGastronomy: string;
     footerCopyright: string;
     footerTagline: string;
   };
@@ -117,5 +119,24 @@ export interface TranslationSchema {
     defaultReviewRole: string;
     defaultReviewDate: string;
     policyNotice: string;
+  };
+
+  // Brand Heritage & Identity
+  heritage: {
+    badge: string;
+    title: string;
+    subtitle: string;
+    hatTitle: string;
+    hatDesc: string;
+    chiliTitle: string;
+    chiliDesc: string;
+    aniseTitle: string;
+    aniseDesc: string;
+    viTitle: string;
+    viDesc: string;
+    hatTag: string;
+    chiliTag: string;
+    aniseTag: string;
+    viTag: string;
   };
 }

@@ -7,7 +7,10 @@
 @theme inline {
   --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-serif), Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-script: var(--font-script), cursive;
+  --font-script: var(--font-corinthia), var(--font-script), cursive;
+  --font-corinthia: var(--font-corinthia), cursive;
+  --font-chancery: var(--font-chancery), var(--font-corinthia), cursive;
+  --font-minion: var(--font-serif), Georgia, serif;
 
   /* Official Brand Colors */
   --color-brand-cream: #FAF6EF;
@@ -74,6 +77,45 @@
 .pattern-maison-arch {
   background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 0 C62 0 80 18 80 40 L80 80 L0 80 L0 40 C0 18 18 0 40 0 Z' fill='none' stroke='%23C06129' stroke-width='0.8' stroke-opacity='0.07'/%3E%3Ccircle cx='40' cy='40' r='8' fill='none' stroke='%234B5031' stroke-width='0.8' stroke-opacity='0.07'/%3E%3C/svg%3E");
   background-size: 80px 80px;
+}
+
+/* Official Maison de Vị Brand Patterns & Banners */
+.bg-maison-pattern-subtle {
+  background-image: 
+    linear-gradient(to bottom, rgba(250, 246, 239, 0.94), rgba(250, 246, 239, 0.94)),
+    url("/images/maison-pattern-clean.webp");
+  background-size: 560px auto;
+  background-repeat: repeat;
+}
+
+.bg-maison-pattern-light {
+  background-image: 
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.93), rgba(255, 255, 255, 0.93)),
+    url("/images/maison-pattern-clean.webp");
+  background-size: 560px auto;
+  background-repeat: repeat;
+}
+
+.bg-maison-pattern-dark {
+  background-image: 
+    linear-gradient(to bottom, rgba(36, 24, 18, 0.92), rgba(36, 24, 18, 0.95)),
+    url("/images/maison-pattern-clean.webp");
+  background-size: 560px auto;
+  background-repeat: repeat;
+}
+
+.bg-maison-banner-band {
+  background-image: url("/images/maison-pattern-banner.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bg-maison-clean-band {
+  background-image: url("/images/maison-pattern-clean.webp");
+  background-size: 600px auto;
+  background-position: center;
+  background-repeat: repeat-x;
 }
 
 /* Animations */

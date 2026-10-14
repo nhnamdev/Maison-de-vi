@@ -14,7 +14,13 @@ import {
   Phone,
 } from "lucide-react";
 import { RestaurantData, getLocalizedRestaurant } from "@/lib/restaurant-data";
-import { GoldDivider, TerracottaDivider } from "@/components/common/BrandLogos";
+import {
+  GoldDivider,
+  TerracottaDivider,
+  MaisonBrandDivider,
+  BrandPatternBand,
+  MaisonDeViLogo,
+} from "@/components/common/BrandLogos";
 import { useI18n } from "@/lib/i18n/context";
 
 interface RestaurantDetailViewProps {
@@ -38,7 +44,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
   const [isSuccess, setIsSuccess] = useState(false);
 
   const isMaison = data.id === "maison-de-vi";
-  const Divider = isMaison ? TerracottaDivider : GoldDivider;
+  const Divider = isMaison ? MaisonBrandDivider : GoldDivider;
 
   const handleBooking = (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,7 +70,18 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
               <span>{t.restaurant.backToAll}</span>
             </Link>
 
-            <Link href={data.route} className="flex items-center gap-2">
+            <Link href={data.route} className="flex items-center gap-2.5 group">
+              {isMaison && (
+                <div className="relative w-8 h-8 sm:w-9 sm:h-9 flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
+                  <Image
+                    src="/images/maison-de-vi/logo-official-badge.png"
+                    alt={data.name}
+                    width={36}
+                    height={36}
+                    className="object-contain w-full h-full"
+                  />
+                </div>
+              )}
               <span className="font-serif text-xl sm:text-2xl font-bold text-[#241812] tracking-wide">
                 {data.name}
               </span>
@@ -211,11 +228,28 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
             className="object-cover"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#241812]/80 via-[#241812]/50 to-[#FAF6EF]" />
-          <div className="absolute inset-0 pattern-indochine opacity-30 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#241812]/80 via-[#241812]/55 to-[#FAF6EF]" />
+          {isMaison ? (
+            <div className="absolute inset-0 bg-maison-pattern-dark opacity-35 mix-blend-overlay pointer-events-none" />
+          ) : (
+            <div className="absolute inset-0 pattern-indochine opacity-30 pointer-events-none" />
+          )}
         </div>
 
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto space-y-6 pt-12">
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto space-y-6 pt-16">
+          {/* Brand Official Emblem for Maison de Vị */}
+          {isMaison && (
+            <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto relative drop-shadow-xl animate-fade-in-up">
+              <Image
+                src="/images/maison-de-vi/logo-official-badge-white.png"
+                alt="Maison de Vị Official Emblem"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+          )}
+
           <div className="inline-block text-[11px] sm:text-xs tracking-[0.35em] uppercase font-semibold px-4 py-1.5 rounded-md border border-[#DFD5BF] bg-[#FAF6EF]/95 text-[#4B5031] shadow-xs">
             {data.address} · {data.city}
           </div>
@@ -250,6 +284,11 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
           </div>
         </div>
       </section>
+
+      {/* Decorative Brand Ribbon Band */}
+      {isMaison && (
+        <BrandPatternBand height="h-9 sm:h-12" variant="clean" className="shadow-2xs" />
+      )}
 
       {/* SECTION: NOTRE HISTOIRE */}
       <section id="histoire" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
@@ -293,6 +332,23 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
                 — {localized.storyAuthor}
               </footer>
             </blockquote>
+
+            {isMaison && (
+              <div className="pt-4 border-t border-[#DFD5BF] grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
+                <div className="p-3.5 rounded-lg bg-white/80 border border-[#DFD5BF] shadow-2xs space-y-1">
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-[#4B5031] block">{t.heritage.hatTitle}</span>
+                  <span className="text-xs text-[#5C4B42] font-light">{t.heritage.hatDesc}</span>
+                </div>
+                <div className="p-3.5 rounded-lg bg-white/80 border border-[#DFD5BF] shadow-2xs space-y-1">
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-[#BF4227] block">{t.heritage.chiliTitle}</span>
+                  <span className="text-xs text-[#5C4B42] font-light">{t.heritage.chiliDesc}</span>
+                </div>
+                <div className="p-3.5 rounded-lg bg-white/80 border border-[#DFD5BF] shadow-2xs space-y-1">
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-[#C06129] block">{t.heritage.aniseTitle}</span>
+                  <span className="text-xs text-[#5C4B42] font-light">{t.heritage.aniseDesc}</span>
+                </div>
+              </div>
+            )}
 
             <div className="pt-2 flex items-center gap-6 text-xs text-[#6D5A50]">
               <div className="flex items-center gap-2">
@@ -360,7 +416,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
       </section>
 
       {/* SECTION: MENU / NOTRE CARTE */}
-      <section id="menu" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-12">
+      <section id="menu" className={`py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-12 ${isMaison ? "bg-maison-pattern-subtle rounded-2xl border border-[#DFD5BF]/70 my-8 shadow-xs" : ""}`}>
         <div className="text-center space-y-3">
           <span className="text-xs tracking-[0.3em] uppercase font-semibold text-[#4B5031]">
             {t.restaurant.menuBadge}
@@ -652,9 +708,14 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-[#DFD5BF] bg-[#EFE6D6] py-8 text-center text-xs text-[#7A695F] space-y-2">
+      <footer className="border-t border-[#DFD5BF] bg-[#EFE6D6] py-12 px-4 text-center text-xs text-[#7A695F] space-y-4">
+        {isMaison && (
+          <div className="flex justify-center mb-2">
+            <MaisonDeViLogo variant="badge" className="h-14 w-auto" />
+          </div>
+        )}
         <p>© 2026 {data.name} Paris — {data.address}, 75015 Paris.</p>
-        <Link href="/" className="inline-block text-[#5C4B42] hover:text-[#BF4227] underline">
+        <Link href="/" className="inline-block text-[#5C4B42] hover:text-[#BF4227] font-medium underline">
           {t.restaurant.backHome}
         </Link>
       </footer>

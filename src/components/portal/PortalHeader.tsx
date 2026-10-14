@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Phone } from "lucide-react";
 import { useI18n } from "@/lib/i18n/context";
 
@@ -27,28 +28,39 @@ export function PortalHeader() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Brand */}
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <span
-            className={`font-serif text-xl sm:text-2xl font-bold tracking-wider transition-colors duration-300 ${
-              isScrolled ? "text-[#241812]" : "text-white drop-shadow-sm"
-            }`}
-          >
-            Group{" "}
+        <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group">
+          <div className="relative w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
+            <Image
+              src={isScrolled ? "/images/maison-de-vi/logo-official-badge.png" : "/images/maison-de-vi/logo-official-badge-white.png"}
+              alt="Maison de Vị"
+              width={40}
+              height={40}
+              className="object-contain w-full h-full"
+            />
+          </div>
+          <div className="flex items-baseline gap-2">
             <span
-              className={`font-script text-2xl sm:text-3xl italic font-normal transition-colors duration-300 ${
-                isScrolled ? "text-[#BF4227]" : "text-[#E88656] drop-shadow-sm"
+              className={`font-serif text-xl sm:text-2xl font-bold tracking-wider transition-colors duration-300 ${
+                isScrolled ? "text-[#241812]" : "text-white drop-shadow-sm"
               }`}
             >
-              Maison de Vi
+              Group{" "}
+              <span
+                className={`font-script text-2xl sm:text-3xl italic font-normal transition-colors duration-300 ${
+                  isScrolled ? "text-[#BF4227]" : "text-[#F4D3B0] drop-shadow-sm"
+                }`}
+              >
+                Maison de Vi
+              </span>
             </span>
-          </span>
-          <span
-            className={`hidden sm:inline-block text-[10px] tracking-[0.25em] uppercase border-l pl-2.5 transition-colors duration-300 ${
-              isScrolled ? "text-[#7A695F] border-[#DFD5BF]" : "text-white/80 border-white/30"
-            }`}
-          >
-            Paris
-          </span>
+            <span
+              className={`hidden sm:inline-block text-[10px] tracking-[0.25em] uppercase border-l pl-2.5 transition-colors duration-300 ${
+                isScrolled ? "text-[#7A695F] border-[#DFD5BF]" : "text-white/80 border-white/30"
+              }`}
+            >
+              Paris
+            </span>
+          </div>
         </Link>
 
         {/* Navigation & Language */}

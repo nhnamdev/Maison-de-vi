@@ -113,7 +113,7 @@ export function QuickReservationDrawer({
           <div className="flex items-center gap-3.5 pr-8">
             <div className="w-12 h-12 rounded-md flex items-center justify-center border border-[#DFD5BF] bg-white shadow-xs flex-shrink-0 overflow-hidden p-1">
               <Image
-                src={isMaison ? "/images/maison-de-vi/logo-badge.png" : "/images/vi-hanoi-logo.png"}
+                src={isMaison ? "/images/maison-de-vi/logo-official-badge.png" : "/images/vi-hanoi-logo.png"}
                 alt={restaurant.name}
                 width={48}
                 height={48}

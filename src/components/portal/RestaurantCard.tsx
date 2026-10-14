@@ -48,7 +48,7 @@ export function RestaurantCard({
         <div className="absolute bottom-4 left-5 flex items-center gap-3.5">
           <div className="w-14 h-14 rounded-md p-1.5 bg-[#FAF6EF] border border-[#DFD5BF] flex items-center justify-center shadow-md flex-shrink-0">
             <Image
-              src={isMaison ? "/images/maison-de-vi/logo-badge.png" : "/images/vi-hanoi-logo.png"}
+              src={isMaison ? "/images/maison-de-vi/logo-official-badge.png" : "/images/vi-hanoi-logo.png"}
               alt={restaurant.name}
               width={52}
               height={52}
@@ -69,8 +69,8 @@ export function RestaurantCard({
         </div>
       </div>
 
-      {/* Content Area - Warm cream and elegant typography */}
-      <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between space-y-6 bg-white">
+      {/* Content Area - Warm cream and elegant typography with subtle brand pattern */}
+      <div className={`p-6 sm:p-7 flex-1 flex flex-col justify-between space-y-6 ${isMaison ? "bg-maison-pattern-light" : "bg-white"}`}>
         <div className="space-y-4">
           {/* Address & Metro */}
           <div className="space-y-1 text-xs text-[#6D5A50]">

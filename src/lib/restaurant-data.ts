@@ -3,6 +3,7 @@ import { Language } from "./i18n/types";
 export interface MenuItem {
   name: string;
   vietnameseName?: string;
+  nameI18n?: Record<Language, string>;
   description: string;
   descriptionI18n?: Record<Language, string>;
   price: string;
@@ -83,6 +84,9 @@ export function getLocalizedRestaurant(data: RestaurantData, lang: Language) {
       category: cat.categoryI18n?.[lang] || cat.category,
       items: cat.items.map((item) => ({
         ...item,
+        name:
+          item.nameI18n?.[lang] ||
+          (lang === "vi" && item.vietnameseName ? item.vietnameseName : item.name),
         description: item.descriptionI18n?.[lang] || item.description,
         tag: item.tagI18n?.[lang] || item.tag,
       })),
@@ -226,6 +230,11 @@ export const VI_HANOI_DATA: RestaurantData = {
       items: [
         {
           name: "Bánh Cuốn Hanoïen",
+          nameI18n: {
+            en: "Hanoi Steamed Rice Rolls",
+            fr: "Bánh Cuốn Hanoïen",
+            vi: "Bánh cuốn nhân thịt mộc nhĩ",
+          },
           vietnameseName: "Bánh cuốn nhân thịt mộc nhĩ",
           description: "Galette de riz à la vapeur maison, porc haché, champignons noirs parfumés et échalotes frites.",
           descriptionI18n: {
@@ -243,6 +252,11 @@ export const VI_HANOI_DATA: RestaurantData = {
         },
         {
           name: "Nems au Porc Spécial (4 pcs)",
+          nameI18n: {
+            en: "Crispy Pork Spring Rolls (4 pcs)",
+            fr: "Nems au Porc Spécial (4 pcs)",
+            vi: "Nem rán truyền thống",
+          },
           vietnameseName: "Nem rán truyền thống",
           description: "Nems croustillants dorés au porc, crevettes, vermicelles de riz et légumes croquants.",
           descriptionI18n: {
@@ -260,6 +274,11 @@ export const VI_HANOI_DATA: RestaurantData = {
         },
         {
           name: "Rouleaux de Printemps aux Crevettes",
+          nameI18n: {
+            en: "Fresh Summer Rolls with Shrimp",
+            fr: "Rouleaux de Printemps aux Crevettes",
+            vi: "Gỏi cuốn tôm tươi",
+          },
           vietnameseName: "Gỏi cuốn tôm tươi",
           description: "Rouleaux de riz frais, crevettes roses, herbes aromatiques et vermicelles.",
           descriptionI18n: {
@@ -271,6 +290,11 @@ export const VI_HANOI_DATA: RestaurantData = {
         },
         {
           name: "Bánh Khọt (4 pcs)",
+          nameI18n: {
+            en: "Crispy Mini Pancakes with Shrimp & Pork (4 pcs)",
+            fr: "Bánh Khọt (4 pcs)",
+            vi: "Bánh khọt tôm thịt",
+          },
           vietnameseName: "Bánh khọt tôm thịt",
           description: "Palets croustillants au lait de coco et curcuma, garniture crevettes et porc.",
           descriptionI18n: {
@@ -282,6 +306,11 @@ export const VI_HANOI_DATA: RestaurantData = {
         },
         {
           name: "Plateau Royal Vietnamien (12 pcs)",
+          nameI18n: {
+            en: "Royal Vietnamese Platter (12 pcs)",
+            fr: "Plateau Royal Vietnamien (12 pcs)",
+            vi: "Mẹt khai vị hoàng gia",
+          },
           vietnameseName: "Mẹt khai vị hoàng gia",
           description: "Assortiment généreux : nems porc, crevettes, bánh khọt, rouleaux de printemps à partager.",
           descriptionI18n: {
@@ -309,6 +338,11 @@ export const VI_HANOI_DATA: RestaurantData = {
       items: [
         {
           name: "Phở Spécial du Chef",
+          nameI18n: {
+            en: "Chef's Special Phở",
+            fr: "Phở Spécial du Chef",
+            vi: "Phở đặc biệt Vị Hanoi",
+          },
           vietnameseName: "Phở đặc biệt Vị Hanoi",
           description: "Phở bœuf mi-cuit mi-saignant, bœuf mijoté, boulettes artisanales, bouillon mijoté 48h.",
           descriptionI18n: {
@@ -326,6 +360,11 @@ export const VI_HANOI_DATA: RestaurantData = {
         },
         {
           name: "Phở Bœuf Cru",
+          nameI18n: {
+            en: "Rare Beef Phở",
+            fr: "Phở Bœuf Cru",
+            vi: "Phở bò tái",
+          },
           vietnameseName: "Phở bò tái",
           description: "Fines tranches de bœuf tendre crues cuites au bouillon brûlant et aromates frais.",
           descriptionI18n: {
@@ -337,6 +376,11 @@ export const VI_HANOI_DATA: RestaurantData = {
         },
         {
           name: "Phở Bœuf Sauté à l'Ail",
+          nameI18n: {
+            en: "Wok-Seared Garlic Beef Phở",
+            fr: "Phở Bœuf Sauté à l'Ail",
+            vi: "Phở bò tái lăn",
+          },
           vietnameseName: "Phở bò tái lăn",
           description: "Bœuf émincé sauté vivement au wok à l'ail et gingembre frais, bouillon riche.",
           descriptionI18n: {
@@ -354,6 +398,11 @@ export const VI_HANOI_DATA: RestaurantData = {
         },
         {
           name: "Phở Poulet Fermier",
+          nameI18n: {
+            en: "Free-Range Chicken Phở",
+            fr: "Phở Poulet Fermier",
+            vi: "Phở gà ta lá chanh",
+          },
           vietnameseName: "Phở gà ta lá chanh",
           description: "Bouillon limpide et parfumé au gingembre, poulet fermier émincé et feuilles de citronnier.",
           descriptionI18n: {
@@ -375,6 +424,11 @@ export const VI_HANOI_DATA: RestaurantData = {
       items: [
         {
           name: "Bún Chả Hanoïen",
+          nameI18n: {
+            en: "Hanoi Charcoal-Grilled Bún Chả",
+            fr: "Bún Chả Hanoïen",
+            vi: "Bún chả than hoa Hà Nội",
+          },
           vietnameseName: "Bún chả than hoa Hà Nội",
           description: "Poitrine et boulettes de porc grillées au charbon de bois, vermicelles, herbes fraîches et bouillon tiède.",
           descriptionI18n: {
@@ -392,6 +446,11 @@ export const VI_HANOI_DATA: RestaurantData = {
         },
         {
           name: "Bò Bún Traditionnel & Nem",
+          nameI18n: {
+            en: "Traditional Bò Bún with Crispy Spring Roll",
+            fr: "Bò Bún Traditionnel & Nem",
+            vi: "Bún bò Nam Bộ & Nem",
+          },
           vietnameseName: "Bún bò Nam Bộ & Nem",
           description: "Bœuf sauté à la citronnelle sur lit de vermicelles frais, salade, menthe, cacahuètes pilées.",
           descriptionI18n: {
@@ -403,6 +462,11 @@ export const VI_HANOI_DATA: RestaurantData = {
         },
         {
           name: "Bœuf Luk Lak au Poivre de Phu Quoc",
+          nameI18n: {
+            en: "Shaking Beef Luk Lak with Tomato Rice",
+            fr: "Bœuf Luk Lak au Poivre de Phu Quoc",
+            vi: "Bò lúc lắc cơm chiên tỏi",
+          },
           vietnameseName: "Bò lúc lắc cơm chiên tỏi",
           description: "Dés de bœuf ultra-fondants sautés à haute température, servis avec riz parfumé à la tomate.",
           descriptionI18n: {
@@ -420,6 +484,11 @@ export const VI_HANOI_DATA: RestaurantData = {
         },
         {
           name: "Cơm Thịt Kho Tàu",
+          nameI18n: {
+            en: "Caramelized Braised Pork Belly & Egg",
+            fr: "Cơm Thịt Kho Tàu",
+            vi: "Thịt kho tàu nước dừa",
+          },
           vietnameseName: "Thịt kho tàu nước dừa",
           description: "Porc fondant caramélisé lentement au jus de coco frais et œufs fermiers, servi avec riz blanc.",
           descriptionI18n: {
@@ -441,6 +510,11 @@ export const VI_HANOI_DATA: RestaurantData = {
       items: [
         {
           name: "Kem Bơ Dừa Hanoï",
+          nameI18n: {
+            en: "Hanoi Avocado & Artisanal Coconut Ice Cream",
+            fr: "Kem Bơ Dừa Hanoï",
+            vi: "Kem bơ cốt dừa sấy",
+          },
           vietnameseName: "Kem bơ cốt dừa sấy",
           description: "Crème d'avocat onctueuse sur glace artisanale à la noix de coco, éclats de noix de coco grillée.",
           descriptionI18n: {
@@ -458,6 +532,11 @@ export const VI_HANOI_DATA: RestaurantData = {
         },
         {
           name: "Chè Ba Màu",
+          nameI18n: {
+            en: "Traditional Three-Color Sweet Dessert",
+            fr: "Chè Ba Màu",
+            vi: "Chè ba màu nước cốt dừa",
+          },
           vietnameseName: "Chè ba màu nước cốt dừa",
           description: "Dessert traditionnel rafraîchissant aux trois douceurs, haricots sucrés et gelée de pandan.",
           descriptionI18n: {
@@ -638,6 +717,11 @@ export const MAISON_DE_VI_DATA: RestaurantData = {
       items: [
         {
           name: "Tartare de Bœuf à la Citronnelle & Épices d'Hanoï",
+          nameI18n: {
+            en: "Hand-Cut Beef Tartare with Lemongrass & Spices",
+            fr: "Tartare de Bœuf à la Citronnelle & Épices d'Hanoï",
+            vi: "Bò bóp thấu sốt chanh ớt hoa hồi",
+          },
           vietnameseName: "Bò bóp thấu sốt chanh ớt hoa hồi",
           description: "Bœuf émincé au couteau, échalotes marinées, herbes rares du Nord et chips de riz croustillantes.",
           descriptionI18n: {
@@ -655,6 +739,11 @@ export const MAISON_DE_VI_DATA: RestaurantData = {
         },
         {
           name: "Bánh Cuốn Truffe Noire & Champignons Sylvestres",
+          nameI18n: {
+            en: "Steamed Rice Rolls with Black Truffle & Wild Shiitake",
+            fr: "Bánh Cuốn Truffe Noire & Champignons Sylvestres",
+            vi: "Bánh cuốn hương nấm rừng",
+          },
           vietnameseName: "Bánh cuốn hương nấm rừng",
           description: "Fines vapeurs de riz cuites minute, farce champignon shiitake parfumé, touche de truffe.",
           descriptionI18n: {
@@ -672,6 +761,11 @@ export const MAISON_DE_VI_DATA: RestaurantData = {
         },
         {
           name: "Crevettes Royales en Croûte de Riz Vert (Cốm)",
+          nameI18n: {
+            en: "King Prawns in Crispy Hanoi Young Green Rice",
+            fr: "Crevettes Royales en Croûte de Riz Vert (Cốm)",
+            vi: "Tôm bọc cốm xanh Làng Vòng",
+          },
           vietnameseName: "Tôm bọc cốm xanh Làng Vòng",
           description: "Crevettes enrobées de cốm Hà Nội croustillant, sauce aigre-douce pimentée au kumquat.",
           descriptionI18n: {
@@ -689,6 +783,11 @@ export const MAISON_DE_VI_DATA: RestaurantData = {
         },
         {
           name: "Salade de Papaye Verte & Bœuf Séché Maison",
+          nameI18n: {
+            en: "Green Papaya Salad with Artisanal Spiced Beef",
+            fr: "Salade de Papaye Verte & Bœuf Séché Maison",
+            vi: "Nộm đu đủ bò khô thủ công",
+          },
           vietnameseName: "Nộm đu đủ bò khô thủ công",
           description: "Papaye verte râpée, bœuf mariné séché aux épices traditionnelles, vinaigrette au vinaigre de riz.",
           descriptionI18n: {
@@ -710,6 +809,11 @@ export const MAISON_DE_VI_DATA: RestaurantData = {
       items: [
         {
           name: "Phở Cuit au Chaudron & Os à Moelle Rôti",
+          nameI18n: {
+            en: "Stone-Pot Wagyu Phở with Roasted Bone Marrow",
+            fr: "Phở Cuit au Chaudron & Os à Moelle Rôti",
+            vi: "Phở bò thố đá tủy xương nướng",
+          },
           vietnameseName: "Phở bò thố đá tủy xương nướng",
           description: "Bouillon limpide aux 7 épices torréfiées servi bouillonnant, bœuf Wagyu émincé et os à moelle rôti.",
           descriptionI18n: {
@@ -727,6 +831,11 @@ export const MAISON_DE_VI_DATA: RestaurantData = {
         },
         {
           name: "Canard Laqué aux Cinq Parfums & Prunes Caramel",
+          nameI18n: {
+            en: "Five-Spice Roasted Duck Breast with Plum Reduction",
+            fr: "Canard Laqué aux Cinq Parfums & Prunes Caramel",
+            vi: "Vịt áp chảo ngũ vị sốt mận",
+          },
           vietnameseName: "Vịt áp chảo ngũ vị sốt mận",
           description: "Filet de canard croustillant aux épices douces, réduction de prunes caramélisées et galette de riz.",
           descriptionI18n: {
@@ -744,6 +853,11 @@ export const MAISON_DE_VI_DATA: RestaurantData = {
         },
         {
           name: "Bún Chả Impérial Grillé sur Galets",
+          nameI18n: {
+            en: "Imperial Bún Chả Grilled on Volcanic Stones",
+            fr: "Bún Chả Impérial Grillé sur Galets",
+            vi: "Bún chả nướng đá núi lửa",
+          },
           vietnameseName: "Bún chả nướng đá núi lửa",
           description: "Brochettes de porc fermier grillées au charbon de bois, bouillon tiède infusé à la fleur d'anis étoilé.",
           descriptionI18n: {
@@ -755,6 +869,11 @@ export const MAISON_DE_VI_DATA: RestaurantData = {
         },
         {
           name: "Poisson Chả Cá de La Ligne à l'Aneth & Curcuma",
+          nameI18n: {
+            en: "Artisanal Chả Cá White Fish with Fresh Dill & Turmeric",
+            fr: "Poisson Chả Cá de La Ligne à l'Aneth & Curcuma",
+            vi: "Chả cá Lã Vọng chuẩn phong vị",
+          },
           vietnameseName: "Chả cá Lã Vọng chuẩn phong vị",
           description: "Dos de poisson blanc mariné au curcuma frais, sauté à table avec aneth foisonnant et ciboule.",
           descriptionI18n: {
@@ -782,6 +901,11 @@ export const MAISON_DE_VI_DATA: RestaurantData = {
       items: [
         {
           name: "Entremets Pandan & Noix de Coco Brûlée",
+          nameI18n: {
+            en: "Pandan & Roasted Coconut Mousse Entremets",
+            fr: "Entremets Pandan & Noix de Coco Brûlée",
+            vi: "Bánh bông lan lá dứa cốt dừa nướng",
+          },
           vietnameseName: "Bánh bông lan lá dứa cốt dừa nướng",
           description: "Mousse légère aux feuilles de pandan fraîches, coulis mangue acidulée et crumble de sésame noir.",
           descriptionI18n: {
@@ -799,6 +923,11 @@ export const MAISON_DE_VI_DATA: RestaurantData = {
         },
         {
           name: "Cà Phê Trứng — Café Viennois Vietnamien",
+          nameI18n: {
+            en: "Artisanal Vietnamese Egg Coffee",
+            fr: "Cà Phê Trứng — Café Viennois Vietnamien",
+            vi: "Cà phê trứng kem béo ngậy",
+          },
           vietnameseName: "Cà phê trứng kem béo ngậy",
           description: "Café Robusta torréfié surmonté d'un sabayon aérien au jaune d'œuf et lait concentré.",
           descriptionI18n: {

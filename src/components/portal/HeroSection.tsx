@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { ChevronDown, Utensils, Sparkles } from "lucide-react";
-import { GoldDivider } from "@/components/common/BrandLogos";
+import { GoldDivider, MaisonBrandDivider } from "@/components/common/BrandLogos";
 import { useI18n } from "@/lib/i18n/context";
 
 export function HeroSection({ onScrollToRestaurants }: { onScrollToRestaurants: () => void }) {
@@ -25,7 +25,7 @@ export function HeroSection({ onScrollToRestaurants }: { onScrollToRestaurants: 
   }, [heroImages.length]);
 
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden">
       {/* Background Slides */}
       {heroImages.map((src, index) => (
         <div
@@ -47,28 +47,24 @@ export function HeroSection({ onScrollToRestaurants }: { onScrollToRestaurants: 
       ))}
 
       {/* Warm Ambient Film & Smooth Transition into Cream Canvas */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#241812]/75 via-[#241812]/55 to-[#FAF6EF]" />
-      <div className="absolute inset-0 pattern-indochine opacity-30 pointer-events-none" />
-
-      {/* Floating Corner Ornaments with brand moss green and terracotta */}
-      <div className="absolute top-24 left-8 hidden lg:block opacity-40">
-        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-          <path d="M2 2H24" stroke="#4B5031" strokeWidth="0.8" />
-          <path d="M2 2V24" stroke="#4B5031" strokeWidth="0.8" />
-          <circle cx="2" cy="2" r="2" fill="#BF4227" />
-        </svg>
-      </div>
-      <div className="absolute top-24 right-8 hidden lg:block opacity-40">
-        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-          <path d="M46 2H24" stroke="#4B5031" strokeWidth="0.8" />
-          <path d="M46 2V24" stroke="#4B5031" strokeWidth="0.8" />
-          <circle cx="46" cy="2" r="2" fill="#BF4227" />
-        </svg>
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#241812]/80 via-[#241812]/60 to-[#FAF6EF]" />
+      <div className="absolute inset-0 bg-maison-pattern-dark opacity-35 pointer-events-none mix-blend-overlay" />
 
       {/* Hero Content */}
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto space-y-6 pt-16">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md border border-[#DFD5BF] bg-[#FAF6EF]/95 shadow-xs">
+      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto space-y-6 pt-20">
+        {/* Brand Official Emblem */}
+        <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto relative drop-shadow-xl animate-fade-in-up">
+          <Image
+            src="/images/maison-de-vi/logo-official-badge-white.png"
+            alt="Maison de Vị Emblem"
+            fill
+            sizes="80px"
+            className="object-contain"
+            priority
+          />
+        </div>
+
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md border border-[#DFD5BF]/80 bg-[#FAF6EF]/95 shadow-xs">
           <Sparkles className="w-3.5 h-3.5 text-[#4B5031]" />
           <span className="text-[11px] sm:text-xs tracking-[0.25em] uppercase text-[#4B5031] font-medium">
             {t.hero.subtitle}
@@ -79,7 +75,7 @@ export function HeroSection({ onScrollToRestaurants }: { onScrollToRestaurants: 
           Group Maison de Vi
         </h1>
 
-        <GoldDivider className="my-3 opacity-90" />
+        <MaisonBrandDivider className="my-3 opacity-90" />
 
         <p className="font-script text-2xl sm:text-3xl md:text-4xl text-[#F4D3B0] leading-snug drop-shadow-md">
           {t.hero.titleLine1}
