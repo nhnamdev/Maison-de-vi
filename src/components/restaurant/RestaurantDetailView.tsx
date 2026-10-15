@@ -16,10 +16,10 @@ import {
 import { RestaurantData, getLocalizedRestaurant } from "@/lib/restaurant-data";
 import {
   GoldDivider,
-  TerracottaDivider,
   MaisonBrandDivider,
   BrandPatternBand,
   MaisonDeViLogo,
+  BrandWatermark,
 } from "@/components/common/BrandLogos";
 import { useI18n } from "@/lib/i18n/context";
 
@@ -291,8 +291,23 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
       )}
 
       {/* SECTION: NOTRE HISTOIRE */}
-      <section id="histoire" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <section id="histoire" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full relative overflow-hidden">
+        {/* Authentic Brand Motifs for Maison de Vị */}
+        {isMaison && (
+          <>
+            <BrandWatermark
+              src="/images/maison-de-vi/motifs/motif-heritage-emblem.svg"
+              size="w-48 h-48 sm:w-80 sm:h-80"
+              className="-top-8 -right-12 opacity-[0.20] sm:opacity-[0.24] rotate-6"
+            />
+            <BrandWatermark
+              src="/images/maison-de-vi/motifs/motif-anise-outline.svg"
+              size="w-36 h-36 sm:w-56 sm:h-56"
+              className="-bottom-8 -left-8 opacity-[0.18] sm:opacity-[0.22] -rotate-12"
+            />
+          </>
+        )}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">
           {/* Visual Showcase */}
           <div className="relative rounded-lg overflow-hidden border border-[#DFD5BF] aspect-[4/3] shadow-md group bg-white">
             <Image

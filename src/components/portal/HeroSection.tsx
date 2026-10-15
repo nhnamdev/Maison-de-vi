@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { ChevronDown, Utensils, Sparkles } from "lucide-react";
-import { GoldDivider, MaisonBrandDivider } from "@/components/common/BrandLogos";
+import { MaisonBrandDivider, BrandWatermark } from "@/components/common/BrandLogos";
 import { useI18n } from "@/lib/i18n/context";
 
 export function HeroSection({ onScrollToRestaurants }: { onScrollToRestaurants: () => void }) {
@@ -49,6 +49,18 @@ export function HeroSection({ onScrollToRestaurants }: { onScrollToRestaurants: 
       {/* Warm Ambient Film & Smooth Transition into Cream Canvas */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#241812]/80 via-[#241812]/60 to-[#FAF6EF]" />
       <div className="absolute inset-0 bg-maison-pattern-dark opacity-35 pointer-events-none mix-blend-overlay" />
+
+      {/* Hero Ambient Brand Watermarks */}
+      <BrandWatermark
+        src="/images/maison-de-vi/motifs/motif-anise-outline.svg"
+        size="w-48 h-48 sm:w-72 sm:h-72"
+        className="top-16 left-6 sm:left-12 opacity-[0.20] sm:opacity-[0.28] -rotate-12 hidden sm:block invert brightness-200"
+      />
+      <BrandWatermark
+        src="/images/maison-de-vi/motifs/motif-knot-outline.svg"
+        size="w-48 h-48 sm:w-72 sm:h-72"
+        className="top-20 right-6 sm:right-12 opacity-[0.20] sm:opacity-[0.28] rotate-12 hidden sm:block invert brightness-200"
+      />
 
       {/* Hero Content */}
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto space-y-6 pt-20">

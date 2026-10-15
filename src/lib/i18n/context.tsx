@@ -23,6 +23,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     try {
       const savedLang = localStorage.getItem(STORAGE_KEY) as Language | null;
       if (savedLang && (savedLang === "en" || savedLang === "fr" || savedLang === "vi")) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setLanguageState(savedLang);
       }
     } catch {

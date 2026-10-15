@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import Image from "next/image";
 import { PortalHeader } from "@/components/portal/PortalHeader";
 import { HeroSection } from "@/components/portal/HeroSection";
 import { RestaurantCard } from "@/components/portal/RestaurantCard";
@@ -9,11 +8,11 @@ import { BrandHeritageSection } from "@/components/portal/BrandHeritageSection";
 import { QuickReservationDrawer } from "@/components/portal/QuickReservationDrawer";
 import { VI_HANOI_DATA, MAISON_DE_VI_DATA, RestaurantData } from "@/lib/restaurant-data";
 import {
-  GoldDivider,
   MaisonBrandDivider,
   MaisonDeViLogo,
   ViHanoiLogo,
   BrandPatternBand,
+  BrandWatermark,
 } from "@/components/common/BrandLogos";
 import { Utensils, Award, Clock, Heart } from "lucide-react";
 import { useI18n } from "@/lib/i18n/context";
@@ -52,8 +51,19 @@ export default function Home() {
       <section
         id="restaurants"
         ref={restaurantsSectionRef}
-        className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full relative bg-maison-pattern-subtle rounded-2xl my-6 border border-[#DFD5BF]/60 shadow-xs"
+        className="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full relative bg-maison-pattern-subtle rounded-2xl my-6 border border-[#DFD5BF]/60 shadow-xs overflow-hidden"
       >
+        {/* Subtle Brand Motif Watermarks */}
+        <BrandWatermark
+          src="/images/maison-de-vi/motifs/motif-anise-outline.svg"
+          size="w-44 h-44 sm:w-64 sm:h-64"
+          className="-top-10 -left-10 opacity-[0.18] sm:opacity-[0.22] -rotate-12"
+        />
+        <BrandWatermark
+          src="/images/maison-de-vi/motifs/motif-knot-outline.svg"
+          size="w-44 h-44 sm:w-64 sm:h-64"
+          className="-bottom-10 -right-10 opacity-[0.18] sm:opacity-[0.22] rotate-12"
+        />
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <span className="text-xs tracking-[0.3em] uppercase text-[#4B5031] font-semibold block">

@@ -94,22 +94,52 @@ export function TerracottaDivider({ className = "my-4" }: { className?: string }
   );
 }
 
-/* Official Brand Divider featuring Anise Star & Hat curves */
+/* Official Brand Divider featuring the authentic Anise Star motif */
 export function MaisonBrandDivider({ className = "my-4" }: { className?: string }) {
   return (
     <div className={`flex items-center justify-center gap-3 ${className}`}>
-      <div className="h-[1px] w-16 sm:w-28 bg-gradient-to-r from-transparent via-[#DFD5BF] to-[#C06129]" />
-      <div className="flex items-center gap-1.5 text-[#BF4227]">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="w-5 h-5">
-          {/* Anise 8-pointed star */}
-          <path
-            d="M12 2L13.5 8.5L20 7L15.5 12L20 17L13.5 15.5L12 22L10.5 15.5L4 17L8.5 12L4 7L10.5 8.5Z"
-            fill="#BF4227"
-          />
-          <circle cx="12" cy="12" r="2.5" fill="#FAF6EF" />
-        </svg>
+      <div className="h-[1px] w-14 sm:w-24 bg-gradient-to-r from-transparent via-[#DFD5BF] to-[#C06129]" />
+      <div className="relative w-5 h-5 flex-shrink-0 transition-transform duration-500 hover:rotate-45">
+        <Image
+          src="/images/maison-de-vi/motifs/motif-anise-outline.svg"
+          alt="Hoa hồi Maison de Vị"
+          fill
+          className="object-contain"
+        />
       </div>
-      <div className="h-[1px] w-16 sm:w-28 bg-gradient-to-l from-transparent via-[#DFD5BF] to-[#C06129]" />
+      <div className="h-[1px] w-14 sm:w-24 bg-gradient-to-l from-transparent via-[#DFD5BF] to-[#C06129]" />
+    </div>
+  );
+}
+
+/* Background Brand Motif Watermark for decorative sections */
+export function BrandWatermark({
+  src,
+  alt = "Họa tiết nhận diện thương hiệu",
+  className = "",
+  size = "w-36 h-36 sm:w-56 sm:h-56",
+  opacity = "opacity-[0.18] sm:opacity-[0.22]",
+  rotate = "",
+}: {
+  src: string;
+  alt?: string;
+  className?: string;
+  size?: string;
+  opacity?: string;
+  rotate?: string;
+}) {
+  return (
+    <div
+      aria-hidden="true"
+      className={`absolute pointer-events-none select-none z-0 ${size} ${opacity} ${rotate} transition-opacity duration-700 ${className}`}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes="(max-width: 768px) 160px, 320px"
+        className="object-contain"
+      />
     </div>
   );
 }
