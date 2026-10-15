@@ -58,11 +58,15 @@ export default function Home() {
           src="/images/maison-de-vi/motifs/motif-anise-outline.svg"
           size="w-44 h-44 sm:w-64 sm:h-64"
           className="-top-10 -left-10 opacity-[0.18] sm:opacity-[0.22] -rotate-12"
+          parallaxSpeed={-0.07}
+          animation="float"
         />
         <BrandWatermark
           src="/images/maison-de-vi/motifs/motif-knot-outline.svg"
           size="w-44 h-44 sm:w-64 sm:h-64"
           className="-bottom-10 -right-10 opacity-[0.18] sm:opacity-[0.22] rotate-12"
+          parallaxSpeed={0.07}
+          animation="float-delayed"
         />
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">

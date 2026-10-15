@@ -55,11 +55,15 @@ export function HeroSection({ onScrollToRestaurants }: { onScrollToRestaurants: 
         src="/images/maison-de-vi/motifs/motif-anise-outline.svg"
         size="w-48 h-48 sm:w-72 sm:h-72"
         className="top-16 left-6 sm:left-12 opacity-[0.20] sm:opacity-[0.28] -rotate-12 hidden sm:block invert brightness-200"
+        parallaxSpeed={0.08}
+        animation="float"
       />
       <BrandWatermark
         src="/images/maison-de-vi/motifs/motif-knot-outline.svg"
         size="w-48 h-48 sm:w-72 sm:h-72"
         className="top-20 right-6 sm:right-12 opacity-[0.20] sm:opacity-[0.28] rotate-12 hidden sm:block invert brightness-200"
+        parallaxSpeed={-0.08}
+        animation="float-delayed"
       />
 
       {/* Hero Content */}

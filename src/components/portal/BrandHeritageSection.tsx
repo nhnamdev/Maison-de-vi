@@ -65,26 +65,35 @@ export function BrandHeritageSection() {
         src="/images/maison-de-vi/motifs/motif-heritage-emblem.svg"
         size="w-48 h-48 sm:w-80 sm:h-80"
         className="-top-8 -left-12 opacity-[0.20] sm:opacity-[0.24] -rotate-6"
+        parallaxSpeed={-0.08}
+        animation="float"
       />
       <BrandWatermark
         src="/images/maison-de-vi/motifs/motif-stack-outline.svg"
         size="w-40 h-64 sm:w-56 sm:h-96"
         className="top-12 -right-8 opacity-[0.18] sm:opacity-[0.22] rotate-3 hidden md:block"
+        parallaxSpeed={0.06}
+        animation="float-delayed"
       />
       <BrandWatermark
         src="/images/maison-de-vi/motifs/motif-hat-outline.svg"
         size="w-[320px] sm:w-[520px] h-28 sm:h-44"
         className="top-28 left-1/2 -translate-x-1/2 opacity-[0.16] sm:opacity-[0.20]"
+        parallaxSpeed={-0.04}
       />
       <BrandWatermark
         src="/images/maison-de-vi/motifs/motif-tassel-knot.svg"
         size="w-24 h-60 sm:w-32 sm:h-72"
         className="bottom-12 left-4 sm:left-12 opacity-[0.22] sm:opacity-[0.26] hidden lg:block"
+        parallaxSpeed={0.09}
+        animation="sway"
       />
       <BrandWatermark
         src="/images/maison-de-vi/motifs/motif-anise-outline.svg"
         size="w-40 h-40 sm:w-60 sm:h-60"
         className="-bottom-10 -right-8 opacity-[0.20] sm:opacity-[0.24] rotate-12"
+        parallaxSpeed={-0.06}
+        animation="float"
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

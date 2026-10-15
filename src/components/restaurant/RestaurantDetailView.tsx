@@ -299,11 +299,15 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
               src="/images/maison-de-vi/motifs/motif-heritage-emblem.svg"
               size="w-48 h-48 sm:w-80 sm:h-80"
               className="-top-8 -right-12 opacity-[0.20] sm:opacity-[0.24] rotate-6"
+              parallaxSpeed={-0.08}
+              animation="float"
             />
             <BrandWatermark
               src="/images/maison-de-vi/motifs/motif-anise-outline.svg"
               size="w-36 h-36 sm:w-56 sm:h-56"
               className="-bottom-8 -left-8 opacity-[0.18] sm:opacity-[0.22] -rotate-12"
+              parallaxSpeed={0.06}
+              animation="float-delayed"
             />
           </>
         )}

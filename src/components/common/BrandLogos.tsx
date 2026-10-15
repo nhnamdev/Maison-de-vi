@@ -1,3 +1,6 @@
+"use client";
+
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 export function ViHanoiLogo({ className = "h-14 w-auto" }: { className?: string }) {
@@ -112,7 +115,7 @@ export function MaisonBrandDivider({ className = "my-4" }: { className?: string 
   );
 }
 
-/* Background Brand Motif Watermark for decorative sections */
+/* Background Brand Motif Watermark with scroll parallax & breathing animation */
 export function BrandWatermark({
   src,
   alt = "Họa tiết nhận diện thương hiệu",
@@ -120,6 +123,8 @@ export function BrandWatermark({
   size = "w-36 h-36 sm:w-56 sm:h-56",
   opacity = "opacity-[0.18] sm:opacity-[0.22]",
   rotate = "",
+  parallaxSpeed = 0,
+  animation = "none",
 }: {
   src: string;
   alt?: string;
@@ -127,19 +132,68 @@ export function BrandWatermark({
   size?: string;
   opacity?: string;
   rotate?: string;
+  parallaxSpeed?: number;
+  animation?: "float" | "float-delayed" | "sway" | "none";
 }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [offsetY, setOffsetY] = useState(0);
+
+  useEffect(() => {
+    if (parallaxSpeed === 0) return;
+
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          if (ref.current) {
+            const rect = ref.current.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            // Calculate parallax translation when element is in or near viewport
+            if (rect.top < windowHeight + 250 && rect.bottom > -250) {
+              const centerOffset = rect.top + rect.height / 2 - windowHeight / 2;
+              setOffsetY(centerOffset * parallaxSpeed);
+            }
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [parallaxSpeed]);
+
+  const animationClass =
+    animation === "float"
+      ? "animate-float-slow"
+      : animation === "float-delayed"
+      ? "animate-float-delayed"
+      : animation === "sway"
+      ? "animate-sway-tassel"
+      : "";
+
   return (
     <div
+      ref={ref}
       aria-hidden="true"
-      className={`absolute pointer-events-none select-none z-0 ${size} ${opacity} ${rotate} transition-opacity duration-700 ${className}`}
+      style={{
+        transform: offsetY !== 0 ? `translate3d(0, ${offsetY}px, 0)` : undefined,
+        transition: "transform 0.15s cubic-bezier(0.2, 0.8, 0.4, 1)",
+        willChange: parallaxSpeed !== 0 ? "transform" : "auto",
+      }}
+      className={`absolute pointer-events-none select-none z-0 ${size} ${opacity} ${rotate} ${className}`}
     >
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        sizes="(max-width: 768px) 160px, 320px"
-        className="object-contain"
-      />
+      <div className={`w-full h-full relative ${animationClass}`}>
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          sizes="(max-width: 768px) 160px, 320px"
+          className="object-contain"
+        />
+      </div>
     </div>
   );
 }
