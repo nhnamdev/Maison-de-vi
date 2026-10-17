@@ -68,7 +68,7 @@ export function HeroSection({ onScrollToRestaurants }: { onScrollToRestaurants: 
       {/* Hero Content */}
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto space-y-6 pt-20">
         {/* Brand Official Emblem */}
-        <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto relative drop-shadow-xl animate-fade-in-up">
+        {/* <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto relative drop-shadow-xl animate-fade-in-up">
           <Image
             src="/images/maison-de-vi/logo-official-badge-white.png"
             alt="Maison de Vị Emblem"
@@ -77,18 +77,18 @@ export function HeroSection({ onScrollToRestaurants }: { onScrollToRestaurants: 
             className="object-contain"
             priority
           />
-        </div>
+        </div> */}
 
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md border border-[#DFD5BF]/80 bg-[#FAF6EF]/95 shadow-xs">
+        {/* <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md border border-[#DFD5BF]/80 bg-[#FAF6EF]/95 shadow-xs">
           <Sparkles className="w-3.5 h-3.5 text-[#4B5031]" />
           <span className="text-[11px] sm:text-xs tracking-[0.25em] uppercase text-[#4B5031] font-medium">
             {t.hero.subtitle}
           </span>
-        </div>
+        </div> */}
 
-        <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-normal italic text-white tracking-tight leading-none drop-shadow-lg">
+        {/* <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl font-normal italic text-white tracking-tight leading-none drop-shadow-lg">
           Group Maison de Vi
-        </h1>
+        </h1> */}
 
         <MaisonBrandDivider className="my-3 opacity-90" />
 
