@@ -60,13 +60,17 @@ export function PortalHeader() {
           <div className="hidden md:flex items-center gap-6 text-xs tracking-wider uppercase font-medium">
             <Link
               href="/vi-hanoi"
-              className={`transition-colors duration-300 ${
-                isScrolled
-                  ? "text-[#6D5A50] hover:text-[#C06129]"
-                  : "text-white/90 hover:text-white drop-shadow-sm"
-              }`}
+              className="relative h-8 sm:h-9 flex items-center transition-transform duration-300 hover:scale-105"
+              title={t.nav.viHanoi}
+              aria-label={t.nav.viHanoi}
             >
-              {t.nav.viHanoi}
+              <Image
+                src={isScrolled ? "/images/vihanoi-logo-dark.png" : "/images/vihanoi-logo-white.png"}
+                alt="Vị Hanoi"
+                width={75}
+                height={36}
+                className="object-contain h-7 sm:h-8 w-auto"
+              />
             </Link>
             <span className={`transition-colors duration-300 ${isScrolled ? "text-[#DFD5BF]" : "text-white/40"}`}>
               ·
