@@ -29,15 +29,6 @@ export function PortalHeader() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Brand */}
         <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group">
-          <div className="relative w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
-            <Image
-              src={isScrolled ? "/images/maison-de-vi/logo-official-badge.png" : "/images/maison-de-vi/logo-official-badge-white.png"}
-              alt="Maison de Vị"
-              width={40}
-              height={40}
-              className="object-contain w-full h-full"
-            />
-          </div>
           <div className="flex items-baseline gap-2">
             <span
               className={`font-serif text-xl sm:text-2xl font-bold tracking-wider transition-colors duration-300 ${
@@ -82,13 +73,17 @@ export function PortalHeader() {
             </span>
             <Link
               href="/maison-de-vi"
-              className={`transition-colors duration-300 ${
-                isScrolled
-                  ? "text-[#6D5A50] hover:text-[#BF4227]"
-                  : "text-white/90 hover:text-white drop-shadow-sm"
-              }`}
+              className="relative w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0 transition-transform duration-300 hover:scale-105 inline-block"
+              title={t.nav.maisonDeVi}
+              aria-label={t.nav.maisonDeVi}
             >
-              {t.nav.maisonDeVi}
+              <Image
+                src={isScrolled ? "/images/maison-de-vi/logo-official-badge.png" : "/images/maison-de-vi/logo-official-badge-white.png"}
+                alt="Maison de Vị"
+                width={40}
+                height={40}
+                className="object-contain w-full h-full"
+              />
             </Link>
           </div>
 

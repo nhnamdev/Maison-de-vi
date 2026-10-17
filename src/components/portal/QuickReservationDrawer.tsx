@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { X, Calendar, Clock, Users, Phone, MapPin, CheckCircle, ArrowRight, Utensils } from "lucide-react";
+import { X, Phone, MapPin, ArrowRight, Utensils } from "lucide-react";
+import { ZeltyBookingWidget } from "@/components/booking/ZeltyBookingWidget";
 import { RestaurantData, getLocalizedRestaurant } from "@/lib/restaurant-data";
 import { useI18n } from "@/lib/i18n/context";
 
@@ -20,19 +21,7 @@ export function QuickReservationDrawer({
 }: QuickReservationDrawerProps) {
   const { language, t } = useI18n();
 
-  // Form State
-  const [selectedDate, setSelectedDate] = useState<string>("today");
-  const [customDate, setCustomDate] = useState<string>("");
-  const [selectedTime, setSelectedTime] = useState<string>("19:30");
-  const [guests, setGuests] = useState<number>(2);
-  const [name, setName] = useState<string>("");
-  const [phone, setPhone] = useState<string>("");
-  const [notes, setNotes] = useState<string>("");
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const [isSuccess, setIsSuccess] = useState<boolean>(false);
-
   const handleClose = useCallback(() => {
-    setIsSuccess(false);
     onClose();
   }, [onClose]);
 
@@ -65,28 +54,7 @@ export function QuickReservationDrawer({
   const isMaison = restaurant.id === "maison-de-vi";
   const brandAccent = isMaison ? "#BF4227" : "#C06129";
 
-  const handleBookingSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name || !phone) {
-      alert(t.drawer.alertNamePhone);
-      return;
-    }
-    setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSuccess(true);
-    }, 600);
-  };
 
-  const lunchSlots = ["11:30", "12:00", "12:30", "13:00", "13:30", "14:00"];
-  const dinnerSlots = ["19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00"];
-
-  const dateDisplay =
-    selectedDate === "today"
-      ? t.drawer.today
-      : selectedDate === "tomorrow"
-      ? t.drawer.tomorrow
-      : customDate || t.drawer.otherDate;
 
   return (
     <>
@@ -170,231 +138,10 @@ export function QuickReservationDrawer({
               </a>
             </div>
 
-            {isSuccess ? (
-              <div className="p-6 rounded-md border border-[#4B5031]/30 bg-[#4B5031]/10 text-center space-y-3">
-                <CheckCircle className="w-12 h-12 text-[#4B5031] mx-auto" />
-                <h4 className="font-serif text-xl text-[#241812] font-semibold">{t.drawer.successTitle}</h4>
-                <p className="text-sm text-[#4B5031] leading-relaxed">
-                  {t.drawer.successMessage
-                    .replace("{name}", name)
-                    .replace("{guests}", String(guests))
-                    .replace("{restaurant}", restaurant.name)
-                    .replace("{date}", dateDisplay)
-                    .replace("{time}", selectedTime)
-                    .replace("{phone}", phone)}
-                </p>
-                <button
-                  onClick={() => setIsSuccess(false)}
-                  className="mt-3 text-xs uppercase tracking-wider underline hover:text-[#241812] transition-colors cursor-pointer text-[#BF4227] font-medium"
-                >
-                  {t.drawer.bookAnother}
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleBookingSubmit} className="space-y-4">
-                {/* 1. Select Date */}
-                <div>
-                  <label className="block text-xs font-medium text-[#5C4B42] uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                    <Calendar className="w-3.5 h-3.5 text-[#BF4227]" />
-                    {t.drawer.step1}
-                  </label>
-                  <div className="grid grid-cols-3 gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setSelectedDate("today")}
-                      className={`py-2 px-3 text-xs font-medium rounded-md border transition-all text-center cursor-pointer ${
-                        selectedDate === "today"
-                          ? "border-[#BF4227] bg-[#BF4227] text-white shadow-xs font-semibold"
-                          : "border-[#DFD5BF] bg-white text-[#5C4B42] hover:border-[#BF4227]/50"
-                      }`}
-                    >
-                      {t.drawer.today}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setSelectedDate("tomorrow")}
-                      className={`py-2 px-3 text-xs font-medium rounded-md border transition-all text-center cursor-pointer ${
-                        selectedDate === "tomorrow"
-                          ? "border-[#BF4227] bg-[#BF4227] text-white shadow-xs font-semibold"
-                          : "border-[#DFD5BF] bg-white text-[#5C4B42] hover:border-[#BF4227]/50"
-                      }`}
-                    >
-                      {t.drawer.tomorrow}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setSelectedDate("custom")}
-                      className={`py-2 px-3 text-xs font-medium rounded-md border transition-all text-center cursor-pointer ${
-                        selectedDate === "custom"
-                          ? "border-[#BF4227] bg-[#BF4227] text-white shadow-xs font-semibold"
-                          : "border-[#DFD5BF] bg-white text-[#5C4B42] hover:border-[#BF4227]/50"
-                      }`}
-                    >
-                      {t.drawer.otherDate}
-                    </button>
-                  </div>
-                  {selectedDate === "custom" && (
-                    <input
-                      type="date"
-                      value={customDate}
-                      onChange={(e) => setCustomDate(e.target.value)}
-                      className="mt-2 w-full px-3 py-2 text-xs rounded-md bg-white border border-[#DFD5BF] text-[#241812] focus:outline-none focus:border-[#BF4227]"
-                      required
-                    />
-                  )}
-                </div>
-
-                {/* 2. Select Guests */}
-                <div>
-                  <label className="block text-xs font-medium text-[#5C4B42] uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                    <Users className="w-3.5 h-3.5 text-[#4B5031]" />
-                    {t.drawer.step3}
-                  </label>
-                  <div className="flex items-center gap-2">
-                    <div className="flex items-center bg-white border border-[#DFD5BF] rounded-md p-1 shadow-xs">
-                      <button
-                        type="button"
-                        onClick={() => setGuests((g) => Math.max(1, g - 1))}
-                        className="w-8 h-8 flex items-center justify-center rounded text-lg font-bold text-[#5C4B42] hover:text-[#241812] hover:bg-[#FAF6EF] cursor-pointer"
-                      >
-                        -
-                      </button>
-                      <span className="w-10 text-center font-serif text-base font-semibold text-[#241812]">
-                        {guests}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => setGuests((g) => Math.min(20, g + 1))}
-                        className="w-8 h-8 flex items-center justify-center rounded text-lg font-bold text-[#5C4B42] hover:text-[#241812] hover:bg-[#FAF6EF] cursor-pointer"
-                      >
-                        +
-                      </button>
-                    </div>
-                    <span className="text-xs text-[#7A695F] italic">
-                      {guests} {t.drawer.guestUnit}
-                    </span>
-                  </div>
-                </div>
-
-                {/* 3. Select Time */}
-                <div>
-                  <label className="block text-xs font-medium text-[#5C4B42] uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                    <Clock className="w-3.5 h-3.5 text-[#C06129]" />
-                    {t.drawer.step2}
-                  </label>
-                  <div className="space-y-2">
-                    <div className="text-[11px] text-[#6D5A50] font-medium">{t.drawer.lunchService}:</div>
-                    <div className="flex flex-wrap gap-1.5">
-                      {lunchSlots.map((time) => (
-                        <button
-                          key={time}
-                          type="button"
-                          onClick={() => setSelectedTime(time)}
-                          className={`px-3 py-1.5 rounded-md text-xs transition-colors font-medium cursor-pointer ${
-                            selectedTime === time
-                              ? "bg-[#BF4227] text-white font-semibold shadow-xs"
-                              : "bg-white border border-[#DFD5BF] text-[#5C4B42] hover:border-[#BF4227]/50"
-                          }`}
-                        >
-                          {time}
-                        </button>
-                      ))}
-                    </div>
-
-                    <div className="text-[11px] text-[#6D5A50] font-medium pt-1">{t.drawer.dinnerService}:</div>
-                    <div className="flex flex-wrap gap-1.5">
-                      {dinnerSlots.map((time) => (
-                        <button
-                          key={time}
-                          type="button"
-                          onClick={() => setSelectedTime(time)}
-                          className={`px-3 py-1.5 rounded-md text-xs transition-colors font-medium cursor-pointer ${
-                            selectedTime === time
-                              ? "bg-[#BF4227] text-white font-semibold shadow-xs"
-                              : "bg-white border border-[#DFD5BF] text-[#5C4B42] hover:border-[#BF4227]/50"
-                          }`}
-                        >
-                          {time}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* 4. Customer Info */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                  <div>
-                    <label className="block text-[11px] font-medium text-[#5C4B42] mb-1">
-                      {t.restaurant.nameLabel}
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      placeholder={t.drawer.namePlaceholder}
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      className="w-full px-3 py-2 text-xs rounded-md bg-white border border-[#DFD5BF] text-[#241812] focus:outline-none focus:border-[#BF4227]"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[11px] font-medium text-[#5C4B42] mb-1">
-                      {t.restaurant.phoneLabel}
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      placeholder={t.drawer.phonePlaceholder}
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      className="w-full px-3 py-2 text-xs rounded-md bg-white border border-[#DFD5BF] text-[#241812] focus:outline-none focus:border-[#BF4227]"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-[11px] font-medium text-[#5C4B42] mb-1">
-                    {t.drawer.notesLabel}
-                  </label>
-                  <input
-                    type="text"
-                    placeholder={t.drawer.notesPlaceholder}
-                    value={notes}
-                    onChange={(e) => setNotes(e.target.value)}
-                    className="w-full px-3 py-2 text-xs rounded-md bg-white border border-[#DFD5BF] text-[#241812] focus:outline-none focus:border-[#BF4227]"
-                  />
-                </div>
-
-                {/* Policy Notice Box */}
-                <div className="p-3.5 rounded-md bg-[#FAF2E6] border border-[#DFD5BF] text-[11px] text-[#5C4B42] leading-relaxed flex items-start gap-2.5">
-                  <Phone className="w-4 h-4 text-[#BF4227] flex-shrink-0 mt-0.5" />
-                  <div>
-                    <p>{t.drawer.policyNotice}</p>
-                    <a
-                      href={`tel:${restaurant.phone.replace(/\s+/g, "")}`}
-                      className="inline-block mt-1 font-mono text-xs font-semibold text-[#BF4227] hover:underline"
-                    >
-                      {restaurant.phone}
-                    </a>
-                  </div>
-                </div>
-
-                {/* Submit button */}
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-3.5 px-4 rounded-md font-medium text-xs tracking-widest uppercase transition-all duration-300 shadow-sm text-white flex items-center justify-center gap-2 group cursor-pointer disabled:opacity-50 bg-[#BF4227] hover:bg-[#A4351D] active:scale-[0.99]"
-                >
-                  {isSubmitting ? (
-                    <span>{t.drawer.submitting}</span>
-                  ) : (
-                    <>
-                      <span>{t.drawer.confirmBtn}</span>
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                    </>
-                  )}
-                </button>
-              </form>
-            )}
+            <ZeltyBookingWidget
+              restaurantName={restaurant.name}
+              primaryColor={isMaison ? "b74120" : "c06129"}
+            />
           </div>
 
           {/* SECTION 2: MORE INFORMATION ABOUT US */}

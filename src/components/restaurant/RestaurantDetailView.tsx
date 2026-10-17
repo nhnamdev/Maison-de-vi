@@ -13,6 +13,7 @@ import {
   X,
   Phone,
 } from "lucide-react";
+import { ZeltyBookingWidget } from "@/components/booking/ZeltyBookingWidget";
 import { RestaurantData, getLocalizedRestaurant } from "@/lib/restaurant-data";
 import {
   GoldDivider,
@@ -34,26 +35,8 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
   const [activeCategory, setActiveCategory] = useState<number>(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Form State
-  const [resDate, setResDate] = useState("");
-  const [resTime, setResTime] = useState("19:30");
-  const [resGuests, setResGuests] = useState("2");
-  const [resName, setResName] = useState("");
-  const [resPhone, setResPhone] = useState("");
-  const [resNotes, setResNotes] = useState("");
-  const [isSuccess, setIsSuccess] = useState(false);
-
   const isMaison = data.id === "maison-de-vi";
   const Divider = isMaison ? MaisonBrandDivider : GoldDivider;
-
-  const handleBooking = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!resName || !resPhone) {
-      alert(t.drawer.alertNamePhone);
-      return;
-    }
-    setIsSuccess(true);
-  };
 
   return (
     <div className="min-h-screen flex flex-col text-[#241812] bg-[#FAF6EF]">
@@ -557,148 +540,24 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
             </p>
           </div>
 
-          {isSuccess ? (
-            <div className="p-8 rounded-md bg-[#4B5031]/10 border border-[#4B5031]/30 text-center space-y-4">
-              <CheckCircle className="w-14 h-14 text-[#4B5031] mx-auto" />
-              <h3 className="font-serif text-2xl text-[#241812] font-semibold">{t.restaurant.reservationSuccessTitle}</h3>
-              <p className="text-sm text-[#4B5031]">
-                {t.restaurant.reservationSuccessDesc
-                  .replace("{name}", resName)
-                  .replace("{phone}", resPhone)
-                  .replace("{guests}", String(resGuests))}
-              </p>
-              <button
-                onClick={() => setIsSuccess(false)}
-                className="text-xs uppercase tracking-wider underline hover:text-[#241812] cursor-pointer text-[#BF4227] font-medium"
+          <ZeltyBookingWidget
+            restaurantName={data.name}
+            primaryColor={data.accentColor || "b74120"}
+          />
+
+          {/* Policy Notice Box */}
+          <div className="p-4 rounded-md bg-[#FAF2E6] border border-[#DFD5BF] text-xs text-[#5C4B42] leading-relaxed flex items-start gap-3">
+            <Phone className="w-4 h-4 text-[#BF4227] flex-shrink-0 mt-0.5" />
+            <div>
+              <p>{t.restaurant.policyNotice}</p>
+              <a
+                href={`tel:${data.phone.replace(/\s+/g, "")}`}
+                className="inline-block mt-1 font-mono text-xs font-semibold text-[#BF4227] hover:underline"
               >
-                {t.restaurant.bookAnotherTable}
-              </button>
+                {data.phone}
+              </a>
             </div>
-          ) : (
-            <form onSubmit={handleBooking} className="space-y-5">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div>
-                  <label className="block text-xs font-medium text-[#5C4B42] mb-1.5 uppercase tracking-wider">
-                    {t.restaurant.dateLabel}
-                  </label>
-                  <input
-                    type="date"
-                    required
-                    value={resDate}
-                    onChange={(e) => setResDate(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-md bg-[#FAF6EF] border border-[#DFD5BF] text-[#241812] text-xs focus:outline-none focus:border-[#BF4227]"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-medium text-[#5C4B42] mb-1.5 uppercase tracking-wider">
-                    {t.restaurant.timeLabel}
-                  </label>
-                  <select
-                    value={resTime}
-                    onChange={(e) => setResTime(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-md bg-[#FAF6EF] border border-[#DFD5BF] text-[#241812] text-xs focus:outline-none focus:border-[#BF4227]"
-                  >
-                    <optgroup label={t.restaurant.lunchGroup}>
-                      <option value="11:30">11:30</option>
-                      <option value="12:00">12:00</option>
-                      <option value="12:30">12:30</option>
-                      <option value="13:00">13:00</option>
-                      <option value="13:30">13:30</option>
-                      <option value="14:00">14:00</option>
-                    </optgroup>
-                    <optgroup label={t.restaurant.dinnerGroup}>
-                      <option value="19:00">19:00</option>
-                      <option value="19:30">19:30</option>
-                      <option value="20:00">20:00</option>
-                      <option value="20:30">20:30</option>
-                      <option value="21:00">21:00</option>
-                      <option value="21:30">21:30</option>
-                      <option value="22:00">22:00</option>
-                    </optgroup>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-xs font-medium text-[#5C4B42] mb-1.5 uppercase tracking-wider">
-                    {t.restaurant.guestsLabel}
-                  </label>
-                  <select
-                    value={resGuests}
-                    onChange={(e) => setResGuests(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-md bg-[#FAF6EF] border border-[#DFD5BF] text-[#241812] text-xs focus:outline-none focus:border-[#BF4227]"
-                  >
-                    {[1, 2, 3, 4, 5, 6, 7, 8, "9+"].map((n) => (
-                      <option key={n} value={n}>
-                        {n} {t.drawer.guestUnit}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-medium text-[#5C4B42] mb-1.5 uppercase tracking-wider">
-                    {t.restaurant.nameLabel}
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder={t.drawer.namePlaceholder}
-                    value={resName}
-                    onChange={(e) => setResName(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-md bg-[#FAF6EF] border border-[#DFD5BF] text-[#241812] text-xs focus:outline-none focus:border-[#BF4227]"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-medium text-[#5C4B42] mb-1.5 uppercase tracking-wider">
-                    {t.restaurant.phoneLabel}
-                  </label>
-                  <input
-                    type="tel"
-                    required
-                    placeholder={t.drawer.phonePlaceholder}
-                    value={resPhone}
-                    onChange={(e) => setResPhone(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-md bg-[#FAF6EF] border border-[#DFD5BF] text-[#241812] text-xs focus:outline-none focus:border-[#BF4227]"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-[#5C4B42] mb-1.5 uppercase tracking-wider">
-                  {t.restaurant.notesLabel}
-                </label>
-                <textarea
-                  rows={2}
-                  placeholder={t.restaurant.notesPlaceholder}
-                  value={resNotes}
-                  onChange={(e) => setResNotes(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-md bg-[#FAF6EF] border border-[#DFD5BF] text-[#241812] text-xs focus:outline-none focus:border-[#BF4227]"
-                />
-              </div>
-
-              {/* Policy Notice Box */}
-              <div className="p-4 rounded-md bg-[#FAF2E6] border border-[#DFD5BF] text-xs text-[#5C4B42] leading-relaxed flex items-start gap-3">
-                <Phone className="w-4 h-4 text-[#BF4227] flex-shrink-0 mt-0.5" />
-                <div>
-                  <p>{t.restaurant.policyNotice}</p>
-                  <a
-                    href={`tel:${data.phone.replace(/\s+/g, "")}`}
-                    className="inline-block mt-1 font-mono text-xs font-semibold text-[#BF4227] hover:underline"
-                  >
-                    {data.phone}
-                  </a>
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                className="w-full py-3.5 rounded-md text-xs font-medium uppercase tracking-widest text-white shadow-sm transition-all duration-300 bg-[#BF4227] hover:bg-[#A4351D] cursor-pointer"
-              >
-                {t.restaurant.submitReservation}
-              </button>
-            </form>
-          )}
+          </div>
         </div>
       </section>
 

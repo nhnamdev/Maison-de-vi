@@ -30,9 +30,8 @@ export function HeroSection({ onScrollToRestaurants }: { onScrollToRestaurants: 
       {heroImages.map((src, index) => (
         <div
           key={src}
-          className={`absolute inset-0 transition-opacity duration-1500 ease-in-out ${
-            index === activeSlide ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"
-          }`}
+          className={`absolute inset-0 transition-opacity duration-1500 ease-in-out ${index === activeSlide ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"
+            }`}
           style={{ transition: "opacity 1.5s ease-in-out, transform 8s ease-out" }}
         >
           <Image
@@ -118,9 +117,8 @@ export function HeroSection({ onScrollToRestaurants }: { onScrollToRestaurants: 
             <button
               key={i}
               onClick={() => setActiveSlide(i)}
-              className={`h-1 transition-all duration-300 rounded-sm cursor-pointer ${
-                i === activeSlide ? "w-8 bg-[#BF4227]" : "w-3 bg-white/40"
-              }`}
+              className={`h-1 transition-all duration-300 rounded-sm cursor-pointer ${i === activeSlide ? "w-8 bg-[#BF4227]" : "w-3 bg-white/40"
+                }`}
               aria-label={`Slide ${i + 1}`}
             />
           ))}
