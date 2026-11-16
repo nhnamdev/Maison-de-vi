@@ -605,87 +605,25 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
             </p>
           </div>
 
-          {isMaison ? (
-            <div className="p-6 sm:p-8 rounded-lg bg-[#FAF6EF] border border-[#DFD5BF] space-y-6 text-center">
-              <div className="max-w-xl mx-auto space-y-2.5">
-                <span className="text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-sm bg-[#833422]/10 text-[#833422] border border-[#833422]/20 inline-block">
-                  Maison de Vị · 142 Rue de Vaugirard
-                </span>
-                <h3 className="font-serif text-2xl font-bold text-[#241812]">
-                  {language === "fr"
-                    ? "Réservation par téléphone ou email"
-                    : language === "vi"
-                    ? "Đặt bàn qua điện thoại hoặc email"
-                    : "Reservation by phone or email"}
-                </h3>
-                <p className="text-xs sm:text-sm text-[#6D5A50] leading-relaxed">
-                  {language === "fr"
-                    ? "Notre système de réservation en ligne pour Maison de Vị est en cours de déploiement. Pour réserver votre table ou organiser un repas, contactez-nous directement :"
-                    : language === "vi"
-                    ? "Hệ thống đặt bàn trực tuyến cho Maison de Vị đang được tích hợp. Để đặt bàn nhanh nhất ngay hôm nay, quý khách vui lòng liên hệ:"
-                    : "Our online reservation system for Maison de Vị is being deployed. To book your table or arrange an event, please reach out to us directly:"}
-                </p>
-              </div>
+          <ZeltyBookingWidget
+            zkey={data.zkey}
+            restaurantName={data.name}
+            primaryColor={data.accentColor ? data.accentColor.replace("#", "") : "b74120"}
+          />
 
-              {/* Action buttons */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 max-w-md mx-auto">
-                <a
-                  href={`tel:${data.phone.replace(/\s+/g, "")}`}
-                  className="w-full sm:w-auto px-6 py-3.5 rounded-md font-medium text-xs tracking-wider uppercase transition-all duration-300 shadow-sm text-white flex items-center justify-center gap-2 bg-[#BF4227] hover:bg-[#A4351D] active:scale-[0.99]"
-                >
-                  <Phone className="w-4 h-4" />
-                  <span>
-                    {language === "fr"
-                      ? "Appeler le 09 62 19 45 73"
-                      : language === "vi"
-                      ? "Gọi 09 62 19 45 73"
-                      : "Call 09 62 19 45 73"}
-                  </span>
-                </a>
-
-                <a
-                  href={`mailto:${data.email}`}
-                  className="w-full sm:w-auto px-6 py-3.5 rounded-md font-medium text-xs tracking-wider uppercase border border-[#DFD5BF] bg-white hover:bg-[#F3ECE0] text-[#241812] transition-all duration-300 flex items-center justify-center gap-2"
-                >
-                  <Mail className="w-4 h-4 text-[#BF4227]" />
-                  <span>{data.email}</span>
-                </a>
-              </div>
-
-              {/* Schedule and address */}
-              <div className="pt-4 border-t border-[#DFD5BF]/80 text-xs text-[#7A695F] flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
-                <div className="flex items-center gap-2 font-medium text-[#241812]">
-                  <Clock className="w-3.5 h-3.5 text-[#C06129]" />
-                  <span>{localized.hours}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <MapPin className="w-3.5 h-3.5 text-[#4B5031]" />
-                  <span>{data.address}, {data.city}</span>
-                </div>
-              </div>
+          {/* Policy Notice Box */}
+          <div className="p-4 rounded-md bg-[#FAF2E6] border border-[#DFD5BF] text-xs text-[#5C4B42] leading-relaxed flex items-start gap-3">
+            <Phone className="w-4 h-4 text-[#BF4227] flex-shrink-0 mt-0.5" />
+            <div>
+              <p>{t.restaurant.policyNotice}</p>
+              <a
+                href={`tel:${data.phone.replace(/\s+/g, "")}`}
+                className="inline-block mt-1 font-mono text-xs font-semibold text-[#BF4227] hover:underline"
+              >
+                {data.phone}
+              </a>
             </div>
-          ) : (
-            <>
-              <ZeltyBookingWidget
-                restaurantName={data.name}
-                primaryColor={data.accentColor || "b74120"}
-              />
-
-              {/* Policy Notice Box */}
-              <div className="p-4 rounded-md bg-[#FAF2E6] border border-[#DFD5BF] text-xs text-[#5C4B42] leading-relaxed flex items-start gap-3">
-                <Phone className="w-4 h-4 text-[#BF4227] flex-shrink-0 mt-0.5" />
-                <div>
-                  <p>{t.restaurant.policyNotice}</p>
-                  <a
-                    href={`tel:${data.phone.replace(/\s+/g, "")}`}
-                    className="inline-block mt-1 font-mono text-xs font-semibold text-[#BF4227] hover:underline"
-                  >
-                    {data.phone}
-                  </a>
-                </div>
-              </div>
-            </>
-          )}
+          </div>
         </div>
       </section>
 

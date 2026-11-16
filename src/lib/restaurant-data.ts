@@ -67,6 +67,7 @@ export interface RestaurantData {
   menuImages?: { src: string; title: string; subtitle?: string }[];
   gallery: GalleryItem[];
   route: string;
+  zkey?: string;
 }
 
 export function getLocalizedRestaurant(data: RestaurantData, lang: Language) {
@@ -607,6 +608,7 @@ export const VI_HANOI_DATA: RestaurantData = {
     },
   ],
   route: "/vi-hanoi",
+  zkey: process.env.NEXT_PUBLIC_ZELTY_ZKEY || "MjY0OlFb5gTeuhhW/O8MJbx3NJ29oiZG",
 };
 
 export const MAISON_DE_VI_DATA: RestaurantData = {
@@ -1006,4 +1008,5 @@ export const MAISON_DE_VI_DATA: RestaurantData = {
     },
   ],
   route: "/maison-de-vi",
+  zkey: process.env.NEXT_PUBLIC_ZELTY_MAISON_ZKEY || "Mjc1Og4XNZRbddHtYVbJN9uQmNtAe7Ud",
 };
