@@ -3,7 +3,7 @@
 import React, { useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { X, Phone, MapPin, ArrowRight, Utensils } from "lucide-react";
+import { X, Phone, MapPin, ArrowRight, Utensils, Mail, Clock } from "lucide-react";
 import { ZeltyBookingWidget } from "@/components/booking/ZeltyBookingWidget";
 import { RestaurantData, getLocalizedRestaurant } from "@/lib/restaurant-data";
 import { useI18n } from "@/lib/i18n/context";
@@ -138,10 +138,72 @@ export function QuickReservationDrawer({
               </a>
             </div>
 
-            <ZeltyBookingWidget
-              restaurantName={restaurant.name}
-              primaryColor={isMaison ? "b74120" : "c06129"}
-            />
+            {isMaison ? (
+              <div className="p-6 rounded-lg bg-white border border-[#DFD5BF] space-y-5 shadow-xs">
+                <div className="space-y-2">
+                  <span className="text-[10px] uppercase tracking-widest font-semibold px-2.5 py-0.5 rounded-sm bg-[#833422]/10 text-[#833422] border border-[#833422]/20 inline-block">
+                    Maison de Vị · 142 Rue de Vaugirard
+                  </span>
+                  <h4 className="font-serif text-lg font-bold text-[#241812]">
+                    {language === "fr"
+                      ? "Réservation par téléphone ou email"
+                      : language === "vi"
+                      ? "Đặt bàn qua hotline hoặc email"
+                      : "Reservation by phone or email"}
+                  </h4>
+                  <p className="text-xs text-[#6D5A50] leading-relaxed">
+                    {language === "fr"
+                      ? "Notre module de réservation en ligne pour Maison de Vị est en cours de déploiement. Pour réserver votre table dès aujourd'hui, contactez-nous directement :"
+                      : language === "vi"
+                      ? "Hệ thống đặt bàn trực tuyến cho Maison de Vị đang được tích hợp. Để đặt bàn nhanh nhất ngay hôm nay, quý khách vui lòng liên hệ:"
+                      : "Our online booking system for Maison de Vị is being finalized. To book your table today, please reach out to us directly:"}
+                  </p>
+                </div>
+
+                {/* Direct Call & Email Buttons */}
+                <div className="space-y-2.5">
+                  <a
+                    href="tel:+33962194573"
+                    className="w-full py-3.5 px-4 rounded-md font-medium text-xs tracking-wider uppercase transition-all duration-300 shadow-sm text-white flex items-center justify-center gap-2.5 bg-[#BF4227] hover:bg-[#A4351D] active:scale-[0.99]"
+                  >
+                    <Phone className="w-4 h-4" />
+                    <span>
+                      {language === "fr"
+                        ? "Appeler le 09 62 19 45 73"
+                        : language === "vi"
+                        ? "Gọi ngay 09 62 19 45 73"
+                        : "Call 09 62 19 45 73"}
+                    </span>
+                  </a>
+
+                  <a
+                    href={`mailto:${restaurant.email}`}
+                    className="w-full py-3 px-4 rounded-md font-medium text-xs tracking-wider uppercase border border-[#DFD5BF] bg-[#F7F2E8] hover:bg-[#EFE6D6] text-[#241812] transition-all duration-300 flex items-center justify-center gap-2"
+                  >
+                    <Mail className="w-4 h-4 text-[#C06129]" />
+                    <span className="truncate">{restaurant.email}</span>
+                  </a>
+                </div>
+
+                {/* Schedule info */}
+                <div className="pt-3 border-t border-[#EAE2D5] text-[11px] text-[#7A695F] space-y-1">
+                  <div className="flex items-center gap-2 font-medium text-[#241812]">
+                    <Clock className="w-3.5 h-3.5 text-[#C06129]" />
+                    <span>{localized.hours}</span>
+                  </div>
+                  <p className="text-[10px] text-[#8F7D73]">
+                    {language === "fr"
+                      ? "142 Rue de Vaugirard, 75015 Paris · Métro Pasteur / Falguière"
+                      : "142 Rue de Vaugirard, 75015 Paris · Metro Pasteur / Falguière"}
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <ZeltyBookingWidget
+                restaurantName={restaurant.name}
+                primaryColor="c06129"
+              />
+            )}
           </div>
 
           {/* SECTION 2: MORE INFORMATION ABOUT US */}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -12,6 +12,10 @@ import {
   Menu as MenuIcon,
   X,
   Phone,
+  ZoomIn,
+  ChevronLeft,
+  ChevronRight,
+  Mail,
 } from "lucide-react";
 import { ZeltyBookingWidget } from "@/components/booking/ZeltyBookingWidget";
 import { RestaurantData, getLocalizedRestaurant } from "@/lib/restaurant-data";
@@ -34,9 +38,29 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
 
   const [activeCategory, setActiveCategory] = useState<number>(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [lightboxMenuIndex, setLightboxMenuIndex] = useState<number | null>(null);
 
   const isMaison = data.id === "maison-de-vi";
   const Divider = isMaison ? MaisonBrandDivider : GoldDivider;
+
+  useEffect(() => {
+    if (lightboxMenuIndex === null) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightboxMenuIndex(null);
+      if (e.key === "ArrowLeft") {
+        setLightboxMenuIndex((prev) =>
+          prev !== null && prev > 0 ? prev - 1 : (data.menuImages?.length || 1) - 1
+        );
+      }
+      if (e.key === "ArrowRight") {
+        setLightboxMenuIndex((prev) =>
+          prev !== null && prev < (data.menuImages?.length || 1) - 1 ? prev + 1 : 0
+        );
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [lightboxMenuIndex, data.menuImages?.length]);
 
   return (
     <div className="min-h-screen flex flex-col text-[#241812] bg-[#FAF6EF]">
@@ -359,7 +383,7 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4 text-[#C06129]" />
-                <span>{localized.hours.split("&")[0]}</span>
+                <span>{localized.hours}</span>
               </div>
             </div>
           </div>
@@ -432,56 +456,97 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
           </p>
         </div>
 
-        {/* Categories Tab */}
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-          {localized.menu.map((cat, idx) => (
-            <button
-              key={idx}
-              onClick={() => setActiveCategory(idx)}
-              className={`px-5 py-2.5 rounded-md text-xs font-medium tracking-wider uppercase transition-all duration-300 cursor-pointer ${
-                activeCategory === idx
-                  ? "bg-[#BF4227] text-white shadow-xs font-semibold"
-                  : "bg-white text-[#5C4B42] hover:text-[#241812] border border-[#DFD5BF]"
-              }`}
-            >
-              {cat.category}
-            </button>
-          ))}
-        </div>
-
-        {/* Dish Items Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-          {localized.menu[activeCategory]?.items.map((dish, i) => (
-            <div
-              key={i}
-              className="p-6 rounded-md bg-white border border-[#DFD5BF] flex flex-col justify-between hover:border-[#BF4227]/50 shadow-xs transition-all duration-300"
-            >
-              <div className="space-y-1.5">
-                <div className="flex items-start justify-between gap-4">
-                  <h3 className="font-serif text-lg font-medium text-[#241812] flex items-center gap-2">
-                    <span>{dish.name}</span>
-                    {dish.tag && (
-                      <span className="text-[10px] uppercase font-sans tracking-wider px-2 py-0.5 rounded-sm border border-[#4B5031]/30 bg-[#4B5031]/5 text-[#4B5031] font-normal">
-                        {dish.tag}
-                      </span>
-                    )}
-                  </h3>
-                  <span className="font-serif text-lg font-bold whitespace-nowrap text-[#BF4227]">
-                    {dish.price}
-                  </span>
-                </div>
-                {dish.vietnameseName && (
-                  <div className="text-xs text-[#C06129] font-light italic">
-                    {dish.vietnameseName}
+        {isMaison && data.menuImages && data.menuImages.length > 0 ? (
+          /* 3 Menu Cards for Maison de Vị with Lightbox Modal */
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 pt-4">
+            {data.menuImages.map((menuImg, idx) => (
+              <div
+                key={idx}
+                onClick={() => setLightboxMenuIndex(idx)}
+                className="group relative rounded-lg overflow-hidden border border-[#DFD5BF] bg-white shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col hover:-translate-y-1"
+              >
+                <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#FAF6EF]">
+                  <Image
+                    src={menuImg.src}
+                    alt={menuImg.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-contain p-2.5 transition-transform duration-500 group-hover:scale-102"
+                  />
+                  <div className="absolute inset-0 bg-black/45 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4">
+                    <span className="inline-flex items-center gap-2 px-4 py-2.5 rounded-md bg-white/95 text-[#241812] text-xs font-medium uppercase tracking-wider shadow-lg">
+                      <ZoomIn className="w-4 h-4 text-[#BF4227]" />
+                      <span>{language === "fr" ? "Agrandir" : language === "vi" ? "Xem phóng to" : "Enlarge"}</span>
+                    </span>
                   </div>
-                )}
-                <p className="text-xs sm:text-sm text-[#5C4B42] leading-relaxed font-light pt-1">
-                  {dish.description}
-                </p>
+                </div>
+                <div className="p-4 border-t border-[#DFD5BF] bg-white text-center space-y-1 flex-1 flex flex-col justify-center">
+                  <h3 className="font-serif text-base font-bold text-[#241812] group-hover:text-[#BF4227] transition-colors">
+                    {menuImg.title}
+                  </h3>
+                  {menuImg.subtitle && (
+                    <p className="text-xs text-[#7A695F] font-light">
+                      {menuImg.subtitle}
+                    </p>
+                  )}
+                </div>
               </div>
+            ))}
+          </div>
+        ) : (
+          <>
+            {/* Categories Tab */}
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
+              {localized.menu.map((cat, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveCategory(idx)}
+                  className={`px-5 py-2.5 rounded-md text-xs font-medium tracking-wider uppercase transition-all duration-300 cursor-pointer ${
+                    activeCategory === idx
+                      ? "bg-[#BF4227] text-white shadow-xs font-semibold"
+                      : "bg-white text-[#5C4B42] hover:text-[#241812] border border-[#DFD5BF]"
+                  }`}
+                >
+                  {cat.category}
+                </button>
+              ))}
             </div>
-          ))}
-        </div>
+
+            {/* Dish Items Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+              {localized.menu[activeCategory]?.items.map((dish, i) => (
+                <div
+                  key={i}
+                  className="p-6 rounded-md bg-white border border-[#DFD5BF] flex flex-col justify-between hover:border-[#BF4227]/50 shadow-xs transition-all duration-300"
+                >
+                  <div className="space-y-1.5">
+                    <div className="flex items-start justify-between gap-4">
+                      <h3 className="font-serif text-lg font-medium text-[#241812] flex items-center gap-2">
+                        <span>{dish.name}</span>
+                        {dish.tag && (
+                          <span className="text-[10px] uppercase font-sans tracking-wider px-2 py-0.5 rounded-sm border border-[#4B5031]/30 bg-[#4B5031]/5 text-[#4B5031] font-normal">
+                            {dish.tag}
+                          </span>
+                        )}
+                      </h3>
+                      <span className="font-serif text-lg font-bold whitespace-nowrap text-[#BF4227]">
+                        {dish.price}
+                      </span>
+                    </div>
+                    {dish.vietnameseName && (
+                      <div className="text-xs text-[#C06129] font-light italic">
+                        {dish.vietnameseName}
+                      </div>
+                    )}
+                    <p className="text-xs sm:text-sm text-[#5C4B42] leading-relaxed font-light pt-1">
+                      {dish.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
       </section>
 
       {/* SECTION: NOTRE ESPACE / GALLERY */}
@@ -540,24 +605,87 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
             </p>
           </div>
 
-          <ZeltyBookingWidget
-            restaurantName={data.name}
-            primaryColor={data.accentColor || "b74120"}
-          />
+          {isMaison ? (
+            <div className="p-6 sm:p-8 rounded-lg bg-[#FAF6EF] border border-[#DFD5BF] space-y-6 text-center">
+              <div className="max-w-xl mx-auto space-y-2.5">
+                <span className="text-[10px] uppercase tracking-widest font-semibold px-3 py-1 rounded-sm bg-[#833422]/10 text-[#833422] border border-[#833422]/20 inline-block">
+                  Maison de Vị · 142 Rue de Vaugirard
+                </span>
+                <h3 className="font-serif text-2xl font-bold text-[#241812]">
+                  {language === "fr"
+                    ? "Réservation par téléphone ou email"
+                    : language === "vi"
+                    ? "Đặt bàn qua điện thoại hoặc email"
+                    : "Reservation by phone or email"}
+                </h3>
+                <p className="text-xs sm:text-sm text-[#6D5A50] leading-relaxed">
+                  {language === "fr"
+                    ? "Notre système de réservation en ligne pour Maison de Vị est en cours de déploiement. Pour réserver votre table ou organiser un repas, contactez-nous directement :"
+                    : language === "vi"
+                    ? "Hệ thống đặt bàn trực tuyến cho Maison de Vị đang được tích hợp. Để đặt bàn nhanh nhất ngay hôm nay, quý khách vui lòng liên hệ:"
+                    : "Our online reservation system for Maison de Vị is being deployed. To book your table or arrange an event, please reach out to us directly:"}
+                </p>
+              </div>
 
-          {/* Policy Notice Box */}
-          <div className="p-4 rounded-md bg-[#FAF2E6] border border-[#DFD5BF] text-xs text-[#5C4B42] leading-relaxed flex items-start gap-3">
-            <Phone className="w-4 h-4 text-[#BF4227] flex-shrink-0 mt-0.5" />
-            <div>
-              <p>{t.restaurant.policyNotice}</p>
-              <a
-                href={`tel:${data.phone.replace(/\s+/g, "")}`}
-                className="inline-block mt-1 font-mono text-xs font-semibold text-[#BF4227] hover:underline"
-              >
-                {data.phone}
-              </a>
+              {/* Action buttons */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 max-w-md mx-auto">
+                <a
+                  href={`tel:${data.phone.replace(/\s+/g, "")}`}
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-md font-medium text-xs tracking-wider uppercase transition-all duration-300 shadow-sm text-white flex items-center justify-center gap-2 bg-[#BF4227] hover:bg-[#A4351D] active:scale-[0.99]"
+                >
+                  <Phone className="w-4 h-4" />
+                  <span>
+                    {language === "fr"
+                      ? "Appeler le 09 62 19 45 73"
+                      : language === "vi"
+                      ? "Gọi 09 62 19 45 73"
+                      : "Call 09 62 19 45 73"}
+                  </span>
+                </a>
+
+                <a
+                  href={`mailto:${data.email}`}
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-md font-medium text-xs tracking-wider uppercase border border-[#DFD5BF] bg-white hover:bg-[#F3ECE0] text-[#241812] transition-all duration-300 flex items-center justify-center gap-2"
+                >
+                  <Mail className="w-4 h-4 text-[#BF4227]" />
+                  <span>{data.email}</span>
+                </a>
+              </div>
+
+              {/* Schedule and address */}
+              <div className="pt-4 border-t border-[#DFD5BF]/80 text-xs text-[#7A695F] flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
+                <div className="flex items-center gap-2 font-medium text-[#241812]">
+                  <Clock className="w-3.5 h-3.5 text-[#C06129]" />
+                  <span>{localized.hours}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-3.5 h-3.5 text-[#4B5031]" />
+                  <span>{data.address}, {data.city}</span>
+                </div>
+              </div>
             </div>
-          </div>
+          ) : (
+            <>
+              <ZeltyBookingWidget
+                restaurantName={data.name}
+                primaryColor={data.accentColor || "b74120"}
+              />
+
+              {/* Policy Notice Box */}
+              <div className="p-4 rounded-md bg-[#FAF2E6] border border-[#DFD5BF] text-xs text-[#5C4B42] leading-relaxed flex items-start gap-3">
+                <Phone className="w-4 h-4 text-[#BF4227] flex-shrink-0 mt-0.5" />
+                <div>
+                  <p>{t.restaurant.policyNotice}</p>
+                  <a
+                    href={`tel:${data.phone.replace(/\s+/g, "")}`}
+                    className="inline-block mt-1 font-mono text-xs font-semibold text-[#BF4227] hover:underline"
+                  >
+                    {data.phone}
+                  </a>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </section>
 
@@ -597,6 +725,76 @@ export function RestaurantDetailView({ data }: RestaurantDetailViewProps) {
           {t.restaurant.backHome}
         </Link>
       </footer>
+
+      {/* Lightbox Modal for Menu Images */}
+      {lightboxMenuIndex !== null && data.menuImages && (
+        <div
+          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-6"
+          onClick={() => setLightboxMenuIndex(null)}
+        >
+          {/* Close button */}
+          <button
+            onClick={() => setLightboxMenuIndex(null)}
+            className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer z-50"
+            aria-label="Close"
+          >
+            <X className="w-6 h-6" />
+          </button>
+
+          {/* Navigation Prev */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightboxMenuIndex((prev) =>
+                prev !== null && prev > 0 ? prev - 1 : (data.menuImages?.length || 1) - 1
+              );
+            }}
+            className="absolute left-2 sm:left-6 p-2.5 sm:p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer z-50"
+            aria-label="Previous"
+          >
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+          </button>
+
+          {/* Image View */}
+          <div
+            className="relative max-w-4xl max-h-[88vh] w-full h-full flex flex-col items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="relative w-full h-[76vh]">
+              <Image
+                src={data.menuImages[lightboxMenuIndex].src}
+                alt={data.menuImages[lightboxMenuIndex].title}
+                fill
+                className="object-contain"
+                sizes="100vw"
+                priority
+              />
+            </div>
+            <div className="text-center mt-2.5 text-white">
+              <p className="font-serif text-base sm:text-lg font-medium">
+                {data.menuImages[lightboxMenuIndex].title}
+              </p>
+              <p className="text-xs text-white/70">
+                {lightboxMenuIndex + 1} / {data.menuImages.length}
+              </p>
+            </div>
+          </div>
+
+          {/* Navigation Next */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setLightboxMenuIndex((prev) =>
+                prev !== null && prev < (data.menuImages?.length || 1) - 1 ? prev + 1 : 0
+              );
+            }}
+            className="absolute right-2 sm:right-6 p-2.5 sm:p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer z-50"
+            aria-label="Next"
+          >
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+          </button>
+        </div>
+      )}
     </div>
   );
 }

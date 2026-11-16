@@ -12,8 +12,7 @@ export function HeroSection({ onScrollToRestaurants }: { onScrollToRestaurants: 
 
   const heroImages = [
     "/images/hero-3.webp",
-    "/images/hero-4.webp",
-    "/images/maison-de-vi/entrance.png",
+    "/images/maison-de-vi/maison-hero.png",
   ];
 
   // Auto rotate hero slides every 6s

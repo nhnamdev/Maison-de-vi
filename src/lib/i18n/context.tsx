@@ -15,8 +15,8 @@ const I18nContext = createContext<I18nContextType | null>(null);
 const STORAGE_KEY = "maison_de_vi_lang";
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  // Always initialize with static 'vi' default on both server and client to eliminate hydration mismatch
-  const [language, setLanguageState] = useState<Language>("vi");
+  // Always initialize with static 'fr' default on both server and client to eliminate hydration mismatch
+  const [language, setLanguageState] = useState<Language>("fr");
 
   // Read saved language from localStorage safely AFTER hydration is complete
   useEffect(() => {
@@ -44,7 +44,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const t = translations[language] || translations.vi;
+  const t = translations[language] || translations.fr;
 
   return (
     <I18nContext.Provider value={{ language, setLanguage, t }}>
@@ -57,9 +57,9 @@ export function useI18n() {
   const context = useContext(I18nContext);
   if (!context) {
     return {
-      language: "vi" as Language,
+      language: "fr" as Language,
       setLanguage: () => {},
-      t: translations.vi,
+      t: translations.fr,
     };
   }
   return context;
